@@ -1,5 +1,8 @@
+const CALVORO_OPENROUTER_API_KEY =
+  process.env.CALVORO_OPENROUTER_API_KEY;
+
 const OPENROUTER_BASE_URL =
-  process.env.OPENROUTER_BASE_URL ||
+  process.env.CALVORO_OPENROUTER_BASE_URL ||
   "https://openrouter.ai/api/v1";
 
 const OPENROUTER_URL =
@@ -113,7 +116,7 @@ function extractAiText(data) {
 }
 
 async function callOpenRouter(prompt) {
-  if (!process.env.OPENROUTER_API_KEY) {
+  if (!CALVORO_OPENROUTER_API_KEY) {
     throw new Error(
       "OPENROUTER_API_KEY is missing from the environment."
     );
@@ -130,7 +133,7 @@ async function callOpenRouter(prompt) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+            Authorization: `Bearer ${CALVORO_OPENROUTER_API_KEY}`,
             "HTTP-Referer": SITE_URL,
             "X-Title": "CALVORO",
           },
@@ -403,7 +406,7 @@ exports.handler = async (event) => {
         service: "CALVORO",
         message: "CALVORO AI function is working.",
         aiConfigured: Boolean(
-          process.env.OPENROUTER_API_KEY
+          CALVORO_OPENROUTER_API_KEY
         ),
       });
     }
