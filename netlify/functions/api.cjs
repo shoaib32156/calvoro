@@ -1,5 +1,12 @@
+const CALVORO_OPENROUTER_API_KEY =
+  process.env.CALVORO_OPENROUTER_API_KEY;
+
+const OPENROUTER_BASE_URL =
+  process.env.CALVORO_OPENROUTER_BASE_URL ||
+  "https://openrouter.ai/api/v1";
+
 const OPENROUTER_URL =
-  "https://openrouter.ai/api/v1/chat/completions";
+  `${OPENROUTER_BASE_URL}/chat/completions`;
 
 const SITE_URL =
   process.env.SITE_URL ||
@@ -109,9 +116,9 @@ function extractAiText(data) {
 }
 
 async function callOpenRouter(prompt) {
-  if (!process.env.OPENROUTER_API_KEY) {
+  if (!CALVORO_OPENROUTER_API_KEY) {
     throw new Error(
-      "OPENROUTER_API_KEY is missing from the environment."
+      "CALVORO_OPENROUTER_API_KEY is missing from the environment."
     );
   }
 
@@ -126,7 +133,8 @@ async function callOpenRouter(prompt) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+            Authorization:
+              `Bearer ${CALVORO_OPENROUTER_API_KEY}`,
             "HTTP-Referer": SITE_URL,
             "X-Title": "CALVORO",
           },
@@ -187,7 +195,8 @@ async function callOpenRouter(prompt) {
           return aiText;
         }
 
-        lastError = "OpenRouter returned an empty AI response.";
+        lastError =
+          "OpenRouter returned an empty AI response.";
       }
     } catch (error) {
       if (error?.name === "AbortError") {
@@ -370,7 +379,10 @@ function getRequestBody(event) {
   }
 
   if (event.isBase64Encoded) {
-    return Buffer.from(event.body, "base64").toString("utf8");
+    return Buffer.from(
+      event.body,
+      "base64"
+    ).toString("utf8");
   }
 
   return event.body;
@@ -378,8 +390,11 @@ function getRequestBody(event) {
 
 exports.handler = async (event) => {
   try {
-    const method = event?.httpMethod || "GET";
-    const endpoint = getEndpoint(event);
+    const method =
+      event?.httpMethod || "GET";
+
+    const endpoint =
+      getEndpoint(event);
 
     if (method === "OPTIONS") {
       return {
@@ -391,16 +406,21 @@ exports.handler = async (event) => {
 
     if (
       method === "GET" &&
-      (endpoint === "/" || endpoint === "/api/health")
+      (
+        endpoint === "/" ||
+        endpoint === "/api/health"
+      )
     ) {
       return jsonResponse(200, {
         success: true,
         status: "ok",
         service: "CALVORO",
-        message: "CALVORO AI function is working.",
-        aiConfigured: Boolean(
-          process.env.OPENROUTER_API_KEY
-        ),
+        message:
+          "CALVORO AI function is working.",
+        aiConfigured:
+          Boolean(
+            CALVORO_OPENROUTER_API_KEY
+          ),
       });
     }
 
@@ -408,30 +428,39 @@ exports.handler = async (event) => {
       method === "POST" &&
       AI_ENDPOINTS.includes(endpoint)
     ) {
-      const body = getRequestBody(event);
+      const body =
+        getRequestBody(event);
 
       if (
-        Buffer.byteLength(body, "utf8") > MAX_BODY_SIZE
+        Buffer.byteLength(
+          body,
+          "utf8"
+        ) > MAX_BODY_SIZE
       ) {
         return jsonResponse(413, {
-          error: "Request body is too large.",
+          error:
+            "Request body is too large.",
         });
       }
 
       let data;
 
       try {
-        data = JSON.parse(body || "{}");
+        data = JSON.parse(
+          body || "{}"
+        );
       } catch {
         return jsonResponse(400, {
-          error: "Invalid request data.",
+          error:
+            "Invalid request data.",
         });
       }
 
-      const validationError = validateRequest(
-        endpoint,
-        data
-      );
+      const validationError =
+        validateRequest(
+          endpoint,
+          data
+        );
 
       if (validationError) {
         return jsonResponse(400, {
@@ -439,8 +468,16 @@ exports.handler = async (event) => {
         });
       }
 
-      const prompt = buildPrompt(endpoint, data);
-      const aiText = await callOpenRouter(prompt);
+      const prompt =
+        buildPrompt(
+          endpoint,
+          data
+        );
+
+      const aiText =
+        await callOpenRouter(
+          prompt
+        );
 
       if (!aiText) {
         return jsonResponse(502, {
@@ -449,7 +486,10 @@ exports.handler = async (event) => {
         });
       }
 
-      if (endpoint === "/api/summarize") {
+      if (
+        endpoint ===
+        "/api/summarize"
+      ) {
         return jsonResponse(200, {
           summary: aiText,
         });
@@ -461,12 +501,14 @@ exports.handler = async (event) => {
     }
 
     return jsonResponse(404, {
-      error: "CALVORO endpoint not found.",
+      error:
+        "CALVORO endpoint not found.",
     });
   } catch (error) {
     console.error(
       "CALVORO function error:",
-      error?.stack || error?.message
+      error?.stack ||
+        error?.message
     );
 
     return jsonResponse(500, {
