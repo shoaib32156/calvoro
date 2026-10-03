@@ -118,11 +118,7 @@ async function callOpenRouter(prompt) {
   let lastError =
     "The AI provider did not return a usable response.";
 
-  for (
-    let attempt = 1;
-    attempt <= MAX_RETRIES;
-    attempt++
-  ) {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await fetchWithTimeout(
         OPENROUTER_URL,
@@ -130,8 +126,7 @@ async function callOpenRouter(prompt) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              `Bearer ${process.env.OPENROUTER_API_KEY}`,
+            Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
             "HTTP-Referer": SITE_URL,
             "X-Title": "CALVORO",
           },
@@ -192,8 +187,7 @@ async function callOpenRouter(prompt) {
           return aiText;
         }
 
-        lastError =
-          "OpenRouter returned an empty AI response.";
+        lastError = "OpenRouter returned an empty AI response.";
       }
     } catch (error) {
       if (error?.name === "AbortError") {
@@ -236,9 +230,7 @@ ${inputText}`;
 
   if (endpoint === "/api/rewrite") {
     const inputText = String(data.text).trim();
-
-    const tone =
-      data.tone || "Professional";
+    const tone = data.tone || "Professional";
 
     return `Rewrite the following text in a ${tone} tone.
 
@@ -266,9 +258,7 @@ ${inputText}`;
 
   if (endpoint === "/api/translate") {
     const inputText = String(data.text).trim();
-
-    const language =
-      data.language || "Spanish";
+    const language = data.language || "Spanish";
 
     return `Translate the following text into ${language}.
 
@@ -283,12 +273,8 @@ ${inputText}`;
 
   if (endpoint === "/api/generate") {
     const topic = String(data.topic).trim();
-
-    const type =
-      data.type || "Short Article";
-
-    const tone =
-      data.tone || "Professional";
+    const type = data.type || "Short Article";
+    const tone = data.tone || "Professional";
 
     return `Create a ${type} about the following topic.
 
@@ -304,14 +290,9 @@ Do not mention the AI process.
 Return only the requested content.`;
   }
 
-  const purpose =
-    String(data.purpose).trim();
-
-  const tone =
-    data.tone || "Professional";
-
-  const length =
-    data.length || "Medium";
+  const purpose = String(data.purpose).trim();
+  const tone = data.tone || "Professional";
+  const length = data.length || "Medium";
 
   return `Write an email based on the following request.
 
@@ -336,30 +317,21 @@ function validateRequest(endpoint, data) {
   if (
     endpoint !== "/api/generate" &&
     endpoint !== "/api/email-writer" &&
-    (
-      !data.text ||
-      !String(data.text).trim()
-    )
+    (!data.text || !String(data.text).trim())
   ) {
     return "Please enter some text.";
   }
 
   if (
     endpoint === "/api/generate" &&
-    (
-      !data.topic ||
-      !String(data.topic).trim()
-    )
+    (!data.topic || !String(data.topic).trim())
   ) {
     return "Please enter a topic or idea.";
   }
 
   if (
     endpoint === "/api/email-writer" &&
-    (
-      !data.purpose ||
-      !String(data.purpose).trim()
-    )
+    (!data.purpose || !String(data.purpose).trim())
   ) {
     return "Please describe what the email should say.";
   }
@@ -368,9 +340,7 @@ function validateRequest(endpoint, data) {
 }
 
 function getEndpoint(event) {
-  let pathname =
-    event?.path ||
-    "/";
+  let pathname = event?.path || "/";
 
   pathname = pathname.split("?")[0];
 
@@ -383,7 +353,15 @@ function getEndpoint(event) {
     pathname = `/${pathname}`;
   }
 
-  return pathname || "/";
+  if (pathname === "/") {
+    return "/";
+  }
+
+  if (!pathname.startsWith("/api/")) {
+    pathname = `/api${pathname}`;
+  }
+
+  return pathname;
 }
 
 function getRequestBody(event) {
@@ -392,10 +370,7 @@ function getRequestBody(event) {
   }
 
   if (event.isBase64Encoded) {
-    return Buffer.from(
-      event.body,
-      "base64"
-    ).toString("utf8");
+    return Buffer.from(event.body, "base64").toString("utf8");
   }
 
   return event.body;
@@ -403,11 +378,8 @@ function getRequestBody(event) {
 
 exports.handler = async (event) => {
   try {
-    const method =
-      event?.httpMethod || "GET";
-
-    const endpoint =
-      getEndpoint(event);
+    const method = event?.httpMethod || "GET";
+    const endpoint = getEndpoint(event);
 
     if (method === "OPTIONS") {
       return {
@@ -419,21 +391,16 @@ exports.handler = async (event) => {
 
     if (
       method === "GET" &&
-      (
-        endpoint === "/" ||
-        endpoint === "/api/health"
-      )
+      (endpoint === "/" || endpoint === "/api/health")
     ) {
       return jsonResponse(200, {
         success: true,
         status: "ok",
         service: "CALVORO",
-        message:
-          "CALVORO AI function is working.",
-        aiConfigured:
-          Boolean(
-            process.env.OPENROUTER_API_KEY
-          ),
+        message: "CALVORO AI function is working.",
+        aiConfigured: Boolean(
+          process.env.OPENROUTER_API_KEY
+        ),
       });
     }
 
@@ -441,39 +408,30 @@ exports.handler = async (event) => {
       method === "POST" &&
       AI_ENDPOINTS.includes(endpoint)
     ) {
-      const body =
-        getRequestBody(event);
+      const body = getRequestBody(event);
 
       if (
-        Buffer.byteLength(
-          body,
-          "utf8"
-        ) > MAX_BODY_SIZE
+        Buffer.byteLength(body, "utf8") > MAX_BODY_SIZE
       ) {
         return jsonResponse(413, {
-          error:
-            "Request body is too large.",
+          error: "Request body is too large.",
         });
       }
 
       let data;
 
       try {
-        data = JSON.parse(
-          body || "{}"
-        );
+        data = JSON.parse(body || "{}");
       } catch {
         return jsonResponse(400, {
-          error:
-            "Invalid request data.",
+          error: "Invalid request data.",
         });
       }
 
-      const validationError =
-        validateRequest(
-          endpoint,
-          data
-        );
+      const validationError = validateRequest(
+        endpoint,
+        data
+      );
 
       if (validationError) {
         return jsonResponse(400, {
@@ -481,16 +439,8 @@ exports.handler = async (event) => {
         });
       }
 
-      const prompt =
-        buildPrompt(
-          endpoint,
-          data
-        );
-
-      const aiText =
-        await callOpenRouter(
-          prompt
-        );
+      const prompt = buildPrompt(endpoint, data);
+      const aiText = await callOpenRouter(prompt);
 
       if (!aiText) {
         return jsonResponse(502, {
@@ -499,10 +449,7 @@ exports.handler = async (event) => {
         });
       }
 
-      if (
-        endpoint ===
-        "/api/summarize"
-      ) {
+      if (endpoint === "/api/summarize") {
         return jsonResponse(200, {
           summary: aiText,
         });
@@ -514,14 +461,12 @@ exports.handler = async (event) => {
     }
 
     return jsonResponse(404, {
-      error:
-        "CALVORO endpoint not found.",
+      error: "CALVORO endpoint not found.",
     });
   } catch (error) {
     console.error(
       "CALVORO function error:",
-      error?.stack ||
-        error?.message
+      error?.stack || error?.message
     );
 
     return jsonResponse(500, {
