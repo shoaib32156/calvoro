@@ -10,12 +10,12 @@ import {
 
 import SEO from "./SEO";
 
-import MathSolver from "./pages/MathSolver.jsx";
-import ImageMathSolver from "./pages/ImageMathSolver.jsx";
-import Contact from "./pages/Contact.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
-import Terms from "./pages/Terms.jsx";
-import About from "./pages/About.jsx";
+import MathSolver from "./Pages/MathSolver.jsx";
+import ImageMathSolver from "./Pages/ImageMathSolver.jsx";
+import Contact from "./Pages/Contact.jsx";
+import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
+import Terms from "./Pages/Terms.jsx";
+import About from "./Pages/About.jsx";
 
 import AISummarizer from "./Pages/AISummarizer.jsx";
 import AITextRewriter from "./AITexterRewriter.jsx";
@@ -27,7 +27,7 @@ import AIEmailWriter from "./Pages/AIEmailWriter.jsx";
 import FAQ from "./Pages/FAQ.jsx";
 import HowItWorks from "./Pages/HowItWorks.jsx";
 import Tools from "./Pages/Tools.jsx";
-import CalculatorGuide from "./pages/CalculatorGuide.jsx";
+import CalculatorGuide from "./Pages/CalculatorGuide.jsx";
 
 import Blog from "./Pages/Blog.jsx";
 import BlogArticle from "./Pages/BlogArticle.jsx";
@@ -37,159 +37,159 @@ import BlogArticle from "./Pages/BlogArticle.jsx";
 // ======================================================
 
 const PercentageCalculator = lazy(() =>
-  import("./pages/PercentageCalculator.jsx")
+  import("./Pages/PercentageCalculator.jsx")
 );
 
 const AgeCalculator = lazy(() =>
-  import("./pages/AgeCalculator.jsx")
+  import("./Pages/AgeCalculator.jsx")
 );
 
 const BMICalculator = lazy(() =>
-  import("./pages/BMICalculator.jsx")
+  import("./Pages/BMICalculator.jsx")
 );
 
 const LoanCalculator = lazy(() =>
-  import("./pages/LoanCalculator.jsx")
+  import("./Pages/LoanCalculator.jsx")
 );
 
 const EMICalculator = lazy(() =>
-  import("./pages/EMICalculator.jsx")
+  import("./Pages/EMICalculator.jsx")
 );
 
 const CurrencyConverter = lazy(() =>
-  import("./pages/CurrencyConverter.jsx")
+  import("./Pages/CurrencyConverter.jsx")
 );
 
 const DiscountCalculator = lazy(() =>
-  import("./pages/DiscountCalculator.jsx")
+  import("./Pages/DiscountCalculator.jsx")
 );
 
 const TipCalculator = lazy(() =>
-  import("./pages/TipCalculator.jsx")
+  import("./Pages/TipCalculator.jsx")
 );
 
 const TimeZoneConverter = lazy(() =>
-  import("./pages/TimeZoneConverter.jsx")
+  import("./Pages/TimeZoneConverter.jsx")
 );
 
 const GPACalculator = lazy(() =>
-  import("./pages/GPACalculator.jsx")
+  import("./Pages/GPACalculator.jsx")
 );
 
 const UnitConverter = lazy(() =>
-  import("./pages/UnitConverter.jsx")
+  import("./Pages/UnitConverter.jsx")
 );
 
 const FuelCostCalculator = lazy(() =>
-  import("./pages/FuelCostCalculator.jsx")
+  import("./Pages/FuelCostCalculator.jsx")
 );
 
 const MortgageCalculator = lazy(() =>
-  import("./pages/MortgageCalculator.jsx")
+  import("./Pages/MortgageCalculator.jsx")
 );
 
 const SalaryCalculator = lazy(() =>
-  import("./pages/SalaryCalculator.jsx")
+  import("./Pages/SalaryCalculator.jsx")
 );
 
 const CompoundInterestCalculator = lazy(() =>
-  import("./pages/CompoundInterestCalculator.jsx")
+  import("./Pages/CompoundInterestCalculator.jsx")
 );
 
 const TaxCalculator = lazy(() =>
-  import("./pages/TaxCalculator.jsx")
+  import("./Pages/TaxCalculator.jsx")
 );
 
 const ProfitMarginCalculator = lazy(() =>
-  import("./pages/ProfitMarginCalculator.jsx")
+  import("./Pages/ProfitMarginCalculator.jsx")
 );
 
 const BreakEvenCalculator = lazy(() =>
-  import("./pages/BreakEvenCalculator.jsx")
+  import("./Pages/BreakEvenCalculator.jsx")
 );
 
 const ROICalculator = lazy(() =>
-  import("./pages/ROICalculator.jsx")
+  import("./Pages/ROICalculator.jsx")
 );
 
 const PaybackPeriodCalculator = lazy(() =>
-  import("./pages/PaybackPeriodCalculator.jsx")
+  import("./Pages/PaybackPeriodCalculator.jsx")
 );
 
 const InvestmentCalculator = lazy(() =>
-  import("./pages/InvestmentCalculator.jsx")
+  import("./Pages/InvestmentCalculator.jsx")
 );
 
 const SavingsCalculator = lazy(() =>
-  import("./pages/SavingsCalculator.jsx")
+  import("./Pages/SavingsCalculator.jsx")
 );
 
 const InflationCalculator = lazy(() =>
-  import("./pages/InflationCalculator.jsx")
+  import("./Pages/InflationCalculator.jsx")
 );
 
 const PresentValueCalculator = lazy(() =>
-  import("./pages/PresentValueCalculator.jsx")
+  import("./Pages/PresentValueCalculator.jsx")
 );
 
 const FutureValueCalculator = lazy(() =>
-  import("./pages/FutureValueCalculator.jsx")
+  import("./Pages/FutureValueCalculator.jsx")
 );
 
 const NetWorthCalculator = lazy(() =>
-  import("./pages/NetWorthCalculator.jsx")
+  import("./Pages/NetWorthCalculator.jsx")
 );
 
 const PercentageChangeCalculator = lazy(() =>
-  import("./pages/PercentageChangeCalculator.jsx")
+  import("./Pages/PercentageChangeCalculator.jsx")
 );
 
 const AverageCalculator = lazy(() =>
-  import("./pages/AverageCalculator.jsx")
+  import("./Pages/AverageCalculator.jsx")
 );
 
 const FractionCalculator = lazy(() =>
-  import("./pages/FractionCalculator.jsx")
+  import("./Pages/FractionCalculator.jsx")
 );
 
 const RatioCalculator = lazy(() =>
-  import("./pages/RatioCalculator.jsx")
+  import("./Pages/RatioCalculator.jsx")
 );
 
 const TimeDurationCalculator = lazy(() =>
-  import("./pages/TimeDurationCalculator.jsx")
+  import("./Pages/TimeDurationCalculator.jsx")
 );
 
 const DateDifferenceCalculator = lazy(() =>
-  import("./pages/DateDifferenceCalculator.jsx")
+  import("./Pages/DateDifferenceCalculator.jsx")
 );
 
 const SpeedCalculator = lazy(() =>
-  import("./pages/SpeedCalculator.jsx")
+  import("./Pages/SpeedCalculator.jsx")
 );
 
 const DistanceCalculator = lazy(() =>
-  import("./pages/DistanceCalculator.jsx")
+  import("./Pages/DistanceCalculator.jsx")
 );
 
 const PaceCalculator = lazy(() =>
-  import("./pages/PaceCalculator.jsx")
+  import("./Pages/PaceCalculator.jsx")
 );
 
 const RunningSpeedCalculator = lazy(() =>
-  import("./pages/RunningSpeedCalculator.jsx")
+  import("./Pages/RunningSpeedCalculator.jsx")
 );
 
 const TimeToRunCalculator = lazy(() =>
-  import("./pages/TimeToRunCalculator.jsx")
+  import("./Pages/TimeToRunCalculator.jsx")
 );
 
 const RunningTimeCalculator = lazy(() =>
-  import("./pages/RunningTimeCalculator.jsx")
+  import("./Pages/RunningTimeCalculator.jsx")
 );
 
 const RunningPaceCalculator = lazy(() =>
-  import("./pages/RunningPaceCalculator.jsx")
+  import("./Pages/RunningPaceCalculator.jsx")
 );
 
 // ======================================================
