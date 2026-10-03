@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-const SITE_URL = "https://YOUR-DOMAIN.com";
+const SITE_URL = "https://calvorotool.com";
 
 const seoData = {
   "/": {
@@ -165,7 +166,8 @@ const seoData = {
   },
 
   "/inflation-calculator": {
-    title: "Inflation Calculator - Calculate Inflation & Purchasing Power | CALVORO",
+    title:
+      "Inflation Calculator - Calculate Inflation & Purchasing Power | CALVORO",
     description:
       "Calculate the effect of inflation on money and purchasing power with CALVORO's inflation calculator.",
     type: "WebApplication",
@@ -193,7 +195,8 @@ const seoData = {
   },
 
   "/percentage-change-calculator": {
-    title: "Percentage Change Calculator - Calculate Percentage Change | CALVORO",
+    title:
+      "Percentage Change Calculator - Calculate Percentage Change | CALVORO",
     description:
       "Calculate percentage increase or decrease between two numbers with CALVORO's free calculator.",
     type: "WebApplication",
@@ -332,7 +335,9 @@ function setMeta(name, content) {
 }
 
 function setProperty(property, content) {
-  let tag = document.querySelector(`meta[property="${property}"]`);
+  let tag = document.querySelector(
+    `meta[property="${property}"]`
+  );
 
   if (!tag) {
     tag = document.createElement("meta");
@@ -344,7 +349,9 @@ function setProperty(property, content) {
 }
 
 function setCanonical(url) {
-  let canonical = document.querySelector('link[rel="canonical"]');
+  let canonical = document.querySelector(
+    'link[rel="canonical"]'
+  );
 
   if (!canonical) {
     canonical = document.createElement("link");
@@ -356,7 +363,9 @@ function setCanonical(url) {
 }
 
 function setStructuredData(data) {
-  let script = document.getElementById("calvoro-structured-data");
+  let script = document.getElementById(
+    "calvoro-structured-data"
+  );
 
   if (!script) {
     script = document.createElement("script");
@@ -369,76 +378,119 @@ function setStructuredData(data) {
 }
 
 export default function SEO() {
+  const location = useLocation();
+
   useEffect(() => {
-    const updateSEO = () => {
-      const path = window.location.pathname;
+    const path = location.pathname || "/";
 
-      const seo = seoData[path] || defaultSEO;
+    const seo = seoData[path] || defaultSEO;
 
-      const cleanPath =
-        path === "/" ? "" : path.replace(/\/$/, "");
+    const cleanPath =
+      path === "/"
+        ? ""
+        : path.replace(/\/+$/, "");
 
-      const canonicalURL = `${SITE_URL}${cleanPath}`;
+    const canonicalURL =
+      `${SITE_URL}${cleanPath}`;
 
-      document.title = seo.title;
+    document.title = seo.title;
 
-      setMeta("description", seo.description);
+    setMeta(
+      "description",
+      seo.description
+    );
 
-      setCanonical(canonicalURL);
+    setCanonical(canonicalURL);
 
-      setProperty("og:title", seo.title);
-      setProperty("og:description", seo.description);
-      setProperty("og:url", canonicalURL);
-      setProperty("og:type", "website");
-      setProperty("og:site_name", "CALVORO");
+    setProperty(
+      "og:title",
+      seo.title
+    );
 
-      setMeta("twitter:card", "summary");
-      setMeta("twitter:title", seo.title);
-      setMeta("twitter:description", seo.description);
+    setProperty(
+      "og:description",
+      seo.description
+    );
 
-      const structuredData =
-        seo.type === "WebApplication"
-          ? {
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: seo.title,
-              description: seo.description,
-              url: canonicalURL,
-              applicationCategory: "UtilitiesApplication",
-              operatingSystem: "All",
-              isAccessibleForFree: true,
-              publisher: {
-                "@type": "Organization",
-                name: "CALVORO",
-              },
-            }
-          : {
-              "@context": "https://schema.org",
-              "@type": seo.type,
-              name: seo.title,
-              description: seo.description,
-              url: canonicalURL,
-              publisher: {
-                "@type": "Organization",
-                name: "CALVORO",
-              },
-            };
+    setProperty(
+      "og:url",
+      canonicalURL
+    );
 
-      setStructuredData(structuredData);
-    };
+    setProperty(
+      "og:type",
+      "website"
+    );
 
-    updateSEO();
+    setProperty(
+      "og:site_name",
+      "CALVORO"
+    );
 
-    const handlePopState = () => {
-      updateSEO();
-    };
+    setMeta(
+      "twitter:card",
+      "summary"
+    );
 
-    window.addEventListener("popstate", handlePopState);
+    setMeta(
+      "twitter:title",
+      seo.title
+    );
 
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, []);
+    setMeta(
+      "twitter:description",
+      seo.description
+    );
+
+    const structuredData =
+      seo.type === "WebApplication"
+        ? {
+            "@context":
+              "https://schema.org",
+            "@type":
+              "WebApplication",
+            name:
+              seo.title,
+            description:
+              seo.description,
+            url:
+              canonicalURL,
+            applicationCategory:
+              "UtilitiesApplication",
+            operatingSystem:
+              "All",
+            isAccessibleForFree:
+              true,
+            publisher: {
+              "@type":
+                "Organization",
+              name:
+                "CALVORO",
+            },
+          }
+        : {
+            "@context":
+              "https://schema.org",
+            "@type":
+              seo.type,
+            name:
+              seo.title,
+            description:
+              seo.description,
+            url:
+              canonicalURL,
+            publisher: {
+              "@type":
+                "Organization",
+              name:
+                "CALVORO",
+            },
+          };
+
+    setStructuredData(
+      structuredData
+    );
+  }, [location.pathname]);
 
   return null;
 }
