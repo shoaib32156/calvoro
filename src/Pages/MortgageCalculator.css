@@ -1,0 +1,499 @@
+.mortgage-page {
+  min-height: 100vh;
+
+  padding: 35px 20px 70px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #dbeafe 0%,
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      #e0e7ff 0%,
+      transparent 35%
+    ),
+    #f8fafc;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mortgage-container {
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+.mortgage-breadcrumb {
+  margin-bottom: 30px;
+
+  font-size: 14px;
+
+  color: #6b7280;
+}
+
+.mortgage-breadcrumb a {
+  color: #2563eb;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.mortgage-header {
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+.mortgage-icon {
+  width: 75px;
+  height: 75px;
+
+  margin: 0 auto 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 22px;
+
+  background: white;
+
+  font-size: 38px;
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.mortgage-badge {
+  display: inline-block;
+
+  padding: 7px 13px;
+
+  border-radius: 50px;
+
+  background: #dbeafe;
+
+  color: #1d4ed8;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  margin-bottom: 12px;
+}
+
+.mortgage-header h1 {
+  margin: 0;
+
+  font-size: 48px;
+
+  color: #111827;
+}
+
+.mortgage-header p {
+  max-width: 650px;
+
+  margin: 15px auto 0;
+
+  font-size: 18px;
+
+  line-height: 1.6;
+
+  color: #6b7280;
+}
+
+.mortgage-card,
+.mortgage-info {
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 24px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.08);
+}
+
+.mortgage-input-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+}
+
+.mortgage-input-group label,
+.mortgage-term-section > label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #374151;
+}
+
+.mortgage-input-group input {
+  width: 100%;
+
+  padding: 16px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 13px;
+
+  background: #f9fafb;
+
+  font-size: 16px;
+
+  outline: none;
+}
+
+.mortgage-input-group input:focus {
+  background: white;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.mortgage-term-section {
+  margin-top: 25px;
+}
+
+.mortgage-term-options {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 12px;
+}
+
+.mortgage-term-option {
+  padding: 15px 10px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 13px;
+
+  background: #f9fafb;
+
+  color: #374151;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.mortgage-term-option:hover {
+  border-color: #93c5fd;
+
+  background: #eff6ff;
+}
+
+.mortgage-term-option.active {
+  border-color: #2563eb;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+}
+
+.mortgage-buttons {
+  display: grid;
+
+  grid-template-columns: 1fr 140px;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.mortgage-calculate-btn,
+.mortgage-clear-btn {
+  padding: 16px;
+
+  border-radius: 13px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.mortgage-calculate-btn {
+  border: none;
+
+  background: #2563eb;
+
+  color: white;
+}
+
+.mortgage-calculate-btn:hover {
+  background: #1d4ed8;
+}
+
+.mortgage-clear-btn {
+  border: 1px solid #d1d5db;
+
+  background: white;
+
+  color: #374151;
+}
+
+.mortgage-result {
+  margin-top: 35px;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eff6ff,
+      #f5f3ff
+    );
+
+  border: 1px solid #dbeafe;
+}
+
+.mortgage-result-title {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.mortgage-result-title h2 {
+  margin: 0;
+
+  color: #111827;
+}
+
+.mortgage-main-result {
+  margin-top: 20px;
+
+  padding: 28px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  text-align: center;
+}
+
+.mortgage-main-result span {
+  display: block;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+.mortgage-main-result strong {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #2563eb;
+
+  font-size: 44px;
+}
+
+.mortgage-summary {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 18px;
+}
+
+.mortgage-summary div {
+  padding: 20px 10px;
+
+  background: white;
+
+  border-radius: 15px;
+
+  text-align: center;
+}
+
+.mortgage-summary span,
+.mortgage-summary strong {
+  display: block;
+}
+
+.mortgage-summary span {
+  color: #6b7280;
+
+  font-size: 13px;
+}
+
+.mortgage-summary strong {
+  margin-top: 7px;
+
+  color: #111827;
+
+  font-size: 17px;
+}
+
+.mortgage-info {
+  margin-top: 25px;
+
+  padding: 35px;
+}
+
+.mortgage-info h2 {
+  margin: 0 0 25px;
+
+  text-align: center;
+
+  color: #111827;
+}
+
+.mortgage-steps {
+  display: grid;
+
+  gap: 20px;
+}
+
+.mortgage-step {
+  display: flex;
+
+  gap: 15px;
+}
+
+.mortgage-step b {
+  min-width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+}
+
+.mortgage-step h3 {
+  margin: 0 0 5px;
+
+  color: #111827;
+}
+
+.mortgage-step p {
+  margin: 0;
+
+  color: #6b7280;
+
+  line-height: 1.5;
+}
+
+.mortgage-note {
+  margin-top: 25px;
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  background: #f9fafb;
+
+  color: #6b7280;
+
+  line-height: 1.6;
+
+  font-size: 14px;
+}
+
+.mortgage-note strong {
+  color: #374151;
+}
+
+.mortgage-back {
+  text-align: center;
+
+  margin-top: 30px;
+}
+
+.mortgage-back a {
+  color: #2563eb;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+@media (max-width: 750px) {
+
+  .mortgage-page {
+    padding: 25px 15px 50px;
+  }
+
+  .mortgage-header h1 {
+    font-size: 38px;
+  }
+
+  .mortgage-card,
+  .mortgage-info {
+    padding: 25px 20px;
+  }
+
+  .mortgage-input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mortgage-term-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mortgage-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .mortgage-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .mortgage-main-result strong {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .mortgage-term-options {
+    grid-template-columns: 1fr;
+  }
+
+  .mortgage-header p {
+    font-size: 16px;
+  }
+
+  .mortgage-main-result strong {
+    font-size: 32px;
+  }
+}

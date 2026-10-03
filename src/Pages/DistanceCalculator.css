@@ -1,0 +1,320 @@
+.distance-page {
+  min-height: 100vh;
+  padding: 40px 20px 60px;
+  background:
+    radial-gradient(circle at top left, #e0e7ff, transparent 35%),
+    radial-gradient(circle at bottom right, #dbeafe, transparent 35%),
+    #f8fafc;
+}
+
+.distance-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.distance-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 35px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.distance-breadcrumb a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.distance-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.distance-icon {
+  font-size: 58px;
+  margin-bottom: 15px;
+}
+
+.distance-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 30px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-bottom: 15px;
+}
+
+.distance-header h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+.distance-header p {
+  max-width: 650px;
+  margin: 15px auto 0;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.distance-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.distance-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.distance-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.distance-input-group label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.distance-input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.distance-input-group input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.distance-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.distance-calculate-btn,
+.distance-clear-btn {
+  flex: 1;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.distance-calculate-btn {
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.distance-calculate-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.distance-clear-btn {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+}
+
+.distance-clear-btn:hover {
+  background: #f8fafc;
+}
+
+.distance-result {
+  margin-top: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+}
+
+.distance-result-main {
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.distance-result-main span {
+  display: block;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.distance-result-main strong {
+  display: block;
+  color: #2563eb;
+  font-size: 42px;
+  line-height: 1.2;
+}
+
+.distance-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid #bfdbfe;
+}
+
+.distance-summary div {
+  padding: 22px 15px;
+  text-align: center;
+}
+
+.distance-summary div + div {
+  border-left: 1px solid #bfdbfe;
+}
+
+.distance-summary span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.distance-summary strong {
+  color: #0f172a;
+  font-size: 18px;
+}
+
+.distance-info {
+  margin-top: 35px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+}
+
+.distance-info h2 {
+  margin: 0 0 18px;
+  color: #0f172a;
+  font-size: 24px;
+}
+
+.distance-info ol {
+  margin: 0;
+  padding-left: 22px;
+  color: #475569;
+  line-height: 1.9;
+}
+
+.distance-note {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.distance-note strong {
+  color: #0f172a;
+}
+
+.distance-back {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.distance-back a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.distance-back a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .distance-page {
+    padding: 25px 15px 45px;
+  }
+
+  .distance-header h1 {
+    font-size: 32px;
+  }
+
+  .distance-header p {
+    font-size: 15px;
+  }
+
+  .distance-card {
+    padding: 22px;
+  }
+
+  .distance-input-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .distance-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .distance-summary div:nth-child(3) {
+    border-left: none;
+    border-top: 1px solid #bfdbfe;
+  }
+
+  .distance-summary div:nth-child(4) {
+    border-top: 1px solid #bfdbfe;
+  }
+}
+
+@media (max-width: 480px) {
+  .distance-header h1 {
+    font-size: 28px;
+  }
+
+  .distance-icon {
+    font-size: 48px;
+  }
+
+  .distance-buttons {
+    flex-direction: column;
+  }
+
+  .distance-result-main strong {
+    font-size: 34px;
+  }
+
+  .distance-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .distance-summary div + div {
+    border-left: none;
+    border-top: 1px solid #bfdbfe;
+  }
+
+  .distance-info {
+    padding: 22px;
+  }
+}

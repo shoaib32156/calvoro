@@ -1,0 +1,308 @@
+.present-value-page {
+  min-height: 100vh;
+  padding: 40px 20px 60px;
+  background:
+    radial-gradient(circle at top left, #e0ecff 0%, transparent 35%),
+    radial-gradient(circle at bottom right, #eef2ff 0%, transparent 35%),
+    #f8fafc;
+}
+
+.present-value-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.present-value-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.present-value-breadcrumb a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.present-value-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.present-value-icon {
+  font-size: 52px;
+  margin-bottom: 15px;
+}
+
+.present-value-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.present-value-header h1 {
+  margin: 0 0 12px;
+  font-size: 42px;
+  line-height: 1.15;
+  color: #0f172a;
+}
+
+.present-value-header p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.present-value-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.present-value-input-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.present-value-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.present-value-input-group label {
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.present-value-input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  outline: none;
+  font-size: 16px;
+  color: #0f172a;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.present-value-input-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.present-value-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.present-value-calculate-btn,
+.present-value-clear-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.present-value-calculate-btn {
+  flex: 1;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.present-value-calculate-btn:hover {
+  background: #1d4ed8;
+}
+
+.present-value-clear-btn {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.present-value-clear-btn:hover {
+  background: #f8fafc;
+}
+
+.present-value-result {
+  margin-top: 30px;
+  padding: 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+  border: 1px solid #dbeafe;
+}
+
+.present-value-result-main {
+  text-align: center;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #dbeafe;
+}
+
+.present-value-result-main span {
+  display: block;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.present-value-result-main strong {
+  display: block;
+  color: #1d4ed8;
+  font-size: 38px;
+  line-height: 1.2;
+}
+
+.present-value-summary {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.present-value-summary div {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.present-value-summary span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.present-value-summary strong {
+  display: block;
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.present-value-info {
+  margin-top: 40px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.present-value-info h2 {
+  color: #0f172a;
+  font-size: 22px;
+  margin: 0 0 15px;
+}
+
+.present-value-info h2:not(:first-child) {
+  margin-top: 30px;
+}
+
+.present-value-info ol {
+  margin: 0;
+  padding-left: 22px;
+  color: #475569;
+  line-height: 1.9;
+}
+
+.present-value-info p {
+  color: #475569;
+  line-height: 1.7;
+}
+
+.present-value-note {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 4px solid #2563eb;
+}
+
+.present-value-back {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.present-value-back a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.present-value-back a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .present-value-page {
+    padding: 25px 15px 45px;
+  }
+
+  .present-value-header h1 {
+    font-size: 32px;
+  }
+
+  .present-value-header p {
+    font-size: 15px;
+  }
+
+  .present-value-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .present-value-input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .present-value-buttons {
+    flex-direction: column;
+  }
+
+  .present-value-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .present-value-result-main strong {
+    font-size: 30px;
+  }
+
+  .present-value-info {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .present-value-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .present-value-header h1 {
+    font-size: 28px;
+  }
+
+  .present-value-icon {
+    font-size: 44px;
+  }
+}

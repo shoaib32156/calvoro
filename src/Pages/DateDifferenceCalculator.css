@@ -1,0 +1,335 @@
+.date-difference-page {
+  min-height: 100vh;
+  padding: 40px 20px 60px;
+  background:
+    radial-gradient(circle at top left, #e0e7ff, transparent 35%),
+    radial-gradient(circle at bottom right, #dbeafe, transparent 35%),
+    #f8fafc;
+}
+
+.date-difference-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.date-difference-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 35px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.date-difference-breadcrumb a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.date-difference-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.date-difference-icon {
+  font-size: 58px;
+  margin-bottom: 15px;
+}
+
+.date-difference-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 30px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  margin-bottom: 15px;
+}
+
+.date-difference-header h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+.date-difference-header p {
+  max-width: 650px;
+  margin: 15px auto 0;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.date-difference-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.date-difference-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  align-items: end;
+  gap: 18px;
+}
+
+.date-difference-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-difference-input-group label {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.date-difference-input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.date-difference-input-group input:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.date-difference-arrow {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.date-difference-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.date-difference-calculate-btn,
+.date-difference-clear-btn {
+  flex: 1;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.date-difference-calculate-btn {
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.date-difference-calculate-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.date-difference-clear-btn {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+}
+
+.date-difference-clear-btn:hover {
+  background: #f8fafc;
+}
+
+.date-difference-result {
+  margin-top: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #bfdbfe;
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+}
+
+.date-difference-result-main {
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.date-difference-result-main span {
+  display: block;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.date-difference-result-main strong {
+  display: block;
+  color: #2563eb;
+  font-size: 42px;
+  line-height: 1.2;
+}
+
+.date-difference-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid #bfdbfe;
+}
+
+.date-difference-summary div {
+  padding: 22px 15px;
+  text-align: center;
+}
+
+.date-difference-summary div + div {
+  border-left: 1px solid #bfdbfe;
+}
+
+.date-difference-summary span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+
+.date-difference-summary strong {
+  color: #0f172a;
+  font-size: 18px;
+}
+
+.date-difference-info {
+  margin-top: 35px;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+}
+
+.date-difference-info h2 {
+  margin: 0 0 18px;
+  color: #0f172a;
+  font-size: 24px;
+}
+
+.date-difference-info ol {
+  margin: 0;
+  padding-left: 22px;
+  color: #475569;
+  line-height: 1.9;
+}
+
+.date-difference-note {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.date-difference-note strong {
+  color: #0f172a;
+}
+
+.date-difference-back {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.date-difference-back a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.date-difference-back a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .date-difference-page {
+    padding: 25px 15px 45px;
+  }
+
+  .date-difference-header h1 {
+    font-size: 32px;
+  }
+
+  .date-difference-header p {
+    font-size: 15px;
+  }
+
+  .date-difference-card {
+    padding: 22px;
+  }
+
+  .date-difference-input-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .date-difference-arrow {
+    height: 25px;
+  }
+
+  .date-difference-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .date-difference-summary div:nth-child(3) {
+    border-left: none;
+    border-top: 1px solid #bfdbfe;
+  }
+
+  .date-difference-summary div:nth-child(4) {
+    border-top: 1px solid #bfdbfe;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-difference-header h1 {
+    font-size: 28px;
+  }
+
+  .date-difference-icon {
+    font-size: 48px;
+  }
+
+  .date-difference-buttons {
+    flex-direction: column;
+  }
+
+  .date-difference-result-main strong {
+    font-size: 34px;
+  }
+
+  .date-difference-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .date-difference-summary div + div {
+    border-left: none;
+    border-top: 1px solid #bfdbfe;
+  }
+
+  .date-difference-info {
+    padding: 22px;
+  }
+}

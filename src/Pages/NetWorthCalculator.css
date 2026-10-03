@@ -1,0 +1,318 @@
+.net-worth-page {
+  min-height: 100vh;
+  padding: 40px 20px 60px;
+  background:
+    radial-gradient(circle at top left, #e0ecff 0%, transparent 35%),
+    radial-gradient(circle at bottom right, #eef2ff 0%, transparent 35%),
+    #f8fafc;
+}
+
+.net-worth-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.net-worth-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.net-worth-breadcrumb a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.net-worth-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.net-worth-icon {
+  font-size: 52px;
+  margin-bottom: 15px;
+}
+
+.net-worth-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.net-worth-header h1 {
+  margin: 0 0 12px;
+  font-size: 42px;
+  line-height: 1.15;
+  color: #0f172a;
+}
+
+.net-worth-header p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #64748b;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.net-worth-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.net-worth-section-title {
+  margin: 0 0 20px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.liabilities-title {
+  margin-top: 35px;
+}
+
+.net-worth-input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.net-worth-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.net-worth-input-group label {
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.net-worth-input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  outline: none;
+  font-size: 16px;
+  color: #0f172a;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.net-worth-input-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.net-worth-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.net-worth-calculate-btn,
+.net-worth-clear-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.net-worth-calculate-btn {
+  flex: 1;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.net-worth-calculate-btn:hover {
+  background: #1d4ed8;
+}
+
+.net-worth-clear-btn {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.net-worth-clear-btn:hover {
+  background: #f8fafc;
+}
+
+.net-worth-result {
+  margin-top: 30px;
+  padding: 28px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #eff6ff, #eef2ff);
+  border: 1px solid #dbeafe;
+}
+
+.net-worth-result-main {
+  text-align: center;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #dbeafe;
+}
+
+.net-worth-result-main span {
+  display: block;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.net-worth-result-main strong {
+  display: block;
+  color: #1d4ed8;
+  font-size: 38px;
+  line-height: 1.2;
+}
+
+.net-worth-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.net-worth-summary div {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.net-worth-summary span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.net-worth-summary strong {
+  display: block;
+  color: #0f172a;
+  font-size: 15px;
+}
+
+.net-worth-info {
+  margin-top: 40px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.net-worth-info h2 {
+  color: #0f172a;
+  font-size: 22px;
+  margin: 0 0 15px;
+}
+
+.net-worth-info h2:not(:first-child) {
+  margin-top: 30px;
+}
+
+.net-worth-info ol {
+  margin: 0;
+  padding-left: 22px;
+  color: #475569;
+  line-height: 1.9;
+}
+
+.net-worth-info p {
+  color: #475569;
+  line-height: 1.7;
+}
+
+.net-worth-note {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f8fafc;
+  border-left: 4px solid #2563eb;
+}
+
+.net-worth-back {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.net-worth-back a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.net-worth-back a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .net-worth-page {
+    padding: 25px 15px 45px;
+  }
+
+  .net-worth-header h1 {
+    font-size: 32px;
+  }
+
+  .net-worth-header p {
+    font-size: 15px;
+  }
+
+  .net-worth-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .net-worth-input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .net-worth-buttons {
+    flex-direction: column;
+  }
+
+  .net-worth-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .net-worth-result-main strong {
+    font-size: 30px;
+  }
+
+  .net-worth-info {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .net-worth-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .net-worth-header h1 {
+    font-size: 28px;
+  }
+
+  .net-worth-icon {
+    font-size: 44px;
+  }
+}

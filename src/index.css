@@ -1,0 +1,817 @@
+/* =========================================================
+   CALVORO — GLOBAL WORDPRESS-INSPIRED DESIGN
+   ========================================================= */
+
+:root {
+  --calvoro-blue: #2563eb;
+  --calvoro-blue-dark: #1d4ed8;
+  --calvoro-navy: #0f172a;
+  --calvoro-navy-2: #172554;
+
+  --calvoro-text: #172033;
+  --calvoro-muted: #64748b;
+  --calvoro-light-text: #94a3b8;
+
+  --calvoro-bg: #f5f7fb;
+  --calvoro-white: #ffffff;
+
+  --calvoro-border: #e2e8f0;
+  --calvoro-border-dark: #cbd5e1;
+
+  --calvoro-shadow:
+    0 8px 30px rgba(15, 23, 42, 0.06);
+
+  --calvoro-shadow-hover:
+    0 16px 40px rgba(15, 23, 42, 0.10);
+
+  --calvoro-radius: 14px;
+  --calvoro-radius-small: 10px;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--calvoro-text);
+  background: var(--calvoro-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fafc 0%,
+      #f5f7fb 100%
+    );
+
+  color: var(--calvoro-text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.75;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: var(--calvoro-blue);
+}
+
+a:hover {
+  color: var(--calvoro-blue-dark);
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--calvoro-navy);
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  line-height: 1.1;
+}
+
+h2 {
+  line-height: 1.2;
+}
+
+h3 {
+  line-height: 1.3;
+}
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+p {
+  line-height: 1.75;
+}
+
+small {
+  color: var(--calvoro-muted);
+}
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  background: #ffffff;
+  color: var(--calvoro-text);
+
+  border: 1px solid var(--calvoro-border-dark);
+
+  border-radius: var(--calvoro-radius-small);
+
+  padding: 12px 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--calvoro-blue);
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* =========================================================
+   CALVORO SITE WRAPPER
+   ========================================================= */
+
+.calvoro-route-content {
+  min-height: calc(100vh - 80px);
+}
+
+/* =========================================================
+   WORDPRESS-STYLE CONTENT CARDS
+   ========================================================= */
+
+.calvoro-card,
+.calvoro-section,
+.calvoro-panel {
+  background: var(--calvoro-white);
+
+  border:
+    1px solid var(--calvoro-border);
+
+  border-radius: var(--calvoro-radius);
+
+  box-shadow: var(--calvoro-shadow);
+}
+
+/* =========================================================
+   GLOBAL ARTICLE / CONTENT FEEL
+   ========================================================= */
+
+.calvoro-content {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding:
+    60px 24px;
+}
+
+.calvoro-content-narrow {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   EDITORIAL SECTION
+   ========================================================= */
+
+.calvoro-editorial-section {
+  background: #ffffff;
+
+  border-top:
+    1px solid var(--calvoro-border);
+
+  border-bottom:
+    1px solid var(--calvoro-border);
+
+  padding:
+    70px 24px;
+}
+
+/* =========================================================
+   SECTION LABELS
+   ========================================================= */
+
+.calvoro-section-label {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    7px 12px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(37, 99, 235, 0.10);
+
+  color:
+    var(--calvoro-blue-dark);
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   WORDPRESS-STYLE BUTTONS
+   ========================================================= */
+
+.calvoro-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding:
+    11px 18px;
+
+  border-radius:
+    var(--calvoro-radius-small);
+
+  border:
+    1px solid transparent;
+
+  background:
+    var(--calvoro-blue);
+
+  color:
+    #ffffff;
+
+  font-weight:
+    800;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(37, 99, 235, 0.20);
+}
+
+.calvoro-button:hover {
+  background:
+    var(--calvoro-blue-dark);
+
+  color:
+    #ffffff;
+
+  box-shadow:
+    0 8px 18px rgba(37, 99, 235, 0.24);
+}
+
+.calvoro-button-secondary {
+  background: #ffffff;
+
+  color:
+    var(--calvoro-navy);
+
+  border:
+    1px solid var(--calvoro-border-dark);
+
+  box-shadow: none;
+}
+
+.calvoro-button-secondary:hover {
+  background:
+    #f8fafc;
+
+  color:
+    var(--calvoro-navy);
+
+  border-color:
+    #94a3b8;
+}
+
+/* =========================================================
+   GLOBAL HEADER SUPPORT
+   ========================================================= */
+
+.calvoro-global-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 1000;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.97),
+      rgba(29, 78, 216, 0.96)
+    );
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.10);
+}
+
+.calvoro-global-header-inner {
+  width: 100%;
+
+  max-width: 1240px;
+
+  margin: 0 auto;
+
+  min-height: 76px;
+
+  padding:
+    0 24px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 24px;
+}
+
+.calvoro-logo {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 25px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.04em;
+}
+
+.calvoro-logo:hover {
+  color: #ffffff;
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+
+.calvoro-global-nav {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  flex-wrap: wrap;
+}
+
+.calvoro-global-nav a {
+  color: rgba(255, 255, 255, 0.88);
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  padding:
+    9px 11px;
+
+  border-radius:
+    8px;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.calvoro-global-nav a:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.10);
+}
+
+/* =========================================================
+   HERO SUPPORT
+   ========================================================= */
+
+.calvoro-hero {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1d4ed8
+    );
+
+  border-radius:
+    18px;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.14);
+}
+
+.calvoro-hero h1,
+.calvoro-hero h2,
+.calvoro-hero h3,
+.calvoro-hero p {
+  color: #ffffff;
+}
+
+/* =========================================================
+   TOOL / CALCULATOR GRID
+   ========================================================= */
+
+.calvoro-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(240px, 1fr)
+    );
+
+  gap: 22px;
+}
+
+/* =========================================================
+   TOOL CARDS
+   ========================================================= */
+
+.calvoro-tool-card {
+  background: #ffffff;
+
+  border:
+    1px solid var(--calvoro-border);
+
+  border-radius:
+    var(--calvoro-radius);
+
+  padding:
+    24px;
+
+  box-shadow:
+    var(--calvoro-shadow);
+
+  transition:
+    transform 0.20s ease,
+    box-shadow 0.20s ease,
+    border-color 0.20s ease;
+}
+
+.calvoro-tool-card:hover {
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    var(--calvoro-shadow-hover);
+
+  border-color:
+    #cbd5e1;
+}
+
+/* =========================================================
+   CALCULATOR RESULT
+   ========================================================= */
+
+.calvoro-result {
+  margin-top: 20px;
+
+  background:
+    #eff6ff;
+
+  border:
+    1px solid #bfdbfe;
+
+  border-radius:
+    var(--calvoro-radius-small);
+
+  padding:
+    18px;
+
+  color:
+    #1e3a8a;
+
+  font-weight:
+    800;
+}
+
+/* =========================================================
+   ARTICLE ELEMENTS
+   ========================================================= */
+
+.calvoro-article {
+  max-width:
+    820px;
+
+  margin:
+    0 auto;
+
+  color:
+    #334155;
+
+  font-size:
+    17px;
+
+  line-height:
+    1.85;
+}
+
+.calvoro-article h2 {
+  margin-top:
+    48px;
+
+  margin-bottom:
+    16px;
+
+  font-size:
+    30px;
+}
+
+.calvoro-article h3 {
+  margin-top:
+    32px;
+
+  margin-bottom:
+    12px;
+
+  font-size:
+    22px;
+}
+
+.calvoro-article p {
+  margin:
+    0 0 22px;
+}
+
+.calvoro-article ul,
+.calvoro-article ol {
+  padding-left:
+    24px;
+
+  line-height:
+    1.8;
+}
+
+.calvoro-article blockquote {
+  margin:
+    30px 0;
+
+  padding:
+    18px 22px;
+
+  border-left:
+    4px solid var(--calvoro-blue);
+
+  background:
+    #f8fafc;
+
+  color:
+    #475569;
+}
+
+/* =========================================================
+   TABLE OF CONTENTS
+   ========================================================= */
+
+.calvoro-toc {
+  background:
+    #f8fafc;
+
+  border:
+    1px solid var(--calvoro-border);
+
+  border-radius:
+    var(--calvoro-radius);
+
+  padding:
+    22px;
+}
+
+.calvoro-toc a {
+  display: block;
+
+  text-decoration: none;
+
+  padding:
+    7px 0;
+
+  color:
+    #334155;
+
+  font-weight:
+    700;
+}
+
+.calvoro-toc a:hover {
+  color:
+    var(--calvoro-blue);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.calvoro-footer {
+  margin-top:
+    80px;
+
+  background:
+    #0f172a;
+
+  color:
+    #cbd5e1;
+
+  border-top:
+    1px solid #1e293b;
+}
+
+.calvoro-footer a {
+  color:
+    #cbd5e1;
+
+  text-decoration: none;
+}
+
+.calvoro-footer a:hover {
+  color:
+    #ffffff;
+}
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background:
+    rgba(37, 99, 235, 0.18);
+
+  color:
+    #0f172a;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    #cbd5e1;
+
+  border-radius:
+    999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    #94a3b8;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .calvoro-global-header-inner {
+    min-height: 70px;
+
+    padding:
+      12px 18px;
+  }
+
+  .calvoro-global-nav {
+    gap: 2px;
+  }
+
+  .calvoro-global-nav a {
+    font-size: 13px;
+
+    padding:
+      8px 8px;
+  }
+
+  .calvoro-content {
+    padding:
+      45px 18px;
+  }
+}
+
+@media (max-width: 700px) {
+  .calvoro-global-header-inner {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap:
+      10px;
+  }
+
+  .calvoro-global-nav {
+    width:
+      100%;
+
+    overflow-x:
+      auto;
+
+    flex-wrap:
+      nowrap;
+
+    padding-bottom:
+      2px;
+  }
+
+  .calvoro-global-nav a {
+    flex:
+      0 0 auto;
+  }
+
+  .calvoro-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .calvoro-article {
+    font-size:
+      16px;
+  }
+
+  .calvoro-article h2 {
+    font-size:
+      26px;
+  }
+}
