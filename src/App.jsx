@@ -17,6 +17,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import Terms from "./Pages/Terms.jsx";
 import About from "./Pages/About.jsx";
 import HomeSEOContent from "./Pages/HomeSEOContent.jsx";
+import AgeCalculatorGuide from "./Pages/AgeCalculatorGuide.jsx";
 
 import AISummarizer from "./Pages/AISummarizer.jsx";
 import AITextRewriter from "./AITexterRewriter.jsx";

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./AgeCalculator.css";
+import AgeCalculatorGuide from "./AgeCalculatorGuide.jsx";
 
 function AgeCalculator() {
   const [birthDate, setBirthDate] = useState("");
@@ -199,9 +200,13 @@ function AgeCalculator() {
 
           </div>
 
-        </div>
+                </div>
+
+        <AgeCalculatorGuide />
 
         <div className="back-home">
+
+        
           <a href="/">
             ← Back to CALVORO
           </a>
