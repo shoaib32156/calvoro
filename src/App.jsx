@@ -1,4 +1,4 @@
-﻿
+
 import { lazy, Suspense, useMemo, useState } from "react";
 import {
   BrowserRouter,
@@ -623,16 +623,12 @@ function GlobalHeader() {
 
   const navStyle = (active = false) => ({
     textDecoration: "none",
-    color: active
-      ? "#ffffff"
-      : "rgba(255,255,255,0.74)",
+    color: active ? "#1d4ed8" : "#334155",
     fontSize: "13px",
     fontWeight: active ? 800 : 700,
     padding: "9px 11px",
     borderRadius: "7px",
-    background: active
-      ? "rgba(255,255,255,0.10)"
-      : "transparent",
+    background: active ? "#eff6ff" : "transparent",
     transition: "all 0.18s ease",
     whiteSpace: "nowrap",
   });
@@ -2128,24 +2124,46 @@ function GlobalCalvoroStyle() {
           top: 0;
           z-index: 9999;
           width: 100%;
-          background: #0f172a;
-          color: #ffffff;
-          box-shadow:
-            0 6px 20px rgba(15,23,42,0.16);
+          background: #ffffff;
+          color: #172033;
+          box-shadow: 0 4px 22px rgba(15, 23, 42, 0.08);
+          border-bottom: 1px solid #e5edf8;
         }
 
-        .calvoro-header-top {
-          border-bottom:
-            1px solid rgba(255,255,255,0.08);
+        .calvoro-header-top,
+        .calvoro-header-main {
+          background: #ffffff;
+          border-color: #e8eef7;
+        }
+
+        .calvoro-brand,
+        .calvoro-brand strong {
+          color: #172033;
+        }
+
+        .calvoro-brand small,
+        .calvoro-header-note {
+          color: #64748b;
+        }
+
+        .calvoro-main-nav a {
+          border-radius: 8px;
+        }
+
+        .calvoro-main-nav a:hover,
+        .calvoro-main-nav a:focus-visible {
+          color: #1d4ed8 !important;
+          background: #eff6ff !important;
+        }
+
+        .calvoro-header-button {
+          background: #2563eb !important;
+          color: #ffffff !important;
+          border-radius: 9px !important;
         }
 
         .calvoro-header-main {
-          background:
-            linear-gradient(
-              90deg,
-              #0f172a,
-              #172554
-            );
+          border-top: 1px solid #e8eef7;
         }
 
         .calvoro-header-inner {
@@ -2225,12 +2243,6 @@ function GlobalCalvoroStyle() {
           align-items: center;
           gap: 3px;
           overflow-x: auto;
-        }
-
-        .calvoro-main-nav a:hover {
-          color: #ffffff !important;
-          background:
-            rgba(255,255,255,0.09) !important;
         }
 
         .calvoro-header-button {
@@ -3500,6 +3512,7 @@ function GlobalCalvoroStyle() {
         }
       `}
     </style>
+
   );
 }
 
@@ -3715,4 +3728,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
