@@ -1,936 +1,312 @@
-
-import React, { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../SEO";
+import ArticleCard from "../components/editorial/ArticleCard.jsx";
+import Breadcrumbs from "../components/editorial/Breadcrumbs.jsx";
+import {
+  articleCategories,
+  articles,
+  featuredArticles,
+  formatArticleDate,
+  getCategoryCount,
+  getReadTime,
+  searchArticles,
+} from "../content/articles/index.js";
 
-const posts = [
-  {
-    slug: "how-to-calculate-percentage",
-    title: "How to Calculate Percentage Easily",
-    category: "Math",
-    date: "September 30, 2026",
-    readTime: "4 min read",
-    excerpt:
-      "Learn how percentages work, how to calculate them, and when a percentage calculator can save time.",
-    content:
-      "Percentages are used in discounts, exams, business, finance, statistics, and many everyday situations.",
-    tool: "/percentage",
-    featured: true,
-  },
-  {
-    slug: "how-compound-interest-works",
-    title: "How Compound Interest Works",
-    category: "Finance",
-    date: "September 30, 2026",
-    readTime: "5 min read",
-    excerpt:
-      "Understand compound interest, growth over time, and how regular investing can affect future value.",
-    content:
-      "Compound interest can help explain how money can grow over repeated compounding periods.",
-    tool: "/compound-interest",
-  },
-  {
-    slug: "how-to-calculate-bmi",
-    title: "How to Calculate BMI",
-    category: "Health",
-    date: "September 30, 2026",
-    readTime: "4 min read",
-    excerpt:
-      "Learn the basic BMI formula, what the calculation measures, and how to use a BMI calculator.",
-    content:
-      "BMI is a calculation based on height and weight that is commonly used as a general screening measure.",
-    tool: "/bmi",
-  },
-  {
-    slug: "how-loan-payments-are-calculated",
-    title: "How Loan Payments Are Calculated",
-    category: "Finance",
-    date: "September 30, 2026",
-    readTime: "6 min read",
-    excerpt:
-      "Understand loan payments, interest, principal, and why the loan term affects total cost.",
-    content:
-      "Loan payments generally depend on the amount borrowed, interest rate, and repayment period.",
-    tool: "/loan",
-  },
-  {
-    slug: "how-to-calculate-gpa",
-    title: "How to Calculate GPA",
-    category: "Education",
-    date: "September 30, 2026",
-    readTime: "4 min read",
-    excerpt:
-      "Learn how grades and credit values can be combined to calculate a grade point average.",
-    content:
-      "A GPA is a numerical summary of academic performance based on grade points and, often, course credits.",
-    tool: "/gpa",
-  },
-  {
-    slug: "how-to-calculate-fuel-cost",
-    title: "How to Calculate Fuel Cost for a Trip",
-    category: "Everyday",
-    date: "September 30, 2026",
-    readTime: "4 min read",
-    excerpt:
-      "Calculate estimated fuel usage and travel cost using distance, efficiency, and fuel price.",
-    content:
-      "Fuel-cost estimates can help with trip planning and comparing travel expenses.",
-    tool: "/fuel-cost",
-  },
+const PAGE_SIZE = 12;
+
+const popularTools = [
+  { name: "Percentage Calculator", path: "/percentage" },
+  { name: "Loan Calculator", path: "/loan" },
+  { name: "BMI Calculator", path: "/bmi" },
+  { name: "GPA Calculator", path: "/gpa" },
 ];
 
-const categories = [
-  "All",
-  "Math",
-  "Finance",
-  "Health",
-  "Education",
-  "Everyday",
+const newTools = [
+  { name: "PDF Studio", path: "/pdf-studio" },
+  { name: "Image Studio", path: "/image-studio" },
+  { name: "Word Counter", path: "/word-counter" },
+  { name: "QR Code Generator", path: "/qr-code-generator" },
 ];
-
-const featuredPost = posts.find((post) => post.featured) || posts[0];
 
 export default function Blog() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const filteredPosts = useMemo(() => {
-    const searchText = search.toLowerCase().trim();
-
-    return posts.filter((post) => {
-      const matchesCategory =
-        activeCategory === "All" ||
-        post.category === activeCategory;
-
-      const matchesSearch =
-        !searchText ||
-        post.title.toLowerCase().includes(searchText) ||
-        post.excerpt.toLowerCase().includes(searchText) ||
-        post.category.toLowerCase().includes(searchText);
-
-      return matchesCategory && matchesSearch;
-    });
-  }, [search, activeCategory]);
-
-  const regularPosts = filteredPosts.filter(
-    (post) => post.slug !== featuredPost.slug
+  const filteredArticles = useMemo(
+    () => searchArticles(search, activeCategory),
+    [search, activeCategory]
   );
 
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [search, activeCategory]);
+
+  const visibleArticles = filteredArticles.slice(0, visibleCount);
+  const remaining = Math.max(0, filteredArticles.length - visibleArticles.length);
+  const showFeatured =
+    !search.trim() && activeCategory === "All" && featuredArticles.length > 0;
+  const leadArticle = featuredArticles[0];
+  const supportingArticles = featuredArticles.slice(1, 3);
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f5f7fb",
-      }}
-    >
+    <div className="calvoro-journal-page">
       <SEO
-        title="CALVORO Blog - Guides, Tips & How-To Articles"
-        description="Read practical CALVORO guides about calculators, finance, math, health, education and everyday tasks."
+        title="CALVORO Journal - Practical Guides for Everyday Numbers"
+        description="Browse original CALVORO guides about percentages, loans, health, education, time, business, productivity and everyday browser tools."
       />
 
-      {/* BLOG PAGE HEADER */}
+      <section className="calvoro-journal-hero">
+        <div className="calvoro-journal-container">
+          <Breadcrumbs
+            tone="dark"
+            items={[{ label: "Home", to: "/" }, { label: "Journal" }]}
+          />
 
-      <section
-        style={{
-          background:
-            "linear-gradient(135deg, #0f172a 0%, #1e3a8a 52%, #2563eb 100%)",
-          color: "#ffffff",
-          padding: "72px 20px 60px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1180px",
-            margin: "0 auto",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "760px",
-            }}
-          >
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "7px 12px",
-                borderRadius: "999px",
-                background: "rgba(255,255,255,0.12)",
-                border:
-                  "1px solid rgba(255,255,255,0.18)",
-                fontSize: "11px",
-                fontWeight: "900",
-                letterSpacing: "0.8px",
-                marginBottom: "16px",
-              }}
-            >
-              📰 CALVORO JOURNAL
+          <div className="calvoro-journal-hero-layout">
+            <div>
+              <span className="calvoro-journal-kicker">CALVORO Journal</span>
+              <h1>Guides for the numbers behind everyday decisions.</h1>
+              <p>
+                Clear explanations, worked examples, and direct links to the
+                calculator or browser tool that does the arithmetic. No account
+                and no upload required.
+              </p>
             </div>
 
-            <h1
-              style={{
-                margin: "0 0 14px",
-                fontSize: "clamp(38px, 6vw, 62px)",
-                lineHeight: 1.03,
-                fontWeight: "900",
-                letterSpacing: "-2px",
-              }}
-            >
-              Practical ideas.
-              <br />
-              Useful guides.
-            </h1>
-
-            <p
-              style={{
-                margin: 0,
-                maxWidth: "700px",
-                fontSize: "17px",
-                lineHeight: 1.8,
-                color: "rgba(255,255,255,0.88)",
-              }}
-            >
-              Helpful articles about calculations, finance,
-              education, health, and everyday tasks — connected
-              to useful CALVORO tools.
-            </p>
+            <dl className="calvoro-journal-stats">
+              <div>
+                <dt>Guides</dt>
+                <dd>{articles.length}</dd>
+              </div>
+              <div>
+                <dt>Topics</dt>
+                <dd>{articleCategories.length - 1}</dd>
+              </div>
+              <div>
+                <dt>Processed locally</dt>
+                <dd>100%</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </section>
 
-      {/* MAIN BLOG AREA */}
-
-      <main
-        style={{
-          maxWidth: "1180px",
-          margin: "0 auto",
-          padding: "40px 20px 80px",
-        }}
-      >
-        {/* CATEGORY BAR */}
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "16px",
-            flexWrap: "wrap",
-            marginBottom: "28px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              gap: "8px",
-              flexWrap: "wrap",
-            }}
-          >
-            {categories.map((category) => {
-              const active =
-                activeCategory === category;
-
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() =>
-                    setActiveCategory(category)
-                  }
-                  style={{
-                    border: active
-                      ? "1px solid #2563eb"
-                      : "1px solid #dbe3ef",
-                    background: active
-                      ? "#2563eb"
-                      : "#ffffff",
-                    color: active
-                      ? "#ffffff"
-                      : "#475569",
-                    padding: "9px 14px",
-                    borderRadius: "999px",
-                    fontSize: "12px",
-                    fontWeight: "800",
-                    cursor: "pointer",
-                  }}
-                >
-                  {category}
-                </button>
-              );
-            })}
-          </div>
-
-          <div
-            style={{
-              color: "#64748b",
-              fontSize: "13px",
-              fontWeight: "700",
-            }}
-          >
-            {filteredPosts.length} articles
-          </div>
-        </div>
-
-        {/* SEARCH */}
-
-        <div
-          style={{
-            marginBottom: "34px",
-          }}
-        >
-          <input
-            type="text"
-            value={search}
-            onChange={(event) =>
-              setSearch(event.target.value)
-            }
-            placeholder="Search articles..."
-            style={{
-              width: "100%",
-              boxSizing: "border-box",
-              padding: "17px 18px",
-              borderRadius: "14px",
-              border: "1px solid #d9e1ec",
-              background: "#ffffff",
-              color: "#0f172a",
-              fontSize: "15px",
-              outline: "none",
-              boxShadow:
-                "0 5px 20px rgba(15,23,42,0.04)",
-            }}
-          />
-        </div>
-
-        {/* FEATURED POST */}
-
-        {filteredPosts.some(
-          (post) => post.slug === featuredPost.slug
-        ) && (
-          <section
-            style={{
-              marginBottom: "40px",
-            }}
-          >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns:
-                  "minmax(0, 1.25fr) minmax(280px, 0.75fr)",
-                background: "#ffffff",
-                border:
-                  "1px solid #dfe7f1",
-                borderRadius: "22px",
-                overflow: "hidden",
-                boxShadow:
-                  "0 10px 30px rgba(15,23,42,0.06)",
-              }}
+      <main className="calvoro-journal-main">
+        <div className="calvoro-journal-container">
+          {showFeatured && leadArticle && (
+            <section
+              className="calvoro-journal-featured"
+              aria-labelledby="featured-guide-heading"
             >
-              {/* FEATURED VISUAL */}
-
-              <div
-                style={{
-                  minHeight: "320px",
-                  background:
-                    "linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #4f46e5 100%)",
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "35px",
-                }}
+              <Link
+                to={`/blog/${leadArticle.slug}`}
+                className="calvoro-journal-featured-lead"
               >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "22px",
-                    left: "22px",
-                    padding: "6px 10px",
-                    borderRadius: "999px",
-                    background:
-                      "rgba(255,255,255,0.15)",
-                    color: "#ffffff",
-                    fontSize: "10px",
-                    fontWeight: "900",
-                    letterSpacing: "1px",
-                  }}
-                >
-                  FEATURED ARTICLE
+                <div className="calvoro-journal-featured-visual" aria-hidden="true">
+                  <span>{leadArticle.category}</span>
+                  <strong>{String(featuredArticles.length).padStart(2, "0")}</strong>
+                  <small>Editor's picks</small>
                 </div>
-
-                <div
-                  style={{
-                    textAlign: "center",
-                    color: "#ffffff",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "72px",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    %
+                <div className="calvoro-journal-featured-copy">
+                  <span className="calvoro-journal-kicker">Featured guide</span>
+                  <h2 id="featured-guide-heading">{leadArticle.title}</h2>
+                  <p>{leadArticle.excerpt}</p>
+                  <div className="calvoro-journal-featured-meta">
+                    <span>{formatArticleDate(leadArticle.date)}</span>
+                    <span>{getReadTime(leadArticle)}</span>
                   </div>
+                  <span className="calvoro-journal-read-link">
+                    Read the guide <b aria-hidden="true">→</b>
+                  </span>
+                </div>
+              </Link>
 
-                  <div
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "800",
-                      opacity: 0.85,
-                    }}
+              <div className="calvoro-journal-featured-side">
+                <h2>Also worth reading</h2>
+                {supportingArticles.map((article) => (
+                  <Link
+                    key={article.slug}
+                    to={`/blog/${article.slug}`}
+                    className="calvoro-journal-mini-card"
                   >
-                    SIMPLE • CLEAR • PRACTICAL
-                  </div>
-                </div>
-              </div>
-
-              {/* FEATURED CONTENT */}
-
-              <div
-                style={{
-                  padding: "34px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                }}
-              >
-                <div
-                  style={{
-                    display: "inline-block",
-                    alignSelf: "flex-start",
-                    padding: "5px 9px",
-                    borderRadius: "999px",
-                    background: "#eff6ff",
-                    color: "#2563eb",
-                    fontSize: "10px",
-                    fontWeight: "900",
-                    marginBottom: "14px",
-                  }}
-                >
-                  {featuredPost.category}
-                </div>
-
-                <h2
-                  style={{
-                    margin: "0 0 12px",
-                    color: "#0f172a",
-                    fontSize: "clamp(26px, 3vw, 38px)",
-                    lineHeight: 1.15,
-                    fontWeight: "900",
-                  }}
-                >
-                  {featuredPost.title}
-                </h2>
-
-                <div
-                  style={{
-                    color: "#94a3b8",
-                    fontSize: "12px",
-                    fontWeight: "600",
-                    marginBottom: "16px",
-                  }}
-                >
-                  {featuredPost.date} ·{" "}
-                  {featuredPost.readTime}
-                </div>
-
-                <p
-                  style={{
-                    margin: "0 0 24px",
-                    color: "#64748b",
-                    fontSize: "15px",
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {featuredPost.excerpt}
-                </p>
-
-                <Link
-                  to={`/blog/${featuredPost.slug}`}
-                  style={{
-                    alignSelf: "flex-start",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "12px 17px",
-                    borderRadius: "10px",
-                    background: "#2563eb",
-                    color: "#ffffff",
-                    textDecoration: "none",
-                    fontSize: "13px",
-                    fontWeight: "900",
-                  }}
-                >
-                  Read featured article →
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* CONTENT + SIDEBAR */}
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "minmax(0, 1fr) 300px",
-            gap: "28px",
-            alignItems: "start",
-          }}
-        >
-          {/* ARTICLES */}
-
-          <section>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "18px",
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    color: "#2563eb",
-                    fontSize: "11px",
-                    fontWeight: "900",
-                    letterSpacing: "1px",
-                    marginBottom: "5px",
-                  }}
-                >
-                  LATEST ARTICLES
-                </div>
-
-                <h2
-                  style={{
-                    margin: 0,
-                    color: "#0f172a",
-                    fontSize: "28px",
-                    fontWeight: "900",
-                  }}
-                >
-                  From the CALVORO Blog
-                </h2>
-              </div>
-            </div>
-
-            {regularPosts.length > 0 ? (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns:
-                    "repeat(auto-fit, minmax(260px, 1fr))",
-                  gap: "20px",
-                }}
-              >
-                {regularPosts.map((post) => (
-                  <article
-                    key={post.slug}
-                    style={{
-                      background: "#ffffff",
-                      border:
-                        "1px solid #dfe7f1",
-                      borderRadius: "20px",
-                      overflow: "hidden",
-                      boxShadow:
-                        "0 8px 24px rgba(15,23,42,0.04)",
-                    }}
-                  >
-                    {/* CARD IMAGE AREA */}
-
-                    <div
-                      style={{
-                        height: "150px",
-                        background:
-                          "linear-gradient(135deg, #eff6ff, #eef2ff)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#2563eb",
-                        fontSize: "52px",
-                        fontWeight: "900",
-                      }}
-                    >
-                      {post.category === "Finance"
-                        ? "₹"
-                        : post.category === "Health"
-                        ? "♥"
-                        : post.category === "Education"
-                        ? "A+"
-                        : post.category === "Everyday"
-                        ? "⚡"
-                        : "∑"}
-                    </div>
-
-                    <div
-                      style={{
-                        padding: "23px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "inline-block",
-                          padding: "5px 8px",
-                          borderRadius: "999px",
-                          background: "#eff6ff",
-                          color: "#2563eb",
-                          fontSize: "10px",
-                          fontWeight: "900",
-                          marginBottom: "12px",
-                        }}
-                      >
-                        {post.category}
-                      </div>
-
-                      <h3
-                        style={{
-                          margin: "0 0 9px",
-                          color: "#0f172a",
-                          fontSize: "20px",
-                          lineHeight: 1.3,
-                          fontWeight: "900",
-                        }}
-                      >
-                        {post.title}
-                      </h3>
-
-                      <div
-                        style={{
-                          color: "#94a3b8",
-                          fontSize: "11px",
-                          marginBottom: "13px",
-                        }}
-                      >
-                        {post.date} ·{" "}
-                        {post.readTime}
-                      </div>
-
-                      <p
-                        style={{
-                          margin: "0 0 18px",
-                          color: "#64748b",
-                          fontSize: "14px",
-                          lineHeight: 1.75,
-                        }}
-                      >
-                        {post.excerpt}
-                      </p>
-
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        style={{
-                          color: "#2563eb",
-                          textDecoration: "none",
-                          fontSize: "13px",
-                          fontWeight: "900",
-                        }}
-                      >
-                        Continue reading →
-                      </Link>
-                    </div>
-                  </article>
+                    <span>{article.category}</span>
+                    <strong>{article.title}</strong>
+                    <small>{getReadTime(article)}</small>
+                  </Link>
                 ))}
               </div>
-            ) : (
-              <div
-                style={{
-                  background: "#ffffff",
-                  border:
-                    "1px solid #dfe7f1",
-                  borderRadius: "18px",
-                  padding: "55px 20px",
-                  textAlign: "center",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "42px",
-                    marginBottom: "12px",
-                  }}
-                >
-                  🔎
+            </section>
+          )}
+
+          <div className="calvoro-journal-grid">
+            <section className="calvoro-journal-content" aria-labelledby="all-guides-heading">
+              <div className="calvoro-journal-heading-row">
+                <div>
+                  <span className="calvoro-journal-kicker">The archive</span>
+                  <h2 id="all-guides-heading">All guides</h2>
                 </div>
-
-                <h3
-                  style={{
-                    margin: "0 0 7px",
-                    color: "#0f172a",
-                  }}
-                >
-                  No articles found
-                </h3>
-
-                <p
-                  style={{
-                    margin: 0,
-                    color: "#64748b",
-                  }}
-                >
-                  Try another search term or category.
-                </p>
-              </div>
-            )}
-          </section>
-
-          {/* SIDEBAR */}
-
-          <aside
-            style={{
-              display: "grid",
-              gap: "18px",
-            }}
-          >
-            {/* ABOUT BLOG */}
-
-            <div
-              style={{
-                background: "#ffffff",
-                border:
-                  "1px solid #dfe7f1",
-                borderRadius: "18px",
-                padding: "24px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#2563eb",
-                  fontSize: "11px",
-                  fontWeight: "900",
-                  letterSpacing: "1px",
-                  marginBottom: "8px",
-                }}
-              >
-                ABOUT THE BLOG
+                <span className="calvoro-journal-count">
+                  {filteredArticles.length}{" "}
+                  {filteredArticles.length === 1 ? "guide" : "guides"}
+                </span>
               </div>
 
-              <h3
-                style={{
-                  margin: "0 0 10px",
-                  color: "#0f172a",
-                  fontSize: "21px",
-                  fontWeight: "900",
-                }}
-              >
-                Helpful content from CALVORO
-              </h3>
+              <div className="calvoro-journal-toolbar">
+                <label htmlFor="journal-search">
+                  Search the journal
+                  <input
+                    id="journal-search"
+                    type="search"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                    placeholder="Try percentage, mortgage, GPA, or PDF"
+                    className="calvoro-search-input"
+                    autoComplete="off"
+                  />
+                </label>
 
-              <p
-                style={{
-                  margin: 0,
-                  color: "#64748b",
-                  fontSize: "14px",
-                  lineHeight: 1.75,
-                }}
-              >
-                Explore practical guides designed to
-                explain common calculations, useful concepts,
-                and everyday tasks in simple language.
-              </p>
-            </div>
-
-            {/* POPULAR CATEGORIES */}
-
-            <div
-              style={{
-                background: "#ffffff",
-                border:
-                  "1px solid #dfe7f1",
-                borderRadius: "18px",
-                padding: "24px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#2563eb",
-                  fontSize: "11px",
-                  fontWeight: "900",
-                  letterSpacing: "1px",
-                  marginBottom: "10px",
-                }}
-              >
-                CATEGORIES
+                {(search || activeCategory !== "All") && (
+                  <button
+                    type="button"
+                    className="calvoro-clear-filters"
+                    onClick={() => {
+                      setSearch("");
+                      setActiveCategory("All");
+                    }}
+                  >
+                    Clear search and topic
+                  </button>
+                )}
               </div>
 
               <div
-                style={{
-                  display: "grid",
-                  gap: "8px",
-                }}
+                className="calvoro-category-row"
+                role="group"
+                aria-label="Article topics"
               >
-                {categories
-                  .filter(
-                    (category) => category !== "All"
-                  )
-                  .map((category) => (
+                {articleCategories.map((category) => {
+                  const active = activeCategory === category;
+                  const count = getCategoryCount(category);
+
+                  return (
                     <button
                       key={category}
                       type="button"
-                      onClick={() => {
-                        setActiveCategory(category);
-                        window.scrollTo({
-                          top: 0,
-                          behavior: "smooth",
-                        });
-                      }}
-                      style={{
-                        border: "none",
-                        borderBottom:
-                          "1px solid #eef2f7",
-                        background: "transparent",
-                        color: "#475569",
-                        textAlign: "left",
-                        padding: "9px 0",
-                        cursor: "pointer",
-                        fontSize: "13px",
-                        fontWeight: "700",
-                      }}
+                      onClick={() => setActiveCategory(category)}
+                      className={
+                        active ? "calvoro-category active" : "calvoro-category"
+                      }
+                      aria-pressed={active}
                     >
-                      {category}
+                      <span>{category}</span>
+                      <small>
+                        {count} {count === 1 ? "guide" : "guides"}
+                      </small>
                     </button>
-                  ))}
-              </div>
-            </div>
-
-            {/* CALVORO TOOL */}
-
-            <div
-              style={{
-                background:
-                  "linear-gradient(135deg, #eff6ff, #eef2ff)",
-                border:
-                  "1px solid #dbeafe",
-                borderRadius: "18px",
-                padding: "24px",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: "30px",
-                  marginBottom: "8px",
-                }}
-              >
-                🧮
+                  );
+                })}
               </div>
 
-              <h3
-                style={{
-                  margin: "0 0 9px",
-                  color: "#0f172a",
-                  fontSize: "20px",
-                  fontWeight: "900",
-                }}
-              >
-                Need a calculator?
-              </h3>
-
-              <p
-                style={{
-                  margin: "0 0 17px",
-                  color: "#64748b",
-                  fontSize: "14px",
-                  lineHeight: 1.7,
-                }}
-              >
-                Try the full CALVORO tool directory and
-                find a calculator for your task.
+              <p className="calvoro-filter-status" aria-live="polite">
+                Showing {filteredArticles.length} of {articles.length} guides
+                {activeCategory === "All" ? "" : ` in ${activeCategory}`}
+                {search.trim() ? ` matching “${search.trim()}”` : ""}.
               </p>
 
-              <Link
-                to="/tools"
-                style={{
-                  display: "inline-block",
-                  padding: "11px 15px",
-                  borderRadius: "10px",
-                  background: "#2563eb",
-                  color: "#ffffff",
-                  textDecoration: "none",
-                  fontSize: "13px",
-                  fontWeight: "900",
-                }}
-              >
-                Browse Tools →
-              </Link>
-            </div>
-          </aside>
-        </div>
+              {visibleArticles.length > 0 ? (
+                <>
+                  <div className="calvoro-editorial-grid">
+                    {visibleArticles.map((article) => (
+                      <ArticleCard key={article.slug} article={article} />
+                    ))}
+                  </div>
 
-        {/* BLOG FOOTER CTA */}
+                  {remaining > 0 && (
+                    <div className="calvoro-journal-pagination">
+                      <button
+                        type="button"
+                        className="calvoro-journal-load-more"
+                        onClick={() =>
+                          setVisibleCount((count) => count + PAGE_SIZE)
+                        }
+                      >
+                        Show {Math.min(PAGE_SIZE, remaining)} more guides
+                      </button>
+                      <span>
+                        {visibleArticles.length} of {filteredArticles.length} shown
+                      </span>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="calvoro-journal-empty" role="status">
+                  <strong>No guides matched that search.</strong>
+                  <p>
+                    Try a shorter phrase or choose a different topic. You can
+                    also browse every calculator in the tool directory.
+                  </p>
+                  <div>
+                    <button
+                      type="button"
+                      className="calvoro-journal-load-more"
+                      onClick={() => {
+                        setSearch("");
+                        setActiveCategory("All");
+                      }}
+                    >
+                      Reset filters
+                    </button>
+                    <Link to="/tools" className="calvoro-journal-text-link">
+                      Browse tools →
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </section>
 
-        <section
-          style={{
-            marginTop: "45px",
-            padding: "32px",
-            borderRadius: "20px",
-            background: "#0f172a",
-            color: "#ffffff",
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              margin: "0 0 8px",
-              fontSize: "28px",
-              fontWeight: "900",
-            }}
-          >
-            Explore CALVORO Tools
-          </h2>
+            <aside className="calvoro-journal-sidebar" aria-label="Journal sidebar">
+              <section className="calvoro-journal-side-card">
+                <span className="calvoro-journal-kicker">Start with a tool</span>
+                <h2>Popular calculators</h2>
+                <div className="calvoro-journal-link-list">
+                  {popularTools.map((tool) => (
+                    <Link key={tool.path} to={tool.path}>
+                      {tool.name}
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
 
-          <p
-            style={{
-              margin: "0 auto 18px",
-              maxWidth: "650px",
-              color: "#cbd5e1",
-              lineHeight: 1.7,
-              fontSize: "14px",
-            }}
-          >
-            Read a guide, then use the related CALVORO
-            calculator or AI tool to work on your own task.
-          </p>
+              <section className="calvoro-journal-side-card">
+                <span className="calvoro-journal-kicker">New in CALVORO</span>
+                <h2>Browser tools</h2>
+                <div className="calvoro-journal-link-list">
+                  {newTools.map((tool) => (
+                    <Link key={tool.path} to={tool.path}>
+                      {tool.name}
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
 
-          <Link
-            to="/tools"
-            style={{
-              display: "inline-block",
-              padding: "12px 18px",
-              borderRadius: "10px",
-              background: "#2563eb",
-              color: "#ffffff",
-              textDecoration: "none",
-              fontSize: "13px",
-              fontWeight: "900",
-            }}
-          >
-            View All Tools →
-          </Link>
-        </section>
-
-        {/* BACK HOME */}
-
-        <div
-          style={{
-            marginTop: "28px",
-            textAlign: "center",
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              color: "#2563eb",
-              textDecoration: "none",
-              fontSize: "13px",
-              fontWeight: "800",
-            }}
-          >
-            ← Back to CALVORO
-          </Link>
+              <section className="calvoro-journal-side-card calvoro-journal-side-note">
+                <h2>How the journal works</h2>
+                <p>
+                  Every guide is written to explain a calculation or workflow
+                  you can check yourself. Articles link to the matching CALVORO
+                  tool, and every tool runs on your device unless a page states
+                  otherwise.
+                </p>
+                <Link to="/about">About CALVORO →</Link>
+              </section>
+            </aside>
+          </div>
         </div>
       </main>
     </div>
   );
 }
-

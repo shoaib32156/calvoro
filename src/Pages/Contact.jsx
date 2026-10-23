@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../SEO";
 import {
   Mail,
   MessageSquare,
@@ -44,6 +45,7 @@ export default function Contact() {
           fontFamily: "Arial, sans-serif",
         }}
       >
+        <SEO />
         <header
           style={{
             background: "#2563eb",
@@ -159,6 +161,7 @@ export default function Contact() {
         fontFamily: "Arial, sans-serif",
       }}
     >
+      <SEO />
       <header
         style={{
           background: "#2563eb",

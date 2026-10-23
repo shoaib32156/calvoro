@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const SITE_URL = "https://calvorotool.com";
+export const SITE_URL = "https://calvorotool.com";
 
 const seoData = {
   "/": {
@@ -385,6 +385,7 @@ export default function SEO({
   title,
   description,
   type,
+  jsonLd,
 }) {
   const location = useLocation();
 
@@ -441,7 +442,7 @@ export default function SEO({
 
     setProperty(
       "og:type",
-      "website"
+      seo.type === "article" ? "article" : "website"
     );
 
     setProperty(
@@ -465,7 +466,8 @@ export default function SEO({
     );
 
     const structuredData =
-      seo.type === "WebApplication"
+      jsonLd ||
+      (seo.type === "WebApplication"
         ? {
             "@context":
               "https://schema.org",
@@ -507,7 +509,7 @@ export default function SEO({
               name:
                 "CALVORO",
             },
-          };
+          });
 
     setStructuredData(
       structuredData
@@ -517,6 +519,7 @@ export default function SEO({
     title,
     description,
     type,
+    jsonLd,
   ]);
 
   return null;

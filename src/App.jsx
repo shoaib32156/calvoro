@@ -1,5 +1,32 @@
 
-import { lazy, Suspense, useMemo, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import {
+  Calculator,
+  CalendarDays,
+  Check,
+  FileStack,
+  FileText,
+  HeartPulse,
+  Image as ImageIcon,
+  KeyRound,
+  Languages,
+  Landmark,
+  Mail,
+  Menu,
+  Percent,
+  PenLine,
+  QrCode,
+  Sparkles,
+  Timer,
+  Type,
+  X,
+} from "lucide-react";
 import {
   BrowserRouter,
   Routes,
@@ -9,6 +36,19 @@ import {
 } from "react-router-dom";
 
 import SEO from "./SEO";
+import {
+  calculatorCatalog,
+  calculatorCategories,
+  featuredCalculatorPaths,
+  featuredUtilityTools,
+  matchesCatalogSearch,
+  utilityTools,
+} from "./calculatorCatalog.js";
+import {
+  articles,
+  featuredArticles,
+} from "./content/articles/index.js";
+import ArticleCard from "./components/editorial/ArticleCard.jsx";
 
 import MathSolver from "./Pages/MathSolver.jsx";
 import ImageMathSolver from "./Pages/ImageMathSolver.jsx";
@@ -17,7 +57,6 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy.jsx";
 import Terms from "./Pages/Terms.jsx";
 import About from "./Pages/About.jsx";
 import HomeSEOContent from "./Pages/HomeSEOContent.jsx";
-import AgeCalculatorGuide from "./Pages/AgeCalculatorGuide.jsx";
 
 import AISummarizer from "./Pages/AISummarizer.jsx";
 import AITextRewriter from "./AITexterRewriter.jsx";
@@ -195,416 +234,112 @@ const RunningPaceCalculator = lazy(() =>
 );
 
 // ======================================================
+// BROWSER UTILITIES
+// ======================================================
+
+const utilityPreviewIcons = {
+  "/pdf-studio": FileStack,
+  "/image-studio": ImageIcon,
+  "/word-counter": Type,
+  "/qr-code-generator": QrCode,
+  "/password-generator": KeyRound,
+  "/pomodoro-timer": Timer,
+};
+
+const toolComponents = {
+  "/pdf-studio": lazy(() => import("./tools/PdfStudio.jsx")),
+  "/image-studio": lazy(() => import("./tools/ImageStudio.jsx")),
+  "/word-counter": lazy(() => import("./tools/WordCounter.jsx")),
+  "/text-compare": lazy(() => import("./tools/TextCompare.jsx")),
+  "/remove-duplicate-lines": lazy(() =>
+    import("./tools/DuplicateLineRemover.jsx")
+  ),
+  "/text-cleanup": lazy(() => import("./tools/TextCleanup.jsx")),
+  "/find-replace": lazy(() => import("./tools/FindReplace.jsx")),
+  "/line-sorter": lazy(() => import("./tools/LineSorter.jsx")),
+  "/qr-code-generator": lazy(() =>
+    import("./tools/QrCodeGenerator.jsx")
+  ),
+  "/password-generator": lazy(() =>
+    import("./tools/PasswordGenerator.jsx")
+  ),
+  "/uuid-generator": lazy(() => import("./tools/UuidGenerator.jsx")),
+  "/pomodoro-timer": lazy(() => import("./tools/PomodoroTimer.jsx")),
+  "/json-formatter": lazy(() => import("./tools/JsonFormatter.jsx")),
+  "/csv-viewer": lazy(() => import("./tools/CsvViewer.jsx")),
+  "/markdown-previewer": lazy(() =>
+    import("./tools/MarkdownPreviewer.jsx")
+  ),
+  "/color-palette-generator": lazy(() =>
+    import("./tools/ColorPaletteGenerator.jsx")
+  ),
+};
+
+// ======================================================
 // CALCULATOR DATA
 // ======================================================
 
-const calculators = [
-  {
-    component: PercentageCalculator,
-    name: "Percentage Calculator",
-    path: "/percentage",
-    category: "Math",
-    description:
-      "Calculate percentages quickly and easily.",
-  },
-  {
-    component: AgeCalculator,
-    name: "Age Calculator",
-    path: "/age",
-    category: "Date & Time",
-    description:
-      "Calculate your exact age from your date of birth.",
-  },
-  {
-    component: BMICalculator,
-    name: "BMI Calculator",
-    path: "/bmi",
-    category: "Health",
-    description:
-      "Calculate your Body Mass Index.",
-  },
-  {
-    component: LoanCalculator,
-    name: "Loan Calculator",
-    path: "/loan",
-    category: "Finance",
-    description:
-      "Estimate loan payments and total interest.",
-  },
-  {
-    component: EMICalculator,
-    name: "EMI Calculator",
-    path: "/emi",
-    category: "Finance",
-    description:
-      "Calculate monthly EMI payments.",
-  },
-  {
-    component: CurrencyConverter,
-    name: "Currency Converter",
-    path: "/currency",
-    category: "Finance",
-    description:
-      "Convert between different currencies.",
-  },
-  {
-    component: DiscountCalculator,
-    name: "Discount Calculator",
-    path: "/discount",
-    category: "Finance",
-    description:
-      "Calculate discounts and final prices.",
-  },
-  {
-    component: TipCalculator,
-    name: "Tip Calculator",
-    path: "/tip",
-    category: "Finance",
-    description:
-      "Calculate tips and split bills easily.",
-  },
-  {
-    component: TimeZoneConverter,
-    name: "Time Zone Converter",
-    path: "/timezone",
-    category: "Date & Time",
-    description:
-      "Convert times between different time zones.",
-  },
-  {
-    component: GPACalculator,
-    name: "GPA Calculator",
-    path: "/gpa",
-    category: "Education",
-    description:
-      "Calculate your GPA quickly.",
-  },
-  {
-    component: UnitConverter,
-    name: "Unit Converter",
-    path: "/unit",
-    category: "Math",
-    description:
-      "Convert common measurement units.",
-  },
-  {
-    component: FuelCostCalculator,
-    name: "Fuel Cost Calculator",
-    path: "/fuel-cost",
-    category: "Everyday",
-    description:
-      "Estimate fuel usage and travel cost.",
-  },
-  {
-    component: MortgageCalculator,
-    name: "Mortgage Calculator",
-    path: "/mortgage",
-    category: "Finance",
-    description:
-      "Estimate mortgage payments and interest.",
-  },
-  {
-    component: SalaryCalculator,
-    name: "Salary Calculator",
-    path: "/salary",
-    category: "Finance",
-    description:
-      "Estimate salary and take-home amounts.",
-  },
-  {
-    component: CompoundInterestCalculator,
-    name: "Compound Interest Calculator",
-    path: "/compound-interest",
-    category: "Finance",
-    description:
-      "Calculate compound interest growth.",
-  },
-  {
-    component: TaxCalculator,
-    name: "Tax Calculator",
-    path: "/tax",
-    category: "Finance",
-    description:
-      "Estimate tax amounts and after-tax income.",
-  },
-  {
-    component: ProfitMarginCalculator,
-    name: "Profit Margin Calculator",
-    path: "/profit-margin",
-    category: "Business",
-    description:
-      "Calculate profit margins and markup.",
-  },
-  {
-    component: BreakEvenCalculator,
-    name: "Break-Even Calculator",
-    path: "/break-even",
-    category: "Business",
-    description:
-      "Find your break-even point.",
-  },
-  {
-    component: ROICalculator,
-    name: "ROI Calculator",
-    path: "/roi",
-    category: "Business",
-    description:
-      "Calculate return on investment.",
-  },
-  {
-    component: PaybackPeriodCalculator,
-    name: "Payback Period Calculator",
-    path: "/payback-period",
-    category: "Business",
-    description:
-      "Calculate how long an investment takes to pay back.",
-  },
-  {
-    component: InvestmentCalculator,
-    name: "Investment Calculator",
-    path: "/investment",
-    category: "Finance",
-    description:
-      "Estimate investment growth over time.",
-  },
-  {
-    component: SavingsCalculator,
-    name: "Savings Calculator",
-    path: "/savings",
-    category: "Finance",
-    description:
-      "Plan your savings and future balance.",
-  },
-  {
-    component: InflationCalculator,
-    name: "Inflation Calculator",
-    path: "/inflation",
-    category: "Finance",
-    description:
-      "Compare the value of money over time.",
-  },
-  {
-    component: PresentValueCalculator,
-    name: "Present Value Calculator",
-    path: "/present-value",
-    category: "Finance",
-    description:
-      "Calculate the present value of future money.",
-  },
-  {
-    component: FutureValueCalculator,
-    name: "Future Value Calculator",
-    path: "/future-value",
-    category: "Finance",
-    description:
-      "Calculate the future value of an investment.",
-  },
-  {
-    component: NetWorthCalculator,
-    name: "Net Worth Calculator",
-    path: "/net-worth",
-    category: "Finance",
-    description:
-      "Calculate your total net worth.",
-  },
-  {
-    component: PercentageChangeCalculator,
-    name: "Percentage Change Calculator",
-    path: "/percentage-change",
-    category: "Math",
-    description:
-      "Calculate percentage increases and decreases.",
-  },
-  {
-    component: AverageCalculator,
-    name: "Average Calculator",
-    path: "/average",
-    category: "Math",
-    description:
-      "Calculate the average of numbers.",
-  },
-  {
-    component: FractionCalculator,
-    name: "Fraction Calculator",
-    path: "/fraction",
-    category: "Math",
-    description:
-      "Add, subtract, multiply and divide fractions.",
-  },
-  {
-    component: RatioCalculator,
-    name: "Ratio Calculator",
-    path: "/ratio",
-    category: "Math",
-    description:
-      "Calculate and simplify ratios.",
-  },
-  {
-    component: TimeDurationCalculator,
-    name: "Time Duration Calculator",
-    path: "/time-duration",
-    category: "Date & Time",
-    description:
-      "Calculate the duration between two times.",
-  },
-  {
-    component: DateDifferenceCalculator,
-    name: "Date Difference Calculator",
-    path: "/date-difference",
-    category: "Date & Time",
-    description:
-      "Find the difference between two dates.",
-  },
-  {
-    component: SpeedCalculator,
-    name: "Speed Calculator",
-    path: "/speed",
-    category: "Everyday",
-    description:
-      "Calculate speed, distance and time.",
-  },
-  {
-    component: DistanceCalculator,
-    name: "Distance Calculator",
-    path: "/distance",
-    category: "Everyday",
-    description:
-      "Calculate distance using speed and time.",
-  },
-  {
-    component: PaceCalculator,
-    name: "Pace Calculator",
-    path: "/pace",
-    category: "Fitness",
-    description:
-      "Calculate running pace and speed.",
-  },
-  {
-    component: RunningSpeedCalculator,
-    name: "Running Speed Calculator",
-    path: "/running-speed",
-    category: "Fitness",
-    description:
-      "Calculate your running speed.",
-  },
-  {
-    component: TimeToRunCalculator,
-    name: "Time to Run Calculator",
-    path: "/time-to-run",
-    category: "Fitness",
-    description:
-      "Estimate the time needed to run a distance.",
-  },
-  {
-    component: RunningTimeCalculator,
-    name: "Running Time Calculator",
-    path: "/running-time",
-    category: "Fitness",
-    description:
-      "Calculate running time from distance and pace.",
-  },
-  {
-    component: RunningPaceCalculator,
-    name: "Running Pace Calculator",
-    path: "/running-pace",
-    category: "Fitness",
-    description:
-      "Calculate your running pace.",
-  },
-];
+const calculatorComponents = {
+  "/percentage": PercentageCalculator,
+  "/age": AgeCalculator,
+  "/bmi": BMICalculator,
+  "/loan": LoanCalculator,
+  "/emi": EMICalculator,
+  "/currency": CurrencyConverter,
+  "/discount": DiscountCalculator,
+  "/tip": TipCalculator,
+  "/timezone": TimeZoneConverter,
+  "/gpa": GPACalculator,
+  "/unit": UnitConverter,
+  "/fuel-cost": FuelCostCalculator,
+  "/mortgage": MortgageCalculator,
+  "/salary": SalaryCalculator,
+  "/compound-interest": CompoundInterestCalculator,
+  "/tax": TaxCalculator,
+  "/profit-margin": ProfitMarginCalculator,
+  "/break-even": BreakEvenCalculator,
+  "/roi": ROICalculator,
+  "/payback-period": PaybackPeriodCalculator,
+  "/investment": InvestmentCalculator,
+  "/savings": SavingsCalculator,
+  "/inflation": InflationCalculator,
+  "/present-value": PresentValueCalculator,
+  "/future-value": FutureValueCalculator,
+  "/net-worth": NetWorthCalculator,
+  "/percentage-change": PercentageChangeCalculator,
+  "/average": AverageCalculator,
+  "/fraction": FractionCalculator,
+  "/ratio": RatioCalculator,
+  "/time-duration": TimeDurationCalculator,
+  "/date-difference": DateDifferenceCalculator,
+  "/speed": SpeedCalculator,
+  "/distance": DistanceCalculator,
+  "/pace": PaceCalculator,
+  "/running-speed": RunningSpeedCalculator,
+  "/time-to-run": TimeToRunCalculator,
+  "/running-time": RunningTimeCalculator,
+  "/running-pace": RunningPaceCalculator,
+};
 
-// ======================================================
-// CATEGORIES
-// ======================================================
+const calculators = calculatorCatalog.map((item) => ({
+  ...item,
+  component: calculatorComponents[item.path],
+}));
 
-const categories = [
-  "All",
-  "Math",
-  "Finance",
-  "Business",
-  "Date & Time",
-  "Health",
-  "Education",
-  "Everyday",
-  "Fitness",
-];
+const categories = calculatorCategories;
 
-// ======================================================
-// POPULAR CALCULATORS
-// ======================================================
+const popularCalculators = featuredCalculatorPaths
+  .map((path) => calculators.find((calculator) => calculator.path === path))
+  .filter(Boolean);
 
-const popularCalculators = [
-  {
-    icon: "％",
-    name: "Percentage Calculator",
-    description:
-      "Calculate percentages, increases, decreases, and more.",
-    path: "/percentage",
-  },
-  {
-    icon: "🎂",
-    name: "Age Calculator",
-    description:
-      "Calculate your exact age from your date of birth.",
-    path: "/age",
-  },
-  {
-    icon: "⚖️",
-    name: "BMI Calculator",
-    description:
-      "Calculate your Body Mass Index quickly.",
-    path: "/bmi",
-  },
-  {
-    icon: "💰",
-    name: "Loan Calculator",
-    description:
-      "Estimate monthly loan payments and total interest.",
-    path: "/loan",
-  },
-  {
-    icon: "📊",
-    name: "GPA Calculator",
-    description:
-      "Calculate your GPA from grades and credits.",
-    path: "/gpa",
-  },
-  {
-    icon: "⛽",
-    name: "Fuel Cost Calculator",
-    description:
-      "Estimate fuel usage and travel expenses.",
-    path: "/fuel-cost",
-  },
-];
-
-// ======================================================
-// BLOG PREVIEW
-// ======================================================
-
-const blogPreview = [
-  {
-    slug: "how-to-calculate-percentage",
-    category: "Math",
-    title: "How to Calculate Percentage Easily",
-    excerpt:
-      "Learn how percentages work and how to calculate them in everyday situations.",
-  },
-  {
-    slug: "how-compound-interest-works",
-    category: "Finance",
-    title: "How Compound Interest Works",
-    excerpt:
-      "Understand compound interest and how growth builds over time.",
-  },
-  {
-    slug: "how-to-calculate-bmi",
-    category: "Health",
-    title: "How to Calculate BMI",
-    excerpt:
-      "Learn what BMI is and how the basic calculation works.",
-  },
-];
+const popularCalculatorIcons = {
+  "/percentage": Percent,
+  "/age": CalendarDays,
+  "/bmi": HeartPulse,
+  "/loan": Landmark,
+  "/emi": Landmark,
+  "/discount": Percent,
+};
 
 // ======================================================
 // GLOBAL HEADER
@@ -612,6 +347,7 @@ const blogPreview = [
 
 function GlobalHeader() {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isActive = (path) => {
     if (path === "/") {
@@ -621,116 +357,126 @@ function GlobalHeader() {
     return location.pathname.startsWith(path);
   };
 
-  const navStyle = (active = false) => ({
-    textDecoration: "none",
-    color: active ? "#1d4ed8" : "#334155",
-    fontSize: "13px",
-    fontWeight: active ? 800 : 700,
-    padding: "9px 11px",
-    borderRadius: "7px",
-    background: active ? "#eff6ff" : "transparent",
-    transition: "all 0.18s ease",
-    whiteSpace: "nowrap",
-  });
+  const isCalculatorPage = calculators.some(
+    (calculator) => calculator.path === location.pathname
+  );
+
+  const isUtilityPage = utilityTools.some(
+    (tool) => tool.path === location.pathname
+  );
+
+  const navClassName = (active = false) =>
+    active ? "calvoro-nav-link active" : "calvoro-nav-link";
 
   return (
-    <header className="calvoro-global-header">
+    <header
+      className={`calvoro-global-header${menuOpen ? " is-open" : ""}`}
+    >
+      <div className="calvoro-header-inner">
+        <Link
+          to="/"
+          className="calvoro-brand"
+          aria-label="CALVORO home"
+          onClick={() => setMenuOpen(false)}
+        >
+          <span className="calvoro-brand-mark" aria-hidden="true">C</span>
+          <span>
+            <strong>CALVORO</strong>
+            <small>Online calculators</small>
+          </span>
+        </Link>
 
-      <div className="calvoro-header-top">
-
-        <div className="calvoro-header-inner">
-
-          <Link
-            to="/"
-            className="calvoro-brand"
+        <nav
+          id="calvoro-primary-navigation"
+          className={`calvoro-main-nav${menuOpen ? " is-open" : ""}`}
+          aria-label="Main navigation"
+        >
+          <a
+            href="/#calculators"
+            className={navClassName(
+              isCalculatorPage ||
+              (location.pathname === "/" && location.hash === "#calculators")
+            )}
+            aria-current={
+              isCalculatorPage ||
+              (location.pathname === "/" && location.hash === "#calculators")
+                ? "location"
+                : undefined
+            }
+            onClick={() => setMenuOpen(false)}
           >
-            <span className="calvoro-brand-mark">
-              C
-            </span>
-
-            <span>
-              <strong>CALVORO</strong>
-              <small>SMART ONLINE TOOLS</small>
-            </span>
-          </Link>
-
-          <div className="calvoro-header-note">
-            Free calculators, AI tools & practical guides
-          </div>
-
-        </div>
-
-      </div>
-
-      <div className="calvoro-header-main">
-
-        <div className="calvoro-header-inner">
-
-          <nav className="calvoro-main-nav">
-
-            <Link
-              to="/"
-              style={navStyle(isActive("/"))}
-            >
-              Home
-            </Link>
-
-            <a
-              href="/#calculators"
-              style={navStyle(false)}
-            >
-              Calculators
-            </a>
-
-            <a
-              href="/#ai-tools"
-              style={navStyle(false)}
-            >
-              AI Tools
-            </a>
-
-            <Link
-              to="/tools"
-              style={navStyle(isActive("/tools"))}
-            >
-              Tools
-            </Link>
-
-            <Link
-              to="/blog"
-              style={navStyle(isActive("/blog"))}
-            >
-              Blog
-            </Link>
-
-            <Link
-              to="/about"
-              style={navStyle(isActive("/about"))}
-            >
-              About
-            </Link>
-
-            <Link
-              to="/contact"
-              style={navStyle(isActive("/contact"))}
-            >
-              Contact
-            </Link>
-
-          </nav>
-
+            Calculators
+          </a>
+          <a
+            href="/#calculator-categories"
+            className={navClassName(location.hash === "#calculator-categories")}
+            aria-current={
+              location.hash === "#calculator-categories" ? "location" : undefined
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            Categories
+          </a>
+          <a
+            href="/#guides"
+            className={navClassName(location.hash === "#guides")}
+            aria-current={location.hash === "#guides" ? "location" : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
+            Guides
+          </a>
           <Link
             to="/blog"
-            className="calvoro-header-button"
+            className={navClassName(isActive("/blog"))}
+            aria-current={isActive("/blog") ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
           >
-            CALVORO Journal
-            <span>→</span>
+            Blog
           </Link>
+          <Link
+            to="/about"
+            className={navClassName(isActive("/about"))}
+            aria-current={isActive("/about") ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
+            About
+          </Link>
+          <Link
+            to="/tools"
+            className={navClassName(
+              isActive("/tools") || isUtilityPage
+            )}
+            aria-current={
+              isActive("/tools") || isUtilityPage
+                ? "page"
+                : undefined
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            All tools
+          </Link>
+        </nav>
 
+        <div className="calvoro-header-actions">
+          <Link
+            to="/tools"
+            className="calvoro-header-button"
+            onClick={() => setMenuOpen(false)}
+          >
+            Browse all tools <span aria-hidden="true">→</span>
+          </Link>
+          <button
+            className="calvoro-menu-toggle"
+            type="button"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+            aria-controls="calvoro-primary-navigation"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X size={21} /> : <Menu size={21} />}
+          </button>
         </div>
-
       </div>
-
     </header>
   );
 }
@@ -753,8 +499,8 @@ function GlobalFooter() {
             </div>
 
             <p className="calvoro-footer-description">
-              Practical online calculators, helpful AI
-              tools, and clear guides for everyday tasks.
+              Free browser-based calculators and utilities for math,
+              finance, health, school, files, text, and everyday planning.
             </p>
           </div>
 
@@ -771,6 +517,26 @@ function GlobalFooter() {
 
             <Link to="/about">
               About
+            </Link>
+          </div>
+
+          <div>
+            <h3>Browser tools</h3>
+
+            <Link to="/pdf-studio">
+              PDF Studio
+            </Link>
+
+            <Link to="/image-studio">
+              Image Studio
+            </Link>
+
+            <Link to="/word-counter">
+              Word Counter
+            </Link>
+
+            <Link to="/json-formatter">
+              JSON Formatter
             </Link>
           </div>
 
@@ -816,7 +582,7 @@ function GlobalFooter() {
           </span>
 
           <span>
-            Smart tools for everyday needs.
+            Results are estimates based on the values you enter.
           </span>
 
         </div>
@@ -837,6 +603,29 @@ function PageFrame({ children }) {
       {children}
     </div>
   );
+}
+
+function RouteHashScroll() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const targetId = location.hash.slice(1);
+
+    if (!targetId) {
+      return undefined;
+    }
+
+    const frame = requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [location.hash, location.pathname]);
+
+  return null;
 }
 
 // ======================================================
@@ -920,12 +709,13 @@ function UniversalCalculatorFrame({
 
         <div className="calvoro-universal-container">
 
-          <Link
-            to="/#calculators"
-            className="calvoro-universal-back"
-          >
-            ← All calculators
-          </Link>
+          <nav className="calvoro-universal-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/#calculators">Calculators</Link></li>
+              <li aria-current="page">{calculator.name}</li>
+            </ol>
+          </nav>
 
           <div className="calvoro-universal-hero-grid">
 
@@ -946,7 +736,7 @@ function UniversalCalculatorFrame({
             </div>
 
             <div className="calvoro-universal-icon">
-              🧮
+              <Calculator size={34} strokeWidth={1.7} aria-hidden="true" />
             </div>
 
           </div>
@@ -998,7 +788,7 @@ function UniversalCalculatorFrame({
                 </span>
 
                 <div className="calvoro-universal-sidebar-icon">
-                  🧮
+                  <Calculator size={22} strokeWidth={1.8} aria-hidden="true" />
                 </div>
 
                 <h3>
@@ -1091,8 +881,8 @@ function UniversalCalculatorFrame({
         {`
           .calvoro-universal-calculator-page {
             min-height: 100vh;
-            background: #f5f7fa;
-            color: #172033;
+            background: var(--calvoro-bg);
+            color: var(--calvoro-text);
           }
 
           .calvoro-universal-container {
@@ -1104,29 +894,45 @@ function UniversalCalculatorFrame({
           }
 
           .calvoro-universal-hero {
-            background:
-              linear-gradient(
-                135deg,
-                #0f172a 0%,
-                #172554 55%,
-                #1d4ed8 100%
-              );
-            color: #ffffff;
+            background: #ffffff;
+            color: var(--calvoro-text);
+            border-bottom: 1px solid var(--calvoro-border);
           }
 
-          .calvoro-universal-back {
-            display: inline-flex;
-            padding-top: 34px;
-            margin-bottom: 28px;
-            color:
-              rgba(255,255,255,0.72);
-            text-decoration: none;
+          .calvoro-universal-breadcrumb {
+            padding-top: 28px;
+            margin-bottom: 25px;
+          }
+
+          .calvoro-universal-breadcrumb ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--calvoro-muted);
             font-size: 12px;
-            font-weight: 800;
           }
 
-          .calvoro-universal-back:hover {
-            color: #ffffff;
+          .calvoro-universal-breadcrumb li + li::before {
+            content: "/";
+            margin-right: 8px;
+            color: #94a3b8;
+          }
+
+          .calvoro-universal-breadcrumb a {
+            color: #475569;
+            text-decoration: none;
+          }
+
+          .calvoro-universal-breadcrumb a:hover {
+            color: var(--calvoro-blue);
+          }
+
+          .calvoro-universal-breadcrumb [aria-current="page"] {
+            color: var(--calvoro-navy);
+            font-weight: 700;
           }
 
           .calvoro-universal-hero-grid {
@@ -1135,20 +941,16 @@ function UniversalCalculatorFrame({
               minmax(0, 1fr) 95px;
             gap: 30px;
             align-items: center;
-            padding-bottom: 50px;
+            padding-bottom: 42px;
           }
 
           .calvoro-universal-category {
             display: inline-flex;
             padding: 6px 10px;
-            border:
-              1px solid
-              rgba(255,255,255,0.16);
-            border-radius: 4px;
-            background:
-              rgba(255,255,255,0.07);
-            color:
-              rgba(255,255,255,0.82);
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            background: var(--calvoro-blue-light);
+            color: var(--calvoro-blue-dark);
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 1px;
@@ -1156,8 +958,8 @@ function UniversalCalculatorFrame({
           }
 
           .calvoro-universal-hero h1 {
-            margin: 16px 0 11px;
-            color: #ffffff;
+            margin: 14px 0 10px;
+            color: var(--calvoro-navy);
             font-size:
               clamp(36px,5vw,54px);
             line-height: 1.05;
@@ -1168,8 +970,7 @@ function UniversalCalculatorFrame({
           .calvoro-universal-hero p {
             max-width: 700px;
             margin: 0;
-            color:
-              rgba(255,255,255,0.70);
+            color: var(--calvoro-muted);
             font-size: 16px;
             line-height: 1.8;
           }
@@ -1180,13 +981,10 @@ function UniversalCalculatorFrame({
             display: flex;
             align-items: center;
             justify-content: center;
-            border:
-              1px solid
-              rgba(255,255,255,0.14);
-            border-radius: 8px;
-            background:
-              rgba(255,255,255,0.07);
-            font-size: 38px;
+            border: 1px solid #bfdbfe;
+            border-radius: 16px;
+            background: var(--calvoro-blue-light);
+            color: var(--calvoro-blue);
           }
 
           .calvoro-universal-main {
@@ -1203,18 +1001,15 @@ function UniversalCalculatorFrame({
 
           .calvoro-universal-tool-card {
             background: #ffffff;
-            border:
-              1px solid #e2e8f0;
-            border-radius: 8px;
-            box-shadow:
-              0 8px 28px rgba(15,23,42,0.06);
+            border: 1px solid var(--calvoro-border);
+            border-radius: 16px;
+            box-shadow: var(--calvoro-shadow);
             overflow: hidden;
           }
 
           .calvoro-universal-tool-heading {
             padding: 22px 24px;
-            border-bottom:
-              1px solid #e2e8f0;
+            border-bottom: 1px solid var(--calvoro-border);
             background: #ffffff;
           }
 
@@ -1262,11 +1057,11 @@ function UniversalCalculatorFrame({
           .calvoro-universal-tool input,
           .calvoro-universal-tool textarea,
           .calvoro-universal-tool select {
-            border-radius: 6px !important;
+            border-radius: 10px !important;
           }
 
           .calvoro-universal-tool button {
-            border-radius: 6px !important;
+            border-radius: 10px !important;
           }
 
           .calvoro-universal-sidebar {
@@ -1277,9 +1072,8 @@ function UniversalCalculatorFrame({
           .calvoro-universal-sidebar-card {
             padding: 21px;
             background: #ffffff;
-            border:
-              1px solid #e2e8f0;
-            border-radius: 8px;
+            border: 1px solid var(--calvoro-border);
+            border-radius: 14px;
           }
 
           .calvoro-universal-sidebar-icon {
@@ -1289,9 +1083,9 @@ function UniversalCalculatorFrame({
             align-items: center;
             justify-content: center;
             margin-bottom: 12px;
-            border-radius: 6px;
-            background: #eff6ff;
-            font-size: 22px;
+            border-radius: 9px;
+            background: var(--calvoro-blue-light);
+            color: var(--calvoro-blue);
           }
 
           .calvoro-universal-sidebar-card h3 {
@@ -1328,9 +1122,8 @@ function UniversalCalculatorFrame({
           .calvoro-universal-related a {
             display: block;
             padding: 10px;
-            border:
-              1px solid #e2e8f0;
-            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            border-radius: 9px;
             background: #f8fafc;
             color: #0f172a;
             text-decoration: none;
@@ -1352,35 +1145,29 @@ function UniversalCalculatorFrame({
           }
 
           .calvoro-universal-blue {
-            background:
-              linear-gradient(
-                135deg,
-                #172554,
-                #1d4ed8
-              );
-            border: none;
+            background: var(--calvoro-blue-light);
+            border: 1px solid #bfdbfe;
           }
 
           .calvoro-universal-blue > span {
-            color: #bfdbfe;
+            color: var(--calvoro-blue-dark);
           }
 
           .calvoro-universal-blue h3 {
-            color: #ffffff;
+            color: var(--calvoro-navy);
           }
 
           .calvoro-universal-blue p {
-            color:
-              rgba(255,255,255,0.72);
+            color: #475569;
           }
 
           .calvoro-universal-blue a {
             display: inline-flex;
             margin-top: 15px;
             padding: 9px 11px;
-            border-radius: 5px;
-            background: #ffffff;
-            color: #17358f;
+            border-radius: 8px;
+            background: var(--calvoro-blue);
+            color: #ffffff;
             text-decoration: none;
             font-size: 11px;
             font-weight: 900;
@@ -1411,12 +1198,18 @@ function UniversalCalculatorFrame({
             }
 
             .calvoro-universal-hero-grid {
-              grid-template-columns: 1fr;
-              gap: 20px;
+              grid-template-columns: 1fr 64px;
+              gap: 12px;
             }
 
             .calvoro-universal-icon {
-              justify-self: start;
+              width: 60px;
+              height: 60px;
+              justify-self: end;
+            }
+
+            .calvoro-universal-breadcrumb {
+              padding-top: 20px;
             }
 
             .calvoro-universal-main {
@@ -1424,7 +1217,7 @@ function UniversalCalculatorFrame({
             }
 
             .calvoro-universal-tool {
-              padding: 18px;
+              padding: 16px;
             }
 
             .calvoro-universal-sidebar {
@@ -1489,61 +1282,80 @@ function AIToolCard({
 }
 
 // ======================================================
-// POPULAR SECTION
+// BROWSER TOOLS PREVIEW
 // ======================================================
 
-function PopularCalculators() {
+function BrowserToolsPreview() {
+  const previewTools = featuredUtilityTools.slice(0, 6);
+
   return (
-    <section className="calvoro-home-section calvoro-white-band">
+    <section
+      id="browser-tools"
+      className="calvoro-home-section calvoro-browser-tools-band"
+    >
 
       <div className="calvoro-container">
 
-        <div className="calvoro-section-heading">
+        <div className="calvoro-editorial-heading calvoro-browser-tools-heading">
 
-          <span className="calvoro-eyebrow">
-            Popular tools
-          </span>
+          <div>
 
-          <h2>
-            Calculators people use every day
-          </h2>
+            <span className="calvoro-eyebrow">
+              Browser utilities
+            </span>
 
-          <p>
-            Quick access to some of the most useful
-            calculators available on CALVORO.
-          </p>
+            <h2>
+              Useful tools for files, text, and code
+            </h2>
+
+            <p>
+              PDF, image, writing, and developer utilities that run in
+              your browser. Your files stay on your device.
+            </p>
+
+          </div>
+
+          <Link
+            to="/tools"
+            className="calvoro-outline-button"
+          >
+            Browse all {utilityTools.length} tools →
+          </Link>
 
         </div>
 
-        <div className="calvoro-popular-grid">
+        <div className="calvoro-browser-tools-grid">
 
-          {popularCalculators.map(
-            (calculator) => (
+          {previewTools.map((tool) => {
+            const Icon = utilityPreviewIcons[tool.path] || Calculator;
+
+            return (
               <Link
-                key={calculator.path}
-                to={calculator.path}
-                className="calvoro-popular-card"
+                key={tool.path}
+                to={tool.path}
+                className="calvoro-browser-tool-card"
               >
-
-                <div className="calvoro-popular-icon">
-                  {calculator.icon}
+                <div className="calvoro-browser-tool-top">
+                  <span
+                    className="calvoro-browser-tool-icon"
+                    aria-hidden="true"
+                  >
+                    <Icon size={20} strokeWidth={1.8} />
+                  </span>
+                  <span className="calvoro-browser-tool-category">
+                    {tool.category}
+                  </span>
                 </div>
 
-                <h3>
-                  {calculator.name}
-                </h3>
+                <h3>{tool.name}</h3>
+                <p>{tool.description}</p>
 
-                <p>
-                  {calculator.description}
-                </p>
-
-                <span>
-                  Use calculator →
+                <span className="calvoro-browser-tool-action">
+                  Open tool <b aria-hidden="true">→</b>
                 </span>
-
               </Link>
-            )
-          )}
+            );
+          })}
 
         </div>
 
@@ -1559,7 +1371,10 @@ function PopularCalculators() {
 
 function BlogPreview() {
   return (
-    <section className="calvoro-home-section calvoro-light-band">
+    <section
+      id="guides"
+      className="calvoro-home-section calvoro-light-band"
+    >
 
       <div className="calvoro-container">
 
@@ -1575,49 +1390,99 @@ function BlogPreview() {
               Guides for smarter everyday decisions
             </h2>
 
+            <p>
+              {articles.length} original guides explain the formulas,
+              assumptions, and tradeoffs behind the calculators.
+            </p>
+
           </div>
 
           <Link
             to="/blog"
             className="calvoro-outline-button"
           >
-            View all articles →
+            Browse all {articles.length} guides →
           </Link>
 
         </div>
 
-        <div className="calvoro-blog-preview-grid">
+        <div className="calvoro-home-articles-grid">
 
-          {blogPreview.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/blog/${post.slug}`}
-              className="calvoro-blog-preview-card"
-            >
-
-              <div className="calvoro-blog-preview-meta">
-                {post.category}
-              </div>
-
-              <h3>
-                {post.title}
-              </h3>
-
-              <p>
-                {post.excerpt}
-              </p>
-
-              <span>
-                Read article →
-              </span>
-
-            </Link>
+          {featuredArticles.map((article) => (
+            <ArticleCard key={article.slug} article={article} />
           ))}
 
         </div>
 
       </div>
 
+    </section>
+  );
+}
+
+function AIToolsSection() {
+  return (
+    <section
+      id="ai-tools"
+      className="calvoro-home-section calvoro-white-band"
+    >
+      <div className="calvoro-container">
+        <div className="calvoro-section-heading">
+          <span className="calvoro-eyebrow">
+            Extra writing tools
+          </span>
+          <h2>Optional AI writing helpers</h2>
+          <p>
+            These sit alongside the calculators. Use them when you need a
+            summary, rewrite, translation, grammar check, or email draft.
+          </p>
+        </div>
+
+        <div className="calvoro-ai-grid">
+          <AIToolCard
+            icon={<FileText size={21} strokeWidth={1.8} aria-hidden="true" />}
+            badge="AVAILABLE"
+            title="AI Text Summarizer"
+            description="Turn long articles, notes and other text into clear, easy-to-read summaries."
+            path="/ai-summarizer"
+          />
+          <AIToolCard
+            icon={<PenLine size={21} strokeWidth={1.8} aria-hidden="true" />}
+            badge="AVAILABLE"
+            title="AI Text Rewriter"
+            description="Rewrite your text in different tones while keeping the original meaning clear."
+            path="/ai-rewriter"
+          />
+          <AIToolCard
+            icon={<Check size={21} strokeWidth={2} aria-hidden="true" />}
+            badge="AVAILABLE"
+            title="AI Grammar Checker"
+            description="Check grammar, spelling, punctuation and sentence clarity with CALVORO AI."
+            path="/ai-grammar-checker"
+          />
+          <AIToolCard
+            icon={<Languages size={21} strokeWidth={1.8} aria-hidden="true" />}
+            badge="AVAILABLE"
+            title="AI Text Translator"
+            description="Translate your text into another language quickly and easily."
+            path="/ai-translator"
+          />
+          <AIToolCard
+            icon={<Sparkles size={21} strokeWidth={1.8} aria-hidden="true" />}
+            badge="AVAILABLE"
+            title="AI Text Generator"
+            description="Generate useful content from a topic, content type and writing tone."
+            path="/ai-text-generator"
+          />
+          <AIToolCard
+            icon={<Mail size={21} strokeWidth={1.8} aria-hidden="true" />}
+            badge="AVAILABLE"
+            title="AI Email Writer"
+            description="Create clear and professional emails from a simple description."
+            path="/ai-email-writer"
+          />
+        </div>
+      </div>
     </section>
   );
 }
@@ -1631,44 +1496,30 @@ function Home() {
   const [activeCategory, setActiveCategory] =
     useState("All");
 
+  const clearFilters = () => {
+    setSearch("");
+    setActiveCategory("All");
+  };
+
   const filteredCalculators = useMemo(() => {
-    const searchText =
-      search.toLowerCase().trim();
+    return calculators.filter((calculator) => {
+      const matchesCategory =
+        activeCategory === "All" ||
+        calculator.category === activeCategory;
 
-    return calculators.filter(
-      (calculator) => {
-
-        const matchesCategory =
-          activeCategory === "All" ||
-          calculator.category ===
-            activeCategory;
-
-        const matchesSearch =
-          !searchText ||
-          calculator.name
-            .toLowerCase()
-            .includes(searchText) ||
-          calculator.description
-            .toLowerCase()
-            .includes(searchText) ||
-          calculator.category
-            .toLowerCase()
-            .includes(searchText);
-
-        return (
-          matchesCategory &&
-          matchesSearch
-        );
-      }
-    );
+      return (
+        matchesCategory &&
+        matchesCatalogSearch(calculator, search)
+      );
+    });
   }, [search, activeCategory]);
 
   return (
     <>
 
       <SEO
-        title="CALVORO - Free Online Calculators & AI Tools"
-        description="CALVORO provides free online calculators and useful AI tools for math, finance, health, fitness, education, writing and everyday tasks."
+        title="CALVORO - Free Online Calculators"
+        description="Search CALVORO's free online calculators for percentages, loans, BMI, GPA, savings, and other everyday calculations. Filter by category and open a tool in your browser."
       />
 
       {/* HERO */}
@@ -1682,22 +1533,62 @@ function Home() {
             <div className="calvoro-hero-copy">
 
               <span className="calvoro-hero-label">
-                CALVORO • SMART ONLINE TOOLS
+                CALVORO • Free online calculators
               </span>
 
               <h1>
-                Useful tools.
+                Find a calculator
                 <br />
-                Clear answers.
-                <br />
-                <span>Everyday.</span>
+                for the number you need.
               </h1>
 
               <p>
-                CALVORO brings together practical
-                calculators, AI tools, and helpful
-                guides designed for everyday tasks.
+                Search by name or task, then filter by category.
+                Each calculator runs in your browser and uses the
+                values you enter.
               </p>
+
+              <form
+                className="calvoro-hero-search"
+                role="search"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  const calculatorSection =
+                    document.getElementById("calculators");
+
+                  if (calculatorSection) {
+                    calculatorSection.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+              >
+                <label htmlFor="home-calculator-search">
+                  Search the calculator library
+                </label>
+
+                <div className="calvoro-hero-search-controls">
+                  <input
+                    id="home-calculator-search"
+                    type="search"
+                    value={search}
+                    onChange={(event) =>
+                      setSearch(event.target.value)
+                    }
+                    placeholder="Try EMI, BMI, mortgage, tip, or GPA"
+                    autoComplete="off"
+                    className="calvoro-search-input"
+                  />
+
+                  <button
+                    className="calvoro-hero-search-button"
+                    type="submit"
+                  >
+                    Find a tool
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </form>
 
               <div className="calvoro-hero-actions">
 
@@ -1710,10 +1601,10 @@ function Home() {
                 </a>
 
                 <Link
-                  to="/blog"
+                  to="/tools"
                   className="calvoro-secondary-button"
                 >
-                  Read the Journal
+                  View all tools
                 </Link>
 
               </div>
@@ -1721,116 +1612,51 @@ function Home() {
             </div>
 
             <div className="calvoro-hero-feature">
-
-              <div className="calvoro-feature-kicker">
-                FEATURED
+              <div className="calvoro-featured-heading">
+                <div>
+                  <div className="calvoro-feature-kicker">A good place to start</div>
+                  <h2>Featured calculators</h2>
+                </div>
+                <span className="calvoro-featured-count">
+                  {calculators.length} tools
+                </span>
               </div>
 
-              <div className="calvoro-feature-number">
-                40+
-              </div>
-
-              <h2>
-                Practical calculators
-              </h2>
-
-              <p>
-                Finance, math, health, education,
-                fitness, business, time and everyday
-                calculations.
+              <p className="calvoro-featured-intro">
+                Open a frequently used calculator, or browse the full
+                directory below.
               </p>
 
-              <a
-                href="#calculators"
-                className="calvoro-feature-link"
-              >
-                Browse all calculators →
+              <div className="calvoro-featured-tool-list">
+                {popularCalculators.slice(0, 4).map((calculator) => {
+                  const Icon =
+                    popularCalculatorIcons[calculator.path] || Calculator;
+
+                  return (
+                    <Link
+                      key={calculator.path}
+                      to={calculator.path}
+                      className="calvoro-featured-tool"
+                    >
+                      <span className="calvoro-featured-tool-icon">
+                        <Icon size={18} strokeWidth={1.9} aria-hidden="true" />
+                      </span>
+                      <span className="calvoro-featured-tool-copy">
+                        <strong>{calculator.name}</strong>
+                        <small>{calculator.category}</small>
+                      </span>
+                      <span className="calvoro-featured-tool-arrow" aria-hidden="true">
+                        →
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <a href="#calculators" className="calvoro-featured-all-link">
+                Browse all calculators <span aria-hidden="true">→</span>
               </a>
-
             </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* AI TOOLS */}
-
-      <section
-        id="ai-tools"
-        className="calvoro-home-section calvoro-white-band"
-      >
-
-        <div className="calvoro-container">
-
-          <div className="calvoro-section-heading">
-
-            <span className="calvoro-eyebrow">
-              Artificial intelligence
-            </span>
-
-            <h2>
-              CALVORO AI Tools
-            </h2>
-
-            <p>
-              Write, rewrite, translate, summarize,
-              check grammar, generate content and
-              create professional emails.
-            </p>
-
-          </div>
-
-          <div className="calvoro-ai-grid">
-
-            <AIToolCard
-              icon="📝"
-              badge="AVAILABLE"
-              title="AI Text Summarizer"
-              description="Turn long articles, notes and other text into clear, easy-to-read summaries."
-              path="/ai-summarizer"
-            />
-
-            <AIToolCard
-              icon="✍️"
-              badge="AVAILABLE"
-              title="AI Text Rewriter"
-              description="Rewrite your text in different tones while keeping the original meaning clear."
-              path="/ai-rewriter"
-            />
-
-            <AIToolCard
-              icon="✓"
-              badge="AVAILABLE"
-              title="AI Grammar Checker"
-              description="Check grammar, spelling, punctuation and sentence clarity with CALVORO AI."
-              path="/ai-grammar-checker"
-            />
-
-            <AIToolCard
-              icon="🌍"
-              badge="AVAILABLE"
-              title="AI Text Translator"
-              description="Translate your text into another language quickly and easily."
-              path="/ai-translator"
-            />
-
-            <AIToolCard
-              icon="✦"
-              badge="AVAILABLE"
-              title="AI Text Generator"
-              description="Generate useful content from a topic, content type and writing tone."
-              path="/ai-text-generator"
-            />
-
-            <AIToolCard
-              icon="✉"
-              badge="AVAILABLE"
-              title="AI Email Writer"
-              description="Create clear and professional emails from a simple description."
-              path="/ai-email-writer"
-            />
 
           </div>
 
@@ -1860,8 +1686,9 @@ function Home() {
               </h2>
 
               <p>
-                Find the right tool by category or
-                search for exactly what you need.
+                Category buttons narrow the list. Search also
+                matches common names such as EMI, body mass, or
+                split bill.
               </p>
 
             </div>
@@ -1872,27 +1699,39 @@ function Home() {
 
           </div>
 
-          <div className="calvoro-search-row">
-
-            <input
-              type="text"
-              value={search}
-              onChange={(event) =>
-                setSearch(
-                  event.target.value
-                )
-              }
-              placeholder="Search calculators..."
-              className="calvoro-search-input"
-              aria-label="Search calculators"
-            />
-
+          <div className="calvoro-directory-toolbar">
+            <label htmlFor="directory-calculator-search">
+              Filter this list
+              <input
+                id="directory-calculator-search"
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Type a calculator name or task"
+                className="calvoro-search-input"
+                autoComplete="off"
+              />
+            </label>
+            {(search || activeCategory !== "All") && (
+              <button
+                type="button"
+                className="calvoro-clear-filters"
+                onClick={clearFilters}
+              >
+                Clear search and category
+              </button>
+            )}
           </div>
 
-          <div className="calvoro-category-row">
+          <div className="calvoro-category-row" id="calculator-categories">
 
             {categories.map((category) => {
-
+              const count =
+                category === "All"
+                  ? calculators.length
+                  : calculators.filter(
+                      (calculator) => calculator.category === category
+                    ).length;
               const active =
                 activeCategory === category;
 
@@ -1910,13 +1749,27 @@ function Home() {
                       ? "calvoro-category active"
                       : "calvoro-category"
                   }
+                  aria-pressed={active}
                 >
-                  {category}
+                  <span>{category}</span>
+                  <small>{count} {count === 1 ? "tool" : "tools"}</small>
                 </button>
               );
             })}
 
           </div>
+
+          <p
+            className="calvoro-filter-status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Showing {filteredCalculators.length} of {calculators.length}
+            {activeCategory === "All"
+              ? " calculators"
+              : ` in ${activeCategory}`}
+            {search.trim() ? ` matching “${search.trim()}”` : ""}.
+          </p>
 
           {filteredCalculators.length > 0 ? (
 
@@ -1962,16 +1815,23 @@ function Home() {
 
           ) : (
 
-            <div className="calvoro-empty-state">
+            <div className="calvoro-empty-state" role="status">
 
               <strong>
                 No calculators found
               </strong>
 
               <p>
-                Try a different search or
-                category.
+                Nothing matched that search in {activeCategory === "All" ? "the full list" : activeCategory}.
+                Try a shorter word, another category, or clear the filters.
               </p>
+              <button
+                type="button"
+                className="calvoro-clear-filters"
+                onClick={clearFilters}
+              >
+                Clear filters
+              </button>
 
             </div>
 
@@ -1980,8 +1840,6 @@ function Home() {
         </div>
 
       </section>
-
-      {/* ABOUT */}
 
       <section className="calvoro-home-section calvoro-white-band">
 
@@ -1996,7 +1854,7 @@ function Home() {
               </span>
 
               <h2>
-                Built to make everyday tasks simpler.
+                Calculators first, extra tools second.
               </h2>
 
             </div>
@@ -2004,16 +1862,10 @@ function Home() {
             <div>
 
               <p className="calvoro-about-text">
-                CALVORO is a collection of practical
-                online calculators and useful AI tools
-                designed to make common tasks easier.
-              </p>
-
-              <p className="calvoro-about-text">
-                We focus on clear interfaces,
-                understandable results and useful
-                information without unnecessary
-                complexity.
+                CALVORO is a directory of free calculators. Open a tool,
+                enter the requested values, and read the result on the
+                same page. Writing helpers and math solvers are listed
+                separately so they do not mix into the calculator grid.
               </p>
 
               <Link
@@ -2031,9 +1883,9 @@ function Home() {
 
       </section>
 
-      <HomeSEOContent />
+      <BrowserToolsPreview />
 
-<PopularCalculators />
+      <HomeSEOContent />
 
       <section className="calvoro-component-band">
         <HowItWorks />
@@ -2044,6 +1896,8 @@ function Home() {
       <section className="calvoro-component-band">
         <FAQ />
       </section>
+
+      <AIToolsSection />
 
     </>
   );
@@ -2098,171 +1952,141 @@ function GlobalCalvoroStyle() {
   return (
     <style>
       {`
-        :root {
-          --calvoro-navy: #0f172a;
-          --calvoro-navy-light: #172554;
-          --calvoro-blue: #2563eb;
-          --calvoro-blue-dark: #1d4ed8;
-          --calvoro-text: #172033;
-          --calvoro-muted: #64748b;
-          --calvoro-border: #e2e8f0;
-          --calvoro-bg: #f5f7fa;
-          --calvoro-white: #ffffff;
-          --calvoro-paper: #f8fafc;
-          --calvoro-shadow:
-            0 8px 28px rgba(15,23,42,0.06);
-          --calvoro-shadow-hover:
-            0 14px 36px rgba(15,23,42,0.11);
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-
         .calvoro-global-header {
           position: sticky;
           top: 0;
-          z-index: 9999;
+          z-index: 1000;
           width: 100%;
           background: #ffffff;
           color: #172033;
-          box-shadow: 0 4px 22px rgba(15, 23, 42, 0.08);
-          border-bottom: 1px solid #e5edf8;
-        }
-
-        .calvoro-header-top,
-        .calvoro-header-main {
-          background: #ffffff;
-          border-color: #e8eef7;
-        }
-
-        .calvoro-brand,
-        .calvoro-brand strong {
-          color: #172033;
-        }
-
-        .calvoro-brand small,
-        .calvoro-header-note {
-          color: #64748b;
-        }
-
-        .calvoro-main-nav a {
-          border-radius: 8px;
-        }
-
-        .calvoro-main-nav a:hover,
-        .calvoro-main-nav a:focus-visible {
-          color: #1d4ed8 !important;
-          background: #eff6ff !important;
-        }
-
-        .calvoro-header-button {
-          background: #2563eb !important;
-          color: #ffffff !important;
-          border-radius: 9px !important;
-        }
-
-        .calvoro-header-main {
-          border-top: 1px solid #e8eef7;
+          border-bottom: 1px solid var(--calvoro-border);
+          box-shadow: 0 3px 14px rgba(15, 23, 42, 0.035);
         }
 
         .calvoro-header-inner {
           width: 100%;
           max-width: 1240px;
+          min-height: 72px;
           margin: 0 auto;
-          padding:
-            0 24px;
-        }
-
-        .calvoro-header-top .calvoro-header-inner {
-          min-height: 58px;
+          padding: 0 28px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 20px;
+          gap: 28px;
         }
 
         .calvoro-brand {
           display: inline-flex;
+          flex: 0 0 auto;
           align-items: center;
-          gap: 11px;
-          color: #ffffff;
+          gap: 10px;
+          color: var(--calvoro-navy);
           text-decoration: none;
         }
 
+        .calvoro-brand:hover {
+          color: var(--calvoro-navy);
+        }
+
         .calvoro-brand-mark {
-          width: 36px;
-          height: 36px;
-          border-radius: 7px;
+          width: 38px;
+          height: 38px;
+          border-radius: 11px;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          background: #2563eb;
+          background: var(--calvoro-blue);
           color: #ffffff;
-          font-size: 18px;
+          font-size: 19px;
           font-weight: 900;
-          box-shadow:
-            0 4px 14px rgba(37,99,235,0.30);
+          box-shadow: 0 4px 11px rgba(37, 99, 235, 0.18);
         }
 
         .calvoro-brand strong {
           display: block;
-          font-size: 19px;
+          color: var(--calvoro-navy);
+          font-size: 17px;
           font-weight: 900;
-          letter-spacing: 1.4px;
+          letter-spacing: 1px;
           line-height: 1;
         }
 
         .calvoro-brand small {
           display: block;
           margin-top: 4px;
-          color:
-            rgba(255,255,255,0.55);
-          font-size: 8px;
+          color: var(--calvoro-muted);
+          font-size: 10px;
           font-weight: 800;
-          letter-spacing: 1.9px;
-        }
-
-        .calvoro-header-note {
-          color:
-            rgba(255,255,255,0.53);
-          font-size: 11px;
-          font-weight: 600;
-        }
-
-        .calvoro-header-main .calvoro-header-inner {
-          min-height: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
+          letter-spacing: 1.3px;
         }
 
         .calvoro-main-nav {
           display: flex;
           align-items: center;
-          gap: 3px;
-          overflow-x: auto;
+          justify-content: center;
+          gap: 4px;
+          margin-left: auto;
+        }
+
+        .calvoro-nav-link {
+          display: inline-flex;
+          align-items: center;
+          min-height: 40px;
+          padding: 0 11px;
+          border-radius: 8px;
+          color: #475569 !important;
+          text-decoration: none;
+          font-size: 13px;
+          font-weight: 700;
+          white-space: nowrap;
+          transition: background-color 0.18s ease, color 0.18s ease;
+        }
+
+        .calvoro-nav-link:hover,
+        .calvoro-nav-link:focus-visible,
+        .calvoro-nav-link.active {
+          background: var(--calvoro-blue-light);
+          color: var(--calvoro-blue-dark) !important;
+        }
+
+        .calvoro-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
 
         .calvoro-header-button {
           display: inline-flex;
+          justify-content: center;
+          min-height: 40px;
           align-items: center;
-          gap: 8px;
-          padding:
-            8px 13px;
-          border-radius: 6px;
-          background: #ffffff;
-          color: #17358f;
+          gap: 9px;
+          padding: 0 15px;
+          border-radius: 9px;
+          background: var(--calvoro-blue);
+          color: #ffffff;
           text-decoration: none;
           font-size: 12px;
-          font-weight: 900;
+          font-weight: 800;
           white-space: nowrap;
         }
 
         .calvoro-header-button:hover {
-          color: #17358f;
-          background: #eff6ff;
+          color: #ffffff;
+          background: var(--calvoro-blue-dark);
+        }
+
+        .calvoro-menu-toggle {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          width: 42px;
+          height: 42px;
+          border: 1px solid var(--calvoro-border);
+          border-radius: 10px;
+          background: #ffffff;
+          color: var(--calvoro-navy);
+          cursor: pointer;
         }
 
         .calvoro-page-frame {
@@ -2324,79 +2148,114 @@ function GlobalCalvoroStyle() {
         }
 
         .calvoro-home-hero {
-          background:
-            linear-gradient(
-              135deg,
-              #0f172a 0%,
-              #172554 55%,
-              #1d4ed8 100%
-            );
-          color: #ffffff;
-          border-bottom:
-            1px solid rgba(255,255,255,0.10);
+          background: #f8fafc;
+          color: var(--calvoro-text);
+          border-bottom: 1px solid var(--calvoro-border);
         }
 
         .calvoro-hero-layout {
-          min-height: 535px;
+          min-height: 430px;
           display: grid;
           grid-template-columns:
-            minmax(0,1.4fr)
+            minmax(0,1.2fr)
             minmax(300px,0.8fr);
           align-items: center;
-          gap: 65px;
+          gap: 56px;
         }
 
         .calvoro-hero-copy {
-          padding:
-            75px 0;
+          padding: 54px 0;
         }
 
         .calvoro-hero-label {
           display: inline-flex;
-          padding:
-            7px 11px;
-          border:
-            1px solid rgba(255,255,255,0.16);
-          background:
-            rgba(255,255,255,0.06);
-          border-radius: 5px;
-          color:
-            rgba(255,255,255,0.82);
+          padding: 6px 10px;
+          border: 1px solid #bfdbfe;
+          background: var(--calvoro-blue-light);
+          border-radius: 6px;
+          color: var(--calvoro-blue-dark);
           font-size: 10px;
           font-weight: 900;
-          letter-spacing: 1.6px;
+          letter-spacing: 1.2px;
         }
 
         .calvoro-hero-copy h1 {
-          margin:
-            20px 0;
-          color: #ffffff;
-          font-size:
-            clamp(42px,6vw,68px);
-          line-height: .98;
-          letter-spacing: -.045em;
-          font-weight: 950;
+          max-width: 680px;
+          margin: 19px 0 15px;
+          color: var(--calvoro-navy);
+          font-size: clamp(40px, 5.2vw, 62px);
+          line-height: 1.02;
+          letter-spacing: -0.05em;
+          font-weight: 900;
         }
 
         .calvoro-hero-copy h1 span {
-          color:
-            #93c5fd;
+          color: var(--calvoro-blue);
         }
 
         .calvoro-hero-copy p {
-          max-width: 650px;
+          max-width: 590px;
           margin: 0;
-          color:
-            rgba(255,255,255,0.72);
-          font-size: 17px;
-          line-height: 1.8;
+          color: var(--calvoro-muted);
+          font-size: 16px;
+          line-height: 1.75;
+        }
+
+        .calvoro-hero-search {
+          max-width: 600px;
+          margin-top: 22px;
+        }
+
+        .calvoro-hero-search label {
+          display: block;
+          margin-bottom: 8px;
+          color: var(--calvoro-navy);
+          font-size: 13px;
+          font-weight: 750;
+        }
+
+        .calvoro-hero-search-controls {
+          display: flex;
+          gap: 9px;
+        }
+
+        .calvoro-hero-search .calvoro-search-input {
+          min-width: 0;
+          min-height: 50px;
+          border: 1px solid var(--calvoro-border-dark) !important;
+          border-radius: 10px !important;
+          background: #ffffff !important;
+          color: var(--calvoro-text) !important;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+        }
+
+        .calvoro-route-content .calvoro-hero-search-button {
+          display: inline-flex;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          min-height: 50px;
+          padding: 0 17px;
+          border: 1px solid var(--calvoro-blue);
+          border-radius: 10px !important;
+          background: var(--calvoro-blue);
+          color: #ffffff;
+          font-size: 14px;
+          font-weight: 800;
+          cursor: pointer;
+        }
+
+        .calvoro-route-content .calvoro-hero-search-button:hover {
+          border-color: var(--calvoro-blue-dark);
+          background: var(--calvoro-blue-dark);
         }
 
         .calvoro-hero-actions {
           display: flex;
           flex-wrap: wrap;
           gap: 11px;
-          margin-top: 29px;
+          margin-top: 18px;
         }
 
         .calvoro-primary-button,
@@ -2428,81 +2287,118 @@ function GlobalCalvoroStyle() {
         }
 
         .calvoro-secondary-button {
-          background:
-            rgba(255,255,255,.07);
-          color: #ffffff;
-          border:
-            1px solid
-            rgba(255,255,255,.18);
+          background: #ffffff;
+          color: var(--calvoro-navy);
+          border: 1px solid var(--calvoro-border-dark);
         }
 
         .calvoro-secondary-button:hover {
-          background:
-            rgba(255,255,255,.12);
-          color: #ffffff;
+          background: #f8fafc;
+          color: var(--calvoro-navy);
         }
 
         .calvoro-hero-feature {
           align-self: center;
-          margin:
-            40px 0;
-          padding:
-            34px;
-          background:
-            rgba(255,255,255,.065);
-          border:
-            1px solid
-            rgba(255,255,255,.13);
-          border-radius: 8px;
-          box-shadow:
-            0 18px 45px rgba(0,0,0,.15);
-          backdrop-filter:
-            blur(7px);
+          margin: 28px 0;
+          padding: 25px;
+          background: #ffffff;
+          border: 1px solid var(--calvoro-border);
+          border-radius: 16px;
+          box-shadow: var(--calvoro-shadow);
         }
 
         .calvoro-feature-kicker {
-          color:
-            #93c5fd;
+          margin-bottom: 10px;
+          color: var(--calvoro-blue-dark);
           font-size: 10px;
           font-weight: 900;
-          letter-spacing: 1.7px;
-        }
-
-        .calvoro-feature-number {
-          margin-top: 15px;
-          color: #ffffff;
-          font-size: 58px;
-          line-height: 1;
-          font-weight: 950;
+          letter-spacing: 1.25px;
+          text-transform: uppercase;
         }
 
         .calvoro-hero-feature h2 {
-          margin:
-            9px 0 10px;
-          color: #ffffff;
-          font-size: 24px;
-          font-weight: 900;
+          max-width: 300px;
+          margin: 0 0 17px;
+          color: var(--calvoro-navy);
+          font-size: 21px;
+          line-height: 1.3;
+          font-weight: 850;
         }
 
-        .calvoro-hero-feature p {
-          margin: 0;
-          color:
-            rgba(255,255,255,.66);
-          font-size: 14px;
-          line-height: 1.75;
+        .calvoro-hero-category-list {
+          display: grid;
+          gap: 7px;
+        }
+
+        .calvoro-route-content .calvoro-hero-category {
+          display: flex;
+          align-items: center;
+          gap: 11px;
+          width: 100%;
+          min-height: 60px;
+          padding: 8px 10px;
+          border: 1px solid #edf0f5;
+          border-radius: 10px !important;
+          background: #ffffff;
+          text-align: left;
+          cursor: pointer;
+        }
+
+        .calvoro-route-content .calvoro-hero-category:hover {
+          border-color: #bfdbfe;
+          background: #f8fbff;
+        }
+
+        .calvoro-hero-category-icon {
+          display: grid;
+          flex: 0 0 38px;
+          width: 38px;
+          height: 38px;
+          place-items: center;
+          border-radius: 9px;
+          background: var(--calvoro-blue-light);
+          color: var(--calvoro-blue);
+        }
+
+        .calvoro-hero-category-copy {
+          display: grid;
+          flex: 1;
+          gap: 2px;
+        }
+
+        .calvoro-hero-category-copy strong {
+          color: var(--calvoro-navy);
+          font-size: 13px;
+        }
+
+        .calvoro-hero-category-copy small {
+          color: var(--calvoro-muted);
+          font-size: 11px;
+        }
+
+        .calvoro-hero-category-arrow {
+          padding: 0 4px;
+          color: #94a3b8;
+          font-size: 17px;
+        }
+
+        .calvoro-hero-category-note {
+          margin: 13px 0 0;
+          color: var(--calvoro-muted);
+          font-size: 11px;
         }
 
         .calvoro-feature-link {
           display: inline-block;
           margin-top: 22px;
-          color: #ffffff;
+          color: var(--calvoro-blue-dark);
           text-decoration: none;
           font-size: 13px;
           font-weight: 800;
         }
 
         .calvoro-feature-link:hover {
-          color: #bfdbfe;
+          color: var(--calvoro-blue);
         }
 
         .calvoro-eyebrow {
@@ -2571,7 +2467,7 @@ function GlobalCalvoroStyle() {
           background: #ffffff;
           border:
             1px solid #e2e8f0;
-          border-radius: 8px;
+          border-radius: 14px;
           color: inherit;
           text-decoration: none;
           box-shadow:
@@ -2696,7 +2592,7 @@ function GlobalCalvoroStyle() {
           background: #ffffff;
           border:
             1px solid #e2e8f0;
-          border-radius: 8px;
+          border-radius: 14px;
           text-decoration: none;
           color: inherit;
           transition:
@@ -2764,8 +2660,7 @@ function GlobalCalvoroStyle() {
             #ffffff;
           border:
             1px solid #e2e8f0;
-          border-radius:
-            8px;
+          border-radius: 14px;
           box-shadow:
             var(--calvoro-shadow);
           text-decoration:
@@ -2870,6 +2765,7 @@ function GlobalCalvoroStyle() {
             7px;
           margin-bottom:
             26px;
+          scroll-margin-top: 88px;
         }
 
         .calvoro-category {
@@ -2930,7 +2826,7 @@ function GlobalCalvoroStyle() {
           border:
             1px solid #e2e8f0;
           border-radius:
-            7px;
+            12px;
           color:
             inherit;
           text-decoration:
@@ -2985,6 +2881,7 @@ function GlobalCalvoroStyle() {
             900;
         }
 
+        .calvoro-calculator-card h2,
         .calvoro-calculator-card h3 {
           margin:
             15px 0 8px;
@@ -3093,9 +2990,9 @@ function GlobalCalvoroStyle() {
           display:
             grid;
           grid-template-columns:
-            1.4fr .7fr .9fr .8fr;
+            1.35fr .7fr 1fr .8fr .8fr;
           gap:
-            45px;
+            36px;
           padding-bottom:
             40px;
           border-bottom:
@@ -3307,7 +3204,7 @@ function GlobalCalvoroStyle() {
             none !important;
         }
 
-        .calvoro-route-content header {
+        .calvoro-route-content header:not(.calvoro-article-hero):not(.calvoro-tool-hero) {
           display:
             none !important;
         }
@@ -3323,15 +3220,11 @@ function GlobalCalvoroStyle() {
         .calvoro-route-content input,
         .calvoro-route-content textarea,
         .calvoro-route-content select {
-          border-radius:
-            6px !important;
-          box-shadow:
-            none !important;
+          border-radius: 10px !important;
         }
 
         .calvoro-route-content button {
-          border-radius:
-            6px !important;
+          border-radius: 10px !important;
         }
 
         .calvoro-route-content img {
@@ -3353,51 +3246,64 @@ function GlobalCalvoroStyle() {
 
           .calvoro-footer-grid {
             grid-template-columns:
-              repeat(2,minmax(0,1fr));
+              repeat(3,minmax(0,1fr));
+          }
+
+          .calvoro-footer-grid > div:first-child {
+            grid-column: 1 / -1;
           }
 
         }
 
         @media (max-width: 850px) {
 
-          .calvoro-header-note {
-            display:
-              none;
-          }
-
-          .calvoro-header-main
-            .calvoro-header-inner {
-            padding:
-              7px 18px;
+          .calvoro-header-inner {
+            min-height: 66px;
+            padding: 10px 18px;
+            gap: 12px;
+            flex-wrap: wrap;
           }
 
           .calvoro-main-nav {
-            width:
-              100%;
+            display: none;
+            order: 3;
+            width: 100%;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 5px;
+            margin: 0;
+            padding: 0 0 5px;
+          }
+
+          .calvoro-main-nav.is-open {
+            display: grid;
+          }
+
+          .calvoro-nav-link {
+            min-height: 44px;
+            padding: 0 12px;
+            background: #f8fafc;
           }
 
           .calvoro-header-button {
-            display:
-              none;
+            display: none;
+          }
+
+          .calvoro-menu-toggle {
+            display: inline-flex;
           }
 
           .calvoro-hero-layout {
-            grid-template-columns:
-              1fr;
-            min-height:
-              auto;
-            gap:
-              10px;
+            grid-template-columns: 1fr;
+            min-height: auto;
+            gap: 10px;
           }
 
           .calvoro-hero-copy {
-            padding:
-              62px 0 25px;
+            padding: 50px 0 22px;
           }
 
           .calvoro-hero-feature {
-            margin:
-              0 0 55px;
+            margin: 0 0 42px;
           }
 
           .calvoro-popular-grid,
@@ -3434,12 +3340,9 @@ function GlobalCalvoroStyle() {
               52px 0;
           }
 
-          .calvoro-header-top
-            .calvoro-header-inner {
-            min-height:
-              52px;
-            padding:
-              0 17px;
+          .calvoro-header-inner {
+            min-height: 62px;
+            padding: 9px 17px;
           }
 
           .calvoro-brand strong {
@@ -3453,13 +3356,25 @@ function GlobalCalvoroStyle() {
           }
 
           .calvoro-hero-copy h1 {
-            font-size:
-              44px;
+            font-size: clamp(39px, 11vw, 44px);
           }
 
           .calvoro-hero-copy p {
             font-size:
               15px;
+          }
+
+          .calvoro-hero-search-controls {
+            gap: 7px;
+          }
+
+          .calvoro-route-content .calvoro-hero-search-button {
+            padding: 0 12px;
+            font-size: 12px;
+          }
+
+          .calvoro-hero-feature {
+            padding: 20px;
           }
 
           .calvoro-section-heading,
@@ -3510,6 +3425,468 @@ function GlobalCalvoroStyle() {
           }
 
         }
+
+        .calvoro-home-hero {
+          position: relative;
+          overflow: hidden;
+          background:
+            radial-gradient(circle at 84% 16%, rgba(219, 234, 254, 0.78), transparent 28%),
+            linear-gradient(135deg, #f8fbff 0%, #ffffff 54%, #f1f6ff 100%);
+        }
+
+        .calvoro-hero-layout {
+          min-height: 550px;
+          grid-template-columns: minmax(0, 1.15fr) minmax(350px, 0.85fr);
+          gap: clamp(32px, 5vw, 72px);
+        }
+
+        .calvoro-hero-copy {
+          padding: 72px 0;
+        }
+
+        .calvoro-hero-copy h1 {
+          max-width: 700px;
+          margin-top: 23px;
+          font-size: clamp(42px, 5.6vw, 68px);
+          line-height: 1.04;
+          letter-spacing: -0.055em;
+        }
+
+        .calvoro-hero-copy p {
+          max-width: 540px;
+          font-size: 17px;
+          line-height: 1.7;
+        }
+
+        .calvoro-hero-search {
+          max-width: 650px;
+          margin-top: 28px;
+          padding: 14px;
+          border: 1px solid #e2e8f0;
+          border-radius: 15px;
+          background: rgba(255, 255, 255, 0.94);
+          box-shadow: 0 12px 34px rgba(15, 23, 42, 0.075);
+        }
+
+        .calvoro-hero-search label {
+          margin: 0 0 9px 2px;
+          color: #334155;
+          font-size: 12px;
+          font-weight: 800;
+        }
+
+        .calvoro-hero-search-controls {
+          gap: 8px;
+        }
+
+        .calvoro-hero-search .calvoro-search-input {
+          border-color: #d7e0ec !important;
+          border-radius: 9px !important;
+          box-shadow: none !important;
+        }
+
+        .calvoro-route-content .calvoro-hero-search-button {
+          min-width: 118px;
+          border-radius: 9px !important;
+        }
+
+        .calvoro-hero-actions {
+          margin-top: 18px;
+        }
+
+        .calvoro-primary-button,
+        .calvoro-secondary-button,
+        .calvoro-outline-button {
+          min-height: 46px;
+          border-radius: 9px;
+        }
+
+        .calvoro-primary-button {
+          box-shadow: 0 7px 16px rgba(37, 99, 235, 0.18);
+        }
+
+        .calvoro-hero-feature {
+          width: 100%;
+          max-width: 480px;
+          justify-self: end;
+          margin: 24px 0;
+          padding: clamp(22px, 3vw, 32px);
+          border-color: #e1e8f2;
+          border-radius: 20px;
+          box-shadow: 0 22px 55px rgba(15, 23, 42, 0.09);
+        }
+
+        .calvoro-featured-heading {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .calvoro-feature-kicker {
+          margin-bottom: 7px;
+          letter-spacing: 1px;
+        }
+
+        .calvoro-hero-feature h2 {
+          max-width: none;
+          margin: 0;
+          font-size: clamp(20px, 2.2vw, 25px);
+          letter-spacing: -0.035em;
+        }
+
+        .calvoro-featured-count {
+          flex: 0 0 auto;
+          padding: 6px 9px;
+          border: 1px solid #e2e8f0;
+          border-radius: 999px;
+          color: #64748b;
+          font-size: 10px;
+          font-weight: 800;
+        }
+
+        .calvoro-featured-intro {
+          margin: 9px 0 17px;
+          color: #64748b;
+          font-size: 13px;
+          line-height: 1.6;
+        }
+
+        .calvoro-featured-tool-list {
+          display: grid;
+          gap: 8px;
+        }
+
+        .calvoro-featured-tool {
+          display: flex;
+          min-width: 0;
+          align-items: center;
+          gap: 12px;
+          padding: 10px 11px;
+          border: 1px solid #e8edf4;
+          border-radius: 11px;
+          background: #ffffff;
+          color: inherit;
+          text-decoration: none;
+          transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
+        }
+
+        .calvoro-featured-tool:hover {
+          transform: translateY(-1px);
+          border-color: #bfdbfe;
+          background: #f8fbff;
+          color: inherit;
+        }
+
+        .calvoro-featured-tool-icon {
+          display: grid;
+          flex: 0 0 38px;
+          width: 38px;
+          height: 38px;
+          place-items: center;
+          border-radius: 10px;
+          background: #eff6ff;
+          color: #2563eb;
+        }
+
+        .calvoro-featured-tool-copy {
+          display: grid;
+          min-width: 0;
+          flex: 1;
+          gap: 3px;
+        }
+
+        .calvoro-featured-tool-copy strong {
+          overflow: hidden;
+          color: #172033;
+          font-size: 13px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .calvoro-featured-tool-copy small {
+          color: #64748b;
+          font-size: 11px;
+        }
+
+        .calvoro-featured-tool-arrow {
+          flex: 0 0 auto;
+          color: #94a3b8;
+          font-size: 18px;
+        }
+
+        .calvoro-featured-all-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 17px;
+          color: #1d4ed8;
+          font-size: 12px;
+          font-weight: 850;
+          text-decoration: none;
+        }
+
+        .calvoro-home-section {
+          padding: 76px 0;
+        }
+
+        .calvoro-category-row {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 10px;
+          margin-bottom: 28px;
+          overflow: visible;
+        }
+
+        .calvoro-category {
+          display: flex;
+          min-width: 0;
+          min-height: 64px;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 4px;
+          padding: 10px 13px;
+          border-radius: 12px;
+          text-align: left;
+          font-size: 12px;
+        }
+
+        .calvoro-category small {
+          color: #64748b;
+          font-size: 10px;
+          font-weight: 650;
+        }
+
+        .calvoro-category.active small {
+          color: rgba(255, 255, 255, 0.82);
+        }
+
+        .calvoro-calculator-grid {
+          grid-auto-rows: 1fr;
+          gap: 16px;
+        }
+
+        .calvoro-calculator-card {
+          min-height: 190px;
+          padding: 21px;
+          border-radius: 15px;
+          box-shadow: 0 3px 12px rgba(15, 23, 42, 0.025);
+        }
+
+        .calvoro-calculator-card h2,
+        .calvoro-calculator-card h3 {
+          font-size: 16px;
+          letter-spacing: -0.02em;
+        }
+
+        .calvoro-calculator-card p {
+          font-size: 13px;
+        }
+
+        .calvoro-ai-card,
+        .calvoro-blog-preview-card {
+          min-height: 250px;
+          border-radius: 16px;
+          box-shadow: 0 4px 16px rgba(15, 23, 42, 0.035);
+        }
+
+        .calvoro-ai-card {
+          padding: 25px;
+        }
+
+        .calvoro-ai-card h3,
+        .calvoro-blog-preview-card h3 {
+          letter-spacing: -0.025em;
+        }
+
+        .calvoro-ai-icon {
+          border-radius: 11px;
+        }
+
+        .calvoro-blog-preview-card {
+          display: flex;
+          flex-direction: column;
+          min-height: 270px;
+          padding: 26px;
+        }
+
+        .calvoro-blog-preview-card p {
+          flex: 1;
+        }
+
+        .calvoro-about-layout {
+          gap: clamp(30px, 7vw, 90px);
+        }
+
+        .calvoro-about-layout h2 {
+          max-width: 410px;
+        }
+
+        .calvoro-about-text {
+          max-width: 620px;
+          margin-bottom: 16px;
+          font-size: 15px;
+        }
+
+        .calvoro-seo-disclosure {
+          border-top: 1px solid #e2e8f0;
+          border-bottom: 1px solid #e2e8f0;
+          background: #f8fafc;
+        }
+
+        .calvoro-seo-disclosure > summary {
+          display: flex;
+          max-width: 1200px;
+          min-height: 100px;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+          margin: 0 auto;
+          padding: 20px 24px;
+          color: #172033;
+          cursor: pointer;
+          list-style: none;
+        }
+
+        .calvoro-seo-disclosure > summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .calvoro-seo-disclosure > summary > span:first-child {
+          display: grid;
+          gap: 5px;
+        }
+
+        .calvoro-seo-disclosure > summary strong {
+          color: #10213b;
+          font-size: 15px;
+        }
+
+        .calvoro-seo-disclosure > summary small {
+          font-size: 12px;
+        }
+
+        .calvoro-seo-disclosure-icon {
+          display: grid;
+          flex: 0 0 34px;
+          width: 34px;
+          height: 34px;
+          place-items: center;
+          border: 1px solid #dbe3ec;
+          border-radius: 50%;
+          background: #ffffff;
+          color: #2563eb;
+          font-size: 21px;
+          transition: transform 0.18s ease;
+        }
+
+        .calvoro-seo-disclosure[open] .calvoro-seo-disclosure-icon {
+          transform: rotate(45deg);
+        }
+
+        .calvoro-seo-disclosure > section {
+          border-top: 1px solid #e2e8f0 !important;
+        }
+
+        @media (min-width: 721px) and (max-width: 850px) {
+          .calvoro-hero-layout {
+            min-height: 500px;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 24px;
+          }
+
+          .calvoro-hero-copy {
+            padding: 52px 0;
+          }
+
+          .calvoro-hero-copy h1 {
+            font-size: clamp(38px, 5.3vw, 48px);
+          }
+
+          .calvoro-hero-feature {
+            padding: 21px;
+          }
+
+          .calvoro-featured-tool {
+            gap: 9px;
+            padding: 8px;
+          }
+        }
+
+        @media (max-width: 720px) {
+          .calvoro-hero-layout {
+            min-height: auto;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 8px;
+          }
+
+          .calvoro-hero-copy {
+            padding: 48px 0 20px;
+          }
+
+          .calvoro-hero-feature {
+            max-width: none;
+            justify-self: stretch;
+            margin: 0 0 38px;
+          }
+
+          .calvoro-home-section {
+            padding: 58px 0;
+          }
+
+          .calvoro-calculator-grid {
+            grid-auto-rows: auto;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .calvoro-hero-search-controls {
+            flex-direction: column;
+          }
+
+          .calvoro-route-content .calvoro-hero-search-button {
+            width: 100%;
+          }
+
+          .calvoro-hero-actions > * {
+            flex: 1 1 auto;
+          }
+
+          .calvoro-seo-disclosure > summary {
+            padding-right: 17px;
+            padding-left: 17px;
+          }
+        }
+
+        @media (min-width: 851px) and (max-width: 980px) {
+          .calvoro-header-inner {
+            gap: 18px;
+            padding-left: 22px;
+            padding-right: 22px;
+          }
+
+          .calvoro-header-button {
+            display: none;
+          }
+        }
+
+        @media (max-width: 620px) {
+          .calvoro-category-row {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 8px;
+            padding: 6px 2px 8px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+          }
+
+          .calvoro-category {
+            flex: 0 0 auto;
+          }
+        }
       `}
     </style>
 
@@ -3523,6 +3900,8 @@ function GlobalCalvoroStyle() {
 export default function App() {
   return (
     <BrowserRouter>
+
+      <RouteHashScroll />
 
       <GlobalCalvoroStyle />
 
@@ -3705,6 +4084,22 @@ export default function App() {
                 </PageFrame>
               }
             />
+
+            {/* BROWSER UTILITIES */}
+
+            {Object.entries(toolComponents).map(
+              ([path, ToolComponent]) => (
+                <Route
+                  key={path}
+                  path={path}
+                  element={
+                    <PageFrame>
+                      <ToolComponent />
+                    </PageFrame>
+                  }
+                />
+              )
+            )}
 
             {/* 404 */}
 

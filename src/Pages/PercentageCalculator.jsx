@@ -49,19 +49,14 @@ export default function PercentageCalculator() {
         {`
           .calvoro-percentage-page {
             min-height: 100vh;
-            background: #f5f7fa;
+            background: #f7f9fc;
             color: #172033;
           }
 
           .calvoro-percentage-hero {
-            background:
-              linear-gradient(
-                135deg,
-                #0f172a 0%,
-                #172554 55%,
-                #1d4ed8 100%
-              );
-            color: #ffffff;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            color: #172033;
           }
 
           .calvoro-percentage-container {
@@ -72,16 +67,16 @@ export default function PercentageCalculator() {
           }
 
           .calvoro-percentage-hero-inner {
-            padding: 55px 0;
+            padding: 42px 0;
           }
 
           .calvoro-percentage-label {
             display: inline-flex;
             padding: 7px 11px;
-            border: 1px solid rgba(255,255,255,0.16);
-            border-radius: 5px;
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.82);
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            background: #eff6ff;
+            color: #1d4ed8;
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 1.5px;
@@ -89,8 +84,8 @@ export default function PercentageCalculator() {
           }
 
           .calvoro-percentage-hero h1 {
-            margin: 18px 0 12px;
-            color: #ffffff;
+            margin: 16px 0 10px;
+            color: #0f172a;
             font-size: clamp(38px, 5vw, 58px);
             line-height: 1.05;
             letter-spacing: -0.045em;
@@ -100,27 +95,27 @@ export default function PercentageCalculator() {
           .calvoro-percentage-hero p {
             max-width: 720px;
             margin: 0;
-            color: rgba(255,255,255,0.72);
+            color: #64748b;
             font-size: 16px;
             line-height: 1.8;
           }
 
           .calvoro-percentage-main {
-            padding: 48px 0 80px;
+            padding: 38px 0 72px;
           }
 
           .calvoro-percentage-layout {
             display: grid;
             grid-template-columns:
-              minmax(0, 1fr) 310px;
-            gap: 28px;
+              minmax(0, 1fr) 290px;
+            gap: 24px;
             align-items: start;
           }
 
           .calvoro-percentage-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow:
               0 8px 28px rgba(15,23,42,0.06);
@@ -173,7 +168,7 @@ export default function PercentageCalculator() {
             min-height: 48px;
             padding: 12px 14px;
             border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            border-radius: 10px;
             outline: none;
             background: #ffffff;
             color: #0f172a;
@@ -197,7 +192,7 @@ export default function PercentageCalculator() {
             min-height: 45px;
             padding: 11px 17px;
             border: none;
-            border-radius: 6px;
+            border-radius: 9px;
             font-size: 13px;
             font-weight: 900;
             cursor: pointer;
@@ -225,7 +220,7 @@ export default function PercentageCalculator() {
             margin-top: 18px;
             padding: 13px 15px;
             border: 1px solid #fecaca;
-            border-radius: 6px;
+            border-radius: 9px;
             background: #fef2f2;
             color: #b91c1c;
             font-size: 13px;
@@ -236,13 +231,8 @@ export default function PercentageCalculator() {
             margin-top: 22px;
             padding: 21px;
             border: 1px solid #bfdbfe;
-            border-radius: 8px;
-            background:
-              linear-gradient(
-                135deg,
-                #eff6ff,
-                #dbeafe
-              );
+            border-radius: 12px;
+            background: #eff6ff;
           }
 
           .calvoro-percentage-result-label {
@@ -277,7 +267,7 @@ export default function PercentageCalculator() {
             padding: 21px;
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 14px;
           }
 
           .calvoro-percentage-sidebar-card span {
@@ -309,7 +299,7 @@ export default function PercentageCalculator() {
             padding: 14px;
             background: #eff6ff;
             border: 1px solid #bfdbfe;
-            border-radius: 6px;
+            border-radius: 9px;
             color: #17358f;
             font-size: 13px;
             line-height: 1.7;
@@ -993,4 +983,3 @@ export default function PercentageCalculator() {
     </div>
   );
 }
-

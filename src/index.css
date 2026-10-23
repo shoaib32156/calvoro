@@ -1,43 +1,31 @@
+
 /* =========================================================
-   CALVORO — GLOBAL WORDPRESS-INSPIRED DESIGN
+   CALVORO — MODERN BLUE & WHITE DESIGN SYSTEM
    ========================================================= */
 
 :root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  color: #172033;
+  background: #f7f9fc;
+
   --calvoro-blue: #2563eb;
   --calvoro-blue-dark: #1d4ed8;
-  --calvoro-navy: #0f172a;
-  --calvoro-navy-2: #172554;
-
+  --calvoro-blue-light: #eff6ff;
+  --calvoro-navy: #10213b;
+  --calvoro-navy-light: #172554;
   --calvoro-text: #172033;
   --calvoro-muted: #64748b;
-  --calvoro-light-text: #94a3b8;
-
-  --calvoro-bg: #f5f7fb;
-  --calvoro-white: #ffffff;
-
   --calvoro-border: #e2e8f0;
   --calvoro-border-dark: #cbd5e1;
-
-  --calvoro-shadow:
-    0 8px 30px rgba(15, 23, 42, 0.06);
-
-  --calvoro-shadow-hover:
-    0 16px 40px rgba(15, 23, 42, 0.10);
-
-  --calvoro-radius: 14px;
+  --calvoro-bg: #f7f9fc;
+  --calvoro-paper: #f8fafc;
+  --calvoro-white: #ffffff;
+  --calvoro-radius: 16px;
   --calvoro-radius-small: 10px;
-
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: var(--calvoro-text);
-  background: var(--calvoro-bg);
+  --calvoro-shadow: 0 8px 28px rgba(15, 23, 42, 0.055);
+  --calvoro-shadow-hover: 0 16px 36px rgba(15, 23, 42, 0.10);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -45,30 +33,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* =========================================================
-   RESET
-   ========================================================= */
-
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 0;
   min-height: 100vh;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f8fafc 0%,
-      #f5f7fb 100%
-    );
-
+  background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 45%, #f5f8fd 100%);
   color: var(--calvoro-text);
 }
 
@@ -83,7 +61,7 @@ button {
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease,
-    background 0.18s ease,
+    background-color 0.18s ease,
     border-color 0.18s ease;
 }
 
@@ -92,24 +70,19 @@ button:hover:not(:disabled) {
 }
 
 button:disabled {
-  opacity: 0.75;
+  cursor: not-allowed;
+  opacity: 0.65;
 }
-
-/* =========================================================
-   LINKS
-   ========================================================= */
 
 a {
   color: var(--calvoro-blue);
+  text-underline-offset: 3px;
+  transition: color 0.18s ease;
 }
 
 a:hover {
   color: var(--calvoro-blue-dark);
 }
-
-/* =========================================================
-   HEADINGS
-   ========================================================= */
 
 h1,
 h2,
@@ -133,10 +106,6 @@ h3 {
   line-height: 1.3;
 }
 
-/* =========================================================
-   TEXT
-   ========================================================= */
-
 p {
   line-height: 1.75;
 }
@@ -145,79 +114,69 @@ small {
   color: var(--calvoro-muted);
 }
 
-/* =========================================================
-   FORMS
-   ========================================================= */
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
 
 input,
 textarea,
 select {
+  max-width: 100%;
   background: #ffffff;
   color: var(--calvoro-text);
-
   border: 1px solid var(--calvoro-border-dark);
-
   border-radius: var(--calvoro-radius-small);
-
   padding: 12px 14px;
-
   outline: none;
-
-  transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--calvoro-blue);
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.13);
 }
 
 textarea {
   resize: vertical;
 }
 
-/* =========================================================
-   CALVORO SITE WRAPPER
-   ========================================================= */
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 3px;
+}
 
 .calvoro-route-content {
   min-height: calc(100vh - 80px);
+  overflow-wrap: anywhere;
 }
-
-/* =========================================================
-   WORDPRESS-STYLE CONTENT CARDS
-   ========================================================= */
 
 .calvoro-card,
 .calvoro-section,
 .calvoro-panel {
   background: var(--calvoro-white);
-
-  border:
-    1px solid var(--calvoro-border);
-
+  border: 1px solid var(--calvoro-border);
   border-radius: var(--calvoro-radius);
-
   box-shadow: var(--calvoro-shadow);
 }
-
-/* =========================================================
-   GLOBAL ARTICLE / CONTENT FEEL
-   ========================================================= */
 
 .calvoro-content {
   width: 100%;
   max-width: 1200px;
-
   margin: 0 auto;
-
-  padding:
-    60px 24px;
+  padding: 64px 24px;
 }
 
 .calvoro-content-narrow {
@@ -225,254 +184,125 @@ textarea {
   margin: 0 auto;
 }
 
-/* =========================================================
-   EDITORIAL SECTION
-   ========================================================= */
-
 .calvoro-editorial-section {
   background: #ffffff;
-
-  border-top:
-    1px solid var(--calvoro-border);
-
-  border-bottom:
-    1px solid var(--calvoro-border);
-
-  padding:
-    70px 24px;
+  border-top: 1px solid var(--calvoro-border);
+  border-bottom: 1px solid var(--calvoro-border);
+  padding: 72px 24px;
 }
-
-/* =========================================================
-   SECTION LABELS
-   ========================================================= */
 
 .calvoro-section-label {
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
-
-  padding:
-    7px 12px;
-
+  padding: 7px 12px;
   border-radius: 999px;
-
-  background:
-    rgba(37, 99, 235, 0.10);
-
-  color:
-    var(--calvoro-blue-dark);
-
+  background: var(--calvoro-blue-light);
+  color: var(--calvoro-blue-dark);
   font-size: 12px;
   font-weight: 800;
-
-  letter-spacing: 0.08em;
-
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-/* =========================================================
-   WORDPRESS-STYLE BUTTONS
-   ========================================================= */
-
 .calvoro-button {
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
-
   gap: 8px;
-
-  min-height: 44px;
-
-  padding:
-    11px 18px;
-
-  border-radius:
-    var(--calvoro-radius-small);
-
-  border:
-    1px solid transparent;
-
-  background:
-    var(--calvoro-blue);
-
-  color:
-    #ffffff;
-
-  font-weight:
-    800;
-
+  min-height: 46px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--calvoro-blue);
+  color: #ffffff;
+  font-weight: 750;
   text-decoration: none;
-
   cursor: pointer;
-
-  box-shadow:
-    0 4px 12px rgba(37, 99, 235, 0.20);
+  box-shadow: 0 5px 14px rgba(37, 99, 235, 0.18);
 }
 
 .calvoro-button:hover {
-  background:
-    var(--calvoro-blue-dark);
-
-  color:
-    #ffffff;
-
-  box-shadow:
-    0 8px 18px rgba(37, 99, 235, 0.24);
+  background: var(--calvoro-blue-dark);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.23);
 }
 
 .calvoro-button-secondary {
   background: #ffffff;
-
-  color:
-    var(--calvoro-navy);
-
-  border:
-    1px solid var(--calvoro-border-dark);
-
+  color: var(--calvoro-navy);
+  border-color: var(--calvoro-border-dark);
   box-shadow: none;
 }
 
 .calvoro-button-secondary:hover {
-  background:
-    #f8fafc;
-
-  color:
-    var(--calvoro-navy);
-
-  border-color:
-    #94a3b8;
+  background: #f8fafc;
+  color: var(--calvoro-navy);
+  border-color: #94a3b8;
 }
-
-/* =========================================================
-   GLOBAL HEADER SUPPORT
-   ========================================================= */
 
 .calvoro-global-header {
   position: sticky;
-
   top: 0;
-
   z-index: 1000;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(15, 23, 42, 0.97),
-      rgba(29, 78, 216, 0.96)
-    );
-
-  backdrop-filter:
-    blur(14px);
-
-  -webkit-backdrop-filter:
-    blur(14px);
-
-  border-bottom:
-    1px solid rgba(255, 255, 255, 0.10);
-
-  box-shadow:
-    0 8px 25px rgba(15, 23, 42, 0.10);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e7edf5;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.045);
 }
 
 .calvoro-global-header-inner {
   width: 100%;
-
   max-width: 1240px;
-
-  margin: 0 auto;
-
   min-height: 76px;
-
-  padding:
-    0 24px;
-
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 24px;
 }
 
 .calvoro-logo {
-  color: #ffffff;
-
+  color: var(--calvoro-navy);
   text-decoration: none;
-
   font-size: 25px;
-
   font-weight: 900;
-
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
 }
 
 .calvoro-logo:hover {
-  color: #ffffff;
+  color: var(--calvoro-blue);
 }
-
-/* =========================================================
-   NAV
-   ========================================================= */
 
 .calvoro-global-nav {
   display: flex;
-
   align-items: center;
-
   gap: 5px;
-
   flex-wrap: wrap;
 }
 
 .calvoro-global-nav a {
-  color: rgba(255, 255, 255, 0.88);
-
+  color: #475569;
   text-decoration: none;
-
   font-size: 14px;
-
   font-weight: 700;
-
-  padding:
-    9px 11px;
-
-  border-radius:
-    8px;
-
-  transition:
-    background 0.18s ease,
-    color 0.18s ease;
+  padding: 10px 12px;
+  border-radius: 9px;
+  transition: background 0.18s ease, color 0.18s ease;
 }
 
 .calvoro-global-nav a:hover {
-  color: #ffffff;
-
-  background:
-    rgba(255, 255, 255, 0.10);
+  color: var(--calvoro-blue-dark);
+  background: var(--calvoro-blue-light);
 }
-
-/* =========================================================
-   HERO SUPPORT
-   ========================================================= */
 
 .calvoro-hero {
   color: #ffffff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #0f172a,
-      #1d4ed8
-    );
-
-  border-radius:
-    18px;
-
-  box-shadow:
-    0 20px 50px rgba(15, 23, 42, 0.14);
+  background: linear-gradient(135deg, #10213b 0%, #1d4ed8 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.13);
 }
 
 .calvoro-hero h1,
@@ -482,274 +312,134 @@ textarea {
   color: #ffffff;
 }
 
-/* =========================================================
-   TOOL / CALCULATOR GRID
-   ========================================================= */
-
 .calvoro-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(240px, 1fr)
-    );
-
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: 22px;
 }
 
-/* =========================================================
-   TOOL CARDS
-   ========================================================= */
-
 .calvoro-tool-card {
   background: #ffffff;
-
-  border:
-    1px solid var(--calvoro-border);
-
-  border-radius:
-    var(--calvoro-radius);
-
-  padding:
-    24px;
-
-  box-shadow:
-    var(--calvoro-shadow);
-
-  transition:
-    transform 0.20s ease,
-    box-shadow 0.20s ease,
-    border-color 0.20s ease;
+  border: 1px solid var(--calvoro-border);
+  border-radius: var(--calvoro-radius);
+  padding: 24px;
+  box-shadow: var(--calvoro-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .calvoro-tool-card:hover {
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    var(--calvoro-shadow-hover);
-
-  border-color:
-    #cbd5e1;
+  transform: translateY(-3px);
+  box-shadow: var(--calvoro-shadow-hover);
+  border-color: #bfdbfe;
 }
-
-/* =========================================================
-   CALCULATOR RESULT
-   ========================================================= */
 
 .calvoro-result {
   margin-top: 20px;
-
-  background:
-    #eff6ff;
-
-  border:
-    1px solid #bfdbfe;
-
-  border-radius:
-    var(--calvoro-radius-small);
-
-  padding:
-    18px;
-
-  color:
-    #1e3a8a;
-
-  font-weight:
-    800;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--calvoro-radius-small);
+  padding: 18px;
+  color: #1e3a8a;
+  font-weight: 800;
 }
 
-/* =========================================================
-   ARTICLE ELEMENTS
-   ========================================================= */
-
 .calvoro-article {
-  max-width:
-    820px;
-
-  margin:
-    0 auto;
-
-  color:
-    #334155;
-
-  font-size:
-    17px;
-
-  line-height:
-    1.85;
+  max-width: 820px;
+  margin: 0 auto;
+  color: #334155;
+  font-size: 17px;
+  line-height: 1.85;
 }
 
 .calvoro-article h2 {
-  margin-top:
-    48px;
-
-  margin-bottom:
-    16px;
-
-  font-size:
-    30px;
+  margin: 48px 0 16px;
+  font-size: 30px;
 }
 
 .calvoro-article h3 {
-  margin-top:
-    32px;
-
-  margin-bottom:
-    12px;
-
-  font-size:
-    22px;
+  margin: 32px 0 12px;
+  font-size: 22px;
 }
 
 .calvoro-article p {
-  margin:
-    0 0 22px;
+  margin: 0 0 22px;
 }
 
 .calvoro-article ul,
 .calvoro-article ol {
-  padding-left:
-    24px;
-
-  line-height:
-    1.8;
+  padding-left: 24px;
+  line-height: 1.8;
 }
 
 .calvoro-article blockquote {
-  margin:
-    30px 0;
-
-  padding:
-    18px 22px;
-
-  border-left:
-    4px solid var(--calvoro-blue);
-
-  background:
-    #f8fafc;
-
-  color:
-    #475569;
+  margin: 30px 0;
+  padding: 18px 22px;
+  border-left: 4px solid var(--calvoro-blue);
+  background: #f8fafc;
+  color: #475569;
 }
 
-/* =========================================================
-   TABLE OF CONTENTS
-   ========================================================= */
-
 .calvoro-toc {
-  background:
-    #f8fafc;
-
-  border:
-    1px solid var(--calvoro-border);
-
-  border-radius:
-    var(--calvoro-radius);
-
-  padding:
-    22px;
+  background: #f8fafc;
+  border: 1px solid var(--calvoro-border);
+  border-radius: var(--calvoro-radius);
+  padding: 22px;
 }
 
 .calvoro-toc a {
   display: block;
-
   text-decoration: none;
-
-  padding:
-    7px 0;
-
-  color:
-    #334155;
-
-  font-weight:
-    700;
+  padding: 7px 0;
+  color: #334155;
+  font-weight: 700;
 }
 
 .calvoro-toc a:hover {
-  color:
-    var(--calvoro-blue);
+  color: var(--calvoro-blue);
 }
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
 .calvoro-footer {
-  margin-top:
-    80px;
-
-  background:
-    #0f172a;
-
-  color:
-    #cbd5e1;
-
-  border-top:
-    1px solid #1e293b;
+  margin-top: 80px;
+  background: #10213b;
+  color: #cbd5e1;
+  border-top: 1px solid #1e293b;
 }
 
 .calvoro-footer a {
-  color:
-    #cbd5e1;
-
+  color: #cbd5e1;
   text-decoration: none;
 }
 
 .calvoro-footer a:hover {
-  color:
-    #ffffff;
+  color: #ffffff;
 }
-
-/* =========================================================
-   SELECTION
-   ========================================================= */
 
 ::selection {
-  background:
-    rgba(37, 99, 235, 0.18);
-
-  color:
-    #0f172a;
+  background: rgba(37, 99, 235, 0.18);
+  color: #10213b;
 }
-
-/* =========================================================
-   SCROLLBAR
-   ========================================================= */
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background:
-    #f1f5f9;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background:
-    #cbd5e1;
-
-  border-radius:
-    999px;
+  background: #cbd5e1;
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background:
-    #94a3b8;
+  background: #94a3b8;
 }
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
 
 @media (max-width: 900px) {
   .calvoro-global-header-inner {
     min-height: 70px;
-
-    padding:
-      12px 18px;
+    padding: 12px 18px;
   }
 
   .calvoro-global-nav {
@@ -758,60 +448,1419 @@ textarea {
 
   .calvoro-global-nav a {
     font-size: 13px;
-
-    padding:
-      8px 8px;
+    padding: 8px;
   }
 
   .calvoro-content {
-    padding:
-      45px 18px;
+    padding: 45px 18px;
   }
 }
 
 @media (max-width: 700px) {
   .calvoro-global-header-inner {
-    align-items:
-      flex-start;
-
-    flex-direction:
-      column;
-
-    gap:
-      10px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .calvoro-global-nav {
-    width:
-      100%;
-
-    overflow-x:
-      auto;
-
-    flex-wrap:
-      nowrap;
-
-    padding-bottom:
-      2px;
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding: 2px 0 5px;
   }
 
   .calvoro-global-nav a {
-    flex:
-      0 0 auto;
+    flex: 0 0 auto;
   }
 
   .calvoro-grid {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
   }
 
   .calvoro-article {
-    font-size:
-      16px;
+    font-size: 16px;
   }
 
   .calvoro-article h2 {
-    font-size:
-      26px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calvoro-content {
+    padding: 36px 16px;
+  }
+
+  .calvoro-editorial-section {
+    padding: 46px 16px;
+  }
+
+  .calvoro-button {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.calvoro-article-page {
+  background: #f8fafc !important;
+}
+
+.calvoro-article-main {
+  max-width: 1080px !important;
+  padding: 38px 24px 72px !important;
+}
+
+.calvoro-article-grid {
+  grid-template-columns: minmax(0, 740px) minmax(220px, 280px) !important;
+  justify-content: center;
+  gap: 24px !important;
+}
+
+.calvoro-article-card {
+  min-width: 0;
+  border: 1px solid var(--calvoro-border) !important;
+  border-radius: 16px !important;
+  padding: clamp(22px, 4vw, 42px) !important;
+  box-shadow: var(--calvoro-shadow) !important;
+}
+
+.calvoro-article-card section[id] {
+  scroll-margin-top: 88px !important;
+}
+
+.calvoro-article-card a,
+.calvoro-article-card summary {
+  text-underline-offset: 3px;
+}
+
+.calvoro-article-card a:focus-visible,
+.calvoro-article-card summary:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 3px;
+}
+
+@media (max-width: 820px) {
+  .calvoro-article-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .calvoro-article-main {
+    padding: 26px 16px 52px !important;
+  }
+}
+
+/* ==========================================================
+   CALVORO DIRECT REDESIGN — Responsive visual layer
+   Existing React routes and calculator logic are preserved.
+   ========================================================== */
+
+:root {
+  color-scheme: light;
+  --cv-blue: #2563eb;
+  --cv-blue-dark: #1d4ed8;
+  --cv-navy: #101b36;
+  --cv-ink: #172033;
+  --cv-muted: #667085;
+  --cv-border: #e5eaf2;
+  --cv-surface: #ffffff;
+  --cv-page: #f5f8fd;
+  --cv-radius: 18px;
+  --cv-shadow: 0 12px 34px rgba(23, 43, 77, .07);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  background: var(--cv-page);
+  color: var(--cv-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button, a, input, select, textarea {
+  transition: color .18s ease, background-color .18s ease,
+    border-color .18s ease, box-shadow .18s ease,
+    transform .18s ease;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .3);
+  outline-offset: 3px;
+}
+
+img, svg {
+  max-width: 100%;
+}
+
+::selection {
+  background: #dbeafe;
+  color: #172554;
+}
+
+/* Main surfaces and content panels */
+main, section {
+  scroll-margin-top: 90px;
+}
+
+article, [class*="calculator-card"], [class*="tool-card"],
+[class*="feature-card"], [class*="category-card"] {
+  border-radius: var(--cv-radius);
+}
+
+[class*="card"], [class*="Card"] {
+  transition: border-color .2s ease, box-shadow .2s ease,
+    transform .2s ease;
+}
+
+[class*="card"]:hover, [class*="Card"]:hover {
+  border-color: #d6e3fb;
+}
+
+input, select, textarea {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select, textarea {
+  border: 1px solid #d8e0ec;
+  background: #fff;
+  color: var(--cv-ink);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus, textarea:focus {
+  border-color: var(--cv-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* Improve common calculator and tool page readability */
+label {
+  color: #344054;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--cv-border);
+  text-align: left;
+}
+
+pre, code {
+  overflow-wrap: anywhere;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--cv-border);
+}
+
+/* Responsive layout safeguards */
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  body {
+    overflow-wrap: break-word;
+  }
+
+  input, select, textarea, button {
+    max-width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* End CALVORO direct redesign layer */
+
+/* =========================================================
+   CALVORO HOMEPAGE REDESIGN - targeted existing JSX classes
+   Preserves routes, calculator logic, search and categories.
+   ========================================================= */
+
+.calvoro-container {
+  width: min(1160px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.calvoro-home-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(52px, 7vw, 92px) 0;
+  background:
+    radial-gradient(ellipse at 88% 8%, rgba(147, 197, 253, .34), transparent 34%),
+    linear-gradient(135deg, #f0f6ff 0%, #ffffff 52%, #edf4ff 100%);
+  border-bottom: 1px solid #e1eafa;
+}
+
+.calvoro-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(310px, .85fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 76px);
+}
+
+.calvoro-hero-copy {
+  min-width: 0;
+}
+
+.calvoro-hero-label,
+.calvoro-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #2456bd;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .11em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.calvoro-hero-copy h1 {
+  max-width: 700px;
+  margin: 20px 0;
+  color: #102044;
+  font-size: clamp(38px, 5.1vw, 66px);
+  font-weight: 800;
+  letter-spacing: -.055em;
+  line-height: 1.07;
+}
+
+.calvoro-hero-copy > p {
+  max-width: 590px;
+  margin: 0 0 27px;
+  color: #596780;
+  font-size: clamp(16px, 1.7vw, 19px);
+  line-height: 1.8;
+}
+
+.calvoro-hero-search {
+  max-width: 620px;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #dfe7f4;
+  border-radius: 18px;
+  box-shadow: 0 14px 40px rgba(31, 63, 120, .09);
+}
+
+.calvoro-hero-search label {
+  display: block;
+  margin: 0 0 9px;
+  color: #34435d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.calvoro-hero-search-controls {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.calvoro-search-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  color: #14213d;
+  background: #f8faff;
+  border: 1px solid #dfe6f0;
+  border-radius: 11px;
+  outline-offset: 2px;
+}
+
+.calvoro-search-input::placeholder {
+  color: #8793a7;
+}
+
+.calvoro-hero-search-button,
+.calvoro-primary-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 19px;
+  color: #fff;
+  background: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 11px;
+  font-weight: 750;
+  text-decoration: none;
+  box-shadow: 0 5px 13px rgba(37, 99, 235, .17);
+}
+
+.calvoro-hero-search-button:hover,
+.calvoro-primary-button:hover {
+  color: #fff;
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.calvoro-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.calvoro-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 11px 17px;
+  color: #34435d;
+  background: rgba(255, 255, 255, .8);
+  border: 1px solid #dce5f2;
+  border-radius: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.calvoro-secondary-button:hover {
+  color: #1d4ed8;
+  background: #fff;
+  border-color: #b8cdf5;
+}
+
+.calvoro-hero-feature {
+  min-width: 0;
+  padding: clamp(21px, 3vw, 30px);
+  background: rgba(255, 255, 255, .94);
+  border: 1px solid #e0e8f4;
+  border-radius: 23px;
+  box-shadow: 0 22px 60px rgba(29, 57, 105, .11);
+}
+
+.calvoro-featured-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.calvoro-feature-kicker {
+  margin-bottom: 7px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.calvoro-featured-heading h2 {
+  margin: 0;
+  color: #14213d;
+  font-size: clamp(20px, 2.3vw, 25px);
+  letter-spacing: -.035em;
+}
+
+.calvoro-featured-count {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  color: #2456bd;
+  background: #edf4ff;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.calvoro-featured-intro {
+  margin: 12px 0 17px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.calvoro-featured-tool-list {
+  display: grid;
+  gap: 9px;
+}
+
+.calvoro-featured-tool {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px;
+  color: #172033;
+  background: #fff;
+  border: 1px solid #e7edf6;
+  border-radius: 13px;
+  text-decoration: none;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.calvoro-featured-tool:hover {
+  color: #1d4ed8;
+  background: #f7faff;
+  border-color: #bdd2fb;
+  transform: translateX(2px);
+}
+
+.calvoro-featured-tool-icon {
+  display: grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  color: #2459ca;
+  background: #edf4ff;
+  border-radius: 12px;
+}
+
+.calvoro-featured-tool-copy {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  gap: 4px;
+}
+
+.calvoro-featured-tool-copy strong {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.calvoro-featured-tool-copy small {
+  color: #78859a;
+  font-size: 12px;
+}
+
+.calvoro-featured-tool-arrow {
+  color: #7b8ba5;
+  font-size: 19px;
+}
+
+.calvoro-featured-all-link,
+.calvoro-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: #2459ca;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.calvoro-featured-all-link:hover,
+.calvoro-text-link:hover {
+  color: #153f9f;
+  text-decoration: underline;
+}
+
+.calvoro-home-section {
+  padding: clamp(52px, 7vw, 82px) 0;
+}
+
+.calvoro-paper-band {
+  background: #f7f9fd;
+}
+
+.calvoro-white-band {
+  background: #fff;
+}
+
+.calvoro-editorial-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.calvoro-editorial-heading h2 {
+  margin: 10px 0;
+  color: #14213d;
+  font-size: clamp(29px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+}
+
+.calvoro-editorial-heading p {
+  max-width: 600px;
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.calvoro-tool-count {
+  flex: 0 0 auto;
+  padding: 9px 13px;
+  color: #244fae;
+  background: #eaf1ff;
+  border: 1px solid #d8e5ff;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.calvoro-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 28px;
+}
+
+.calvoro-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  color: #40506a;
+  background: #fff;
+  border: 1px solid #e0e7f1;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.calvoro-category small {
+  padding: 3px 6px;
+  color: #77849a;
+  background: #f1f4f9;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.calvoro-category:hover {
+  color: #2459ca;
+  border-color: #b8cdf5;
+}
+
+.calvoro-category.active {
+  color: #fff;
+  background: #2459ca;
+  border-color: #2459ca;
+  box-shadow: 0 5px 14px rgba(37, 99, 235, .15);
+}
+
+.calvoro-category.active small {
+  color: #fff;
+  background: rgba(255, 255, 255, .17);
+}
+
+.calvoro-calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.calvoro-calculator-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+  color: #172033;
+  background: #fff;
+  border: 1px solid #e5eaf2;
+  border-radius: 17px;
+  box-shadow: 0 3px 12px rgba(22, 40, 75, .025);
+  text-decoration: none;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.calvoro-calculator-card:hover {
+  color: #172033;
+  border-color: #b9cff8;
+  box-shadow: 0 14px 32px rgba(31, 63, 120, .09);
+  transform: translateY(-3px);
+}
+
+.calvoro-calculator-top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 19px;
+}
+
+.calvoro-calculator-category {
+  padding: 6px 9px;
+  color: #2855b2;
+  background: #edf4ff;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.calvoro-calculator-arrow {
+  color: #7d8ba1;
+  font-size: 20px;
+  transition: color .18s ease, transform .18s ease;
+}
+
+.calvoro-calculator-card:hover .calvoro-calculator-arrow {
+  color: #2459ca;
+  transform: translateX(3px);
+}
+
+.calvoro-calculator-card h3 {
+  margin: 0 0 9px;
+  color: #16213a;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.4;
+}
+
+.calvoro-calculator-card p {
+  flex: 1;
+  margin: 0 0 19px;
+  color: #68758a;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.calvoro-calculator-link {
+  color: #2459ca;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.calvoro-empty-state {
+  padding: 36px 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #cbd6e5;
+  border-radius: 17px;
+}
+
+.calvoro-empty-state strong {
+  color: #172033;
+  font-size: 18px;
+}
+
+.calvoro-empty-state p {
+  color: #68758a;
+}
+
+.calvoro-about-layout {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.calvoro-about-layout h2 {
+  margin: 12px 0 0;
+  color: #14213d;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.2;
+}
+
+.calvoro-about-text {
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+@media (min-width: 1400px) {
+  .calvoro-container {
+    width: min(1200px, calc(100% - 64px));
+  }
+}
+
+@media (max-width: 900px) {
+  .calvoro-hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 35px;
+  }
+
+  .calvoro-hero-copy {
+    max-width: 720px;
+  }
+
+  .calvoro-hero-feature {
+    max-width: 680px;
+  }
+
+  .calvoro-calculator-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .calvoro-container {
+    width: calc(100% - 32px);
+  }
+
+  .calvoro-home-hero {
+    padding: 43px 0;
+  }
+
+  .calvoro-hero-copy h1 {
+    font-size: clamp(35px, 10vw, 48px);
+  }
+
+  .calvoro-hero-search-controls {
+    flex-direction: column;
+  }
+
+  .calvoro-hero-search-button {
+    width: 100%;
+  }
+
+  .calvoro-hero-actions > a {
+    flex: 1 1 auto;
+  }
+
+  .calvoro-editorial-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .calvoro-category-row {
+    gap: 8px;
+  }
+
+  .calvoro-category {
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+
+  .calvoro-calculator-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .calvoro-calculator-card {
+    padding: 19px;
+  }
+
+  .calvoro-about-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calvoro-featured-tool,
+  .calvoro-calculator-card,
+  .calvoro-calculator-arrow {
+    transition: none;
+  }
+}
+
+/* End targeted CALVORO homepage redesign */
+
+/* CALVORO HOMEPAGE REDESIGN - layout refresh */
+.calvoro-home-section {
+  padding-top: clamp(52px, 7vw, 92px);
+  padding-bottom: clamp(52px, 7vw, 92px);
+}
+
+.calvoro-container {
+  width: min(1160px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.calvoro-home-hero {
+  padding-top: clamp(54px, 8vw, 104px);
+  padding-bottom: clamp(58px, 8vw, 100px);
+  background:
+    radial-gradient(ellipse at 85% 10%, rgba(96,165,250,.19), transparent 34%),
+    linear-gradient(135deg, #f8fbff 0%, #eef5ff 52%, #ffffff 100%);
+}
+
+.calvoro-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 72px);
+}
+
+.calvoro-hero-copy h1 {
+  max-width: 760px;
+  margin: 18px 0;
+  color: #10213e;
+  font-size: clamp(2.5rem, 5.5vw, 4.6rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.055em;
+}
+
+.calvoro-hero-copy p {
+  max-width: 650px;
+  color: #52627a;
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.8;
+}
+
+.calvoro-hero-feature {
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid #dce6f4;
+  border-radius: 24px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 24px 70px rgba(24, 54, 98, .10);
+}
+
+.calvoro-featured-tool-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.calvoro-featured-tool-list > * {
+  border-radius: 13px;
+}
+
+.calvoro-editorial-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.calvoro-editorial-heading h2,
+.calvoro-about-layout h2 {
+  margin: 10px 0;
+  color: #10213e;
+  font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.15;
+}
+
+.calvoro-editorial-heading p {
+  max-width: 620px;
+  color: #627087;
+  line-height: 1.7;
+}
+
+.calvoro-tool-count {
+  flex-shrink: 0;
+  padding: 10px 15px;
+  border: 1px solid #dbe5f2;
+  border-radius: 999px;
+  background: #fff;
+  color: #24456f;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.calvoro-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 26px 0 30px;
+}
+
+.calvoro-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 15px;
+  border: 1px solid #dce5f1;
+  border-radius: 13px;
+  background: #fff;
+  color: #34445d;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.calvoro-category:hover {
+  transform: translateY(-2px);
+  border-color: #93baf7;
+}
+
+.calvoro-category small {
+  color: #78869a;
+  font-size: .75rem;
+}
+
+.calvoro-category.active {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 7px 18px rgba(37,99,235,.18);
+}
+
+.calvoro-category.active small {
+  color: #e5edff;
+}
+
+.calvoro-calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.calvoro-calculator-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 23px;
+  border: 1px solid #e0e7f0;
+  border-radius: 19px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(16,33,62,.025);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.calvoro-calculator-card:hover {
+  transform: translateY(-5px);
+  border-color: #a9c7fa;
+  box-shadow: 0 18px 36px rgba(30,64,120,.09);
+}
+
+.calvoro-calculator-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 19px;
+}
+
+.calvoro-calculator-category {
+  color: #2563eb;
+  font-size: .76rem;
+  font-weight: 750;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+.calvoro-calculator-arrow {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 11px;
+  background: #eff5ff;
+  color: #2563eb;
+}
+
+.calvoro-calculator-card h3 {
+  margin: 0 0 9px;
+  color: #172943;
+  font-size: 1.12rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.calvoro-calculator-card p {
+  flex: 1;
+  margin: 0 0 20px;
+  color: #65738a;
+  font-size: .94rem;
+  line-height: 1.7;
+}
+
+.calvoro-calculator-link {
+  color: #2563eb;
+  font-size: .9rem;
+  font-weight: 750;
+}
+
+.calvoro-empty-state {
+  padding: 40px 20px;
+  border: 1px dashed #cbd7e8;
+  border-radius: 18px;
+  background: #fff;
+  text-align: center;
+}
+
+.calvoro-about-layout {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.calvoro-about-text {
+  color: #5b6980;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.calvoro-primary-button,
+.calvoro-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 19px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.calvoro-primary-button {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(37,99,235,.2);
+}
+
+.calvoro-secondary-button {
+  border: 1px solid #d6e0ed;
+  background: #fff;
+  color: #21334e;
+}
+
+.calvoro-primary-button:hover,
+.calvoro-secondary-button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .calvoro-hero-layout {
+    grid-template-columns: 1fr;
+  }
+  .calvoro-hero-feature {
+    max-width: 650px;
+  }
+  .calvoro-calculator-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .calvoro-container {
+    width: min(100% - 28px, 1160px);
+  }
+  .calvoro-calculator-grid {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+  .calvoro-editorial-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .calvoro-about-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .calvoro-calculator-card {
+    padding: 19px;
+  }
+  .calvoro-category-row {
+    gap: 8px;
+  }
+  .calvoro-category {
+    padding: 9px 11px;
+  }
+}
+
+/* CALVORO Phase 1: homepage guide, how-it-works, FAQ, and directory controls */
+.calvoro-home-guide-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.calvoro-home-guide h2 {
+  margin: 14px 0 18px;
+  color: #10213e;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+}
+
+.calvoro-home-guide h3 {
+  margin: 30px 0 12px;
+  color: #14213d;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.35;
+}
+
+.calvoro-home-guide p {
+  margin: 0 0 17px;
+  color: #5b6980;
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.calvoro-home-guide-list {
+  display: grid;
+  gap: 9px;
+  margin: 0 0 20px;
+  padding-left: 22px;
+  color: #5b6980;
+  font-size: .98rem;
+  line-height: 1.75;
+}
+
+.calvoro-home-guide-list li::marker {
+  color: #2563eb;
+}
+
+.calvoro-home-guide-list strong {
+  color: #14213d;
+}
+
+.calvoro-home-guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.calvoro-how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.calvoro-how-card {
+  padding: 26px 24px;
+  border: 1px solid #e0e7f0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(16, 33, 62, .025);
+}
+
+.calvoro-how-number {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.calvoro-how-card h3 {
+  margin: 0 0 9px;
+  color: #14213d;
+  font-size: 1.06rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.calvoro-how-card p {
+  margin: 0;
+  color: #64748b;
+  font-size: .95rem;
+  line-height: 1.7;
+}
+
+.calvoro-faq-list {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.calvoro-faq-item {
+  overflow: hidden;
+  border: 1px solid #e0e7f0;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(15, 23, 42, .025);
+}
+
+.calvoro-faq-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 22px;
+  border: 0;
+  background: transparent;
+  color: #14213d;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.calvoro-faq-button span:last-child {
+  display: grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 9px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.calvoro-faq .calvoro-faq-button:hover {
+  transform: none;
+  background: #f8fbff;
+  color: #1d4ed8;
+}
+
+.calvoro-faq-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: -2px;
+}
+
+.calvoro-faq-panel {
+  padding: 0 22px 21px;
+  color: #5b6980;
+  font-size: .98rem;
+  line-height: 1.8;
+}
+
+.calvoro-directory-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.calvoro-directory-toolbar label {
+  display: grid;
+  flex: 1 1 320px;
+  gap: 7px;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.calvoro-clear-filters {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid #c7d7ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d4ed8;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.calvoro-directory-toolbar .calvoro-clear-filters:hover,
+.calvoro-empty-state .calvoro-clear-filters:hover {
+  transform: none;
+  border-color: #93baf7;
+  background: #eff6ff;
+}
+
+.calvoro-filter-status {
+  margin: 0 0 18px;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.calvoro-empty-state .calvoro-clear-filters {
+  margin-top: 14px;
+}
+
+@media (max-width: 820px) {
+  .calvoro-how-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .calvoro-home-guide h3 {
+    margin-top: 26px;
+  }
+
+  .calvoro-home-guide-links .calvoro-primary-button,
+  .calvoro-home-guide-links .calvoro-secondary-button {
+    flex: 1 1 100%;
+  }
+
+  .calvoro-directory-toolbar {
+    align-items: stretch;
+  }
+
+  .calvoro-directory-toolbar label {
+    flex-basis: 100%;
+  }
+
+  .calvoro-directory-toolbar .calvoro-clear-filters {
+    width: 100%;
+  }
+
+  .calvoro-faq-button {
+    padding: 17px 18px;
+  }
+
+  .calvoro-faq-panel {
+    padding: 0 18px 18px;
   }
 }

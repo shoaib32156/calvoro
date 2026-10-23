@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../SEO";
 
 export default function PrivacyPolicy() {
 return (
@@ -10,6 +11,7 @@ fontFamily: "Arial, sans-serif",
 color: "#0f172a",
 }}
 >
+<SEO />
 <header
 style={{
 background: "#2563eb",
@@ -125,29 +127,44 @@ CALVORO </Link>
       </p>
 
       <p>
-        If advertising services are added to CALVORO, third-party
-        advertising providers may use cookies or similar technologies in
-        accordance with their own privacy policies and applicable
-        requirements.
+        If advertising is displayed, third-party providers may use
+        cookies or similar technologies in accordance with their own
+        privacy policies and applicable requirements.
       </p>
 
       <h2>4. Google AdSense and Advertising</h2>
 
       <p>
-        CALVORO may use third-party advertising services such as Google
-        AdSense in the future.
+        CALVORO includes Google AdSense code. Whether ads are displayed
+        depends on ad availability and site settings.
       </p>
 
       <p>
-        If advertising is displayed, advertising providers may use
-        cookies, web beacons, or similar technologies to provide and
-        measure advertisements.
+        If ads are displayed, Google and its partners may use cookies or
+        similar technologies to serve, measure, and personalize
+        advertisements, subject to applicable consent requirements and
+        the settings available to visitors.
       </p>
 
       <p>
-        Visitors may be able to control personalized advertising through
-        the settings and controls provided by the relevant advertising
-        provider.
+        For information about how Google uses data on sites that use its
+        services, visit{" "}
+        <a
+          href="https://policies.google.com/technologies/partner-sites"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Google's Partner Sites policy
+        </a>
+        . Visitors can manage personalized advertising through{" "}
+        <a
+          href="https://adssettings.google.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Google Ads Settings
+        </a>
+        .
       </p>
 
       <h2>5. Third-Party Services</h2>

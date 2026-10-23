@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../SEO";
 
 function Terms() {
 return (
@@ -9,6 +10,7 @@ background: "#f8fafc",
 color: "#0f172a",
 }}
 >
+<SEO />
 <header
 style={{
 background: "#2563eb",
