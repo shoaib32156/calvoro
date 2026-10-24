@@ -13,6 +13,8 @@ export default function ToolPage({
   steps = [],
   notes = [],
   related = [],
+  privacyBadge,
+  privacyNote,
   children,
 }) {
   return (
@@ -40,7 +42,8 @@ export default function ToolPage({
 
           <div className="calvoro-tool-privacy">
             <span aria-hidden="true" />
-            Runs in your browser. CALVORO does not upload your files.
+            {privacyBadge ||
+              "Runs in your browser. CALVORO does not upload your files."}
           </div>
         </div>
       </header>
@@ -65,8 +68,8 @@ export default function ToolPage({
               <section>
                 <h2>Privacy</h2>
                 <p>
-                  Processing happens locally in this browser tab. Files are not
-                  sent to CALVORO or a third-party conversion service.
+                  {privacyNote ||
+                    "Processing happens locally in this browser tab. Files are not sent to CALVORO or a third-party conversion service."}
                 </p>
               </section>
 

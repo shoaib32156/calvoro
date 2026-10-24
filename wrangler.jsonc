@@ -2,6 +2,16 @@
   "name": "calvoro",
   "main": "worker/index.js",
   "compatibility_date": "2026-10-01",
+  "ratelimits": [
+    {
+      "name": "METADATA_RATE_LIMITER",
+      "namespace_id": "20261024",
+      "simple": {
+        "limit": 30,
+        "period": 60
+      }
+    }
+  ],
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",

@@ -543,8 +543,53 @@ export const utilityTools = [
     path: "/color-palette-generator",
     category: "Design",
     description:
-      "Build harmonious color palettes, copy hex values, and check contrast against white and black.",
-    aliases: ["color", "palette", "hex", "contrast", "design colors"],
+      "Build harmonious color palettes, check any text and background pair against WCAG contrast levels, and copy hex values.",
+    aliases: ["color", "palette", "hex", "contrast", "wcag", "accessibility", "design colors"],
+  },
+  {
+    name: "Website Metadata Checker",
+    path: "/website-metadata-checker",
+    category: "Developer",
+    description:
+      "Inspect a public page's title, meta description, canonical URL, social preview tags, headings, and indexing hints.",
+    aliases: [
+      "metadata",
+      "meta tags",
+      "seo",
+      "open graph",
+      "twitter card",
+      "canonical",
+    ],
+  },
+  {
+    name: "Multiplication Practice",
+    path: "/multiplication-practice",
+    category: "Education",
+    description:
+      "Practice times tables at your own pace with untimed questions, instant feedback, and clear strategies for facts that feel hard.",
+    aliases: [
+      "times tables",
+      "multiplication facts",
+      "times table practice",
+      "math facts",
+      "multiplication drill",
+      "times tables quiz",
+    ],
+  },
+  {
+    name: "Vocabulary Flashcards",
+    path: "/vocabulary-flashcards",
+    category: "Education",
+    description:
+      "Study curated everyday, academic, and in-context word decks with reveal-and-review flashcards.",
+    aliases: [
+      "flashcards",
+      "vocabulary practice",
+      "word study",
+      "academic vocabulary",
+      "learn new words",
+      "word cards",
+    ],
   },
 ];
 

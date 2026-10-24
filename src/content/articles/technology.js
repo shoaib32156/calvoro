@@ -429,4 +429,228 @@ export const technologyArticles = [
       },
     ],
   },
+  {
+    slug: "website-metadata-and-social-previews",
+    title: "Website Metadata and Social Previews: A Practical Audit Guide",
+    category: "Technology",
+    date: "2026-10-24",
+    excerpt:
+      "Understand what search engines and social platforms read from a page, which tags matter, and how to audit a public URL without guessing.",
+    tool: {
+      name: "Website Metadata Checker",
+      path: "/website-metadata-checker",
+    },
+    takeaways: [
+      "Metadata describes a page to search engines, social platforms, and browsers; it does not control how every platform will present it.",
+      "Title, description, canonical, and robots directives matter most for search; Open Graph and Twitter tags shape link previews.",
+      "Many crawlers and social scrapers read raw HTML, so metadata added only by JavaScript may never reach them.",
+    ],
+    sections: [
+      {
+        heading: "What Metadata Actually Does",
+        paragraphs: [
+          "Metadata is the part of a page that describes the page itself. Search engines, social platforms, and browsers read elements such as the title, meta description, canonical link, robots directives, viewport tag, and language attribute. These tags usually do not change what visitors see, but they influence how the page is summarized, indexed, and shared.",
+          "There is no single metadata score. Different services read different tags at different times. Google may rewrite a title or description, a social network may keep an old preview, and a crawler may see raw HTML before JavaScript runs. Treat metadata as a set of signals, not a contract.",
+        ],
+      },
+      {
+        heading: "Titles and Descriptions",
+        paragraphs: [
+          "The title element is still one of the strongest on-page signals. Keep it specific, readable, and unique. Roughly 30 to 60 characters is a useful working range, but the real limit is visual: narrow screens and long site names can truncate a title that looks fine on a desktop.",
+          "A meta description does not directly set rankings, but it can influence the snippet and click-through rate. Aim for about 70 to 160 characters that tell a reader what the page answers. Write for people first; search engines may replace the description with page text that matches the query.",
+        ],
+        example: {
+          title: "Example: replacing a generic title and description",
+          lines: [
+            "Weak title: Home | Example Company",
+            "Better title: Website Metadata Checker - Audit Titles and Social Tags",
+            "Weak description: Learn more about our services.",
+            "Better description: Check a public page's title, description, canonical, Open Graph tags, and headings in one report.",
+          ],
+        },
+        note:
+          "Character counts are a planning guide. Search engines measure display width, not characters, and can rewrite either field. Use the [Word and Character Counter](/word-counter) when a precise limit matters.",
+      },
+      {
+        heading: "Canonical, Robots, and Indexing",
+        paragraphs: [
+          "A canonical link tells search engines which URL is the preferred version when the same content is reachable through several addresses. Most pages should use a self-referencing canonical. A canonical pointing to another page is a consolidation request, not a redirect; it does not send visitors anywhere.",
+          "Robots directives control indexing and link following. A noindex meta tag or X-Robots-Tag header asks search engines not to index the page. Do not combine noindex with a canonical pointing elsewhere and expect predictable behavior. Check staging sites carefully: a leftover noindex is a common launch mistake.",
+        ],
+        list: [
+          "Use one absolute canonical URL and keep it consistent with og:url.",
+          "Check both the robots meta tag and the X-Robots-Tag response header.",
+          "Remove noindex from pages that should appear in search results.",
+          "Confirm that the canonical URL returns the same content, not a redirect loop.",
+        ],
+      },
+      {
+        heading: "Open Graph and Twitter Cards",
+        paragraphs: [
+          "Open Graph tags describe a page to social platforms. The core set is og:title, og:description, og:image, og:url, and og:type. Twitter/X uses its own tags, but many platforms fall back to Open Graph when Twitter tags are missing.",
+          "Preview images should be absolute URLs, large enough to look sharp, and close to a 1.91:1 ratio for wide cards. Platforms cache previews aggressively, so a change may not appear until the URL is fetched again. Some platforms also override the title or image based on their own rules.",
+        ],
+        list: [
+          "Provide og:title, og:description, og:image, og:url, and og:type.",
+          "Use a 1200 by 630 pixel image as a practical wide-card default.",
+          "Add twitter:card and the matching title, description, and image tags.",
+          "Re-scrape or wait for the platform cache after changing an image.",
+        ],
+      },
+      {
+        heading: "Structured Data and Headings",
+        paragraphs: [
+          "JSON-LD is a script block that describes entities such as an Article, Product, FAQPage, or Organization. It can help search engines understand relationships, but it does not guarantee a rich result. The markup must match the visible page; describing a product that is not present is a policy risk.",
+          "Headings give the document an outline. One clear H1 is a useful default, followed by H2 sections in reading order. Heading counts are not a ranking formula, but a page with no H1 or with many competing H1s is harder to scan. Use the heading level that fits the structure, not the font size you want.",
+        ],
+      },
+      {
+        heading: "Audit a Page in Practice",
+        paragraphs: [
+          "Start with a URL that returns the page without a login. Check the HTTP status first; a redirected or error page will produce misleading metadata. Then read the title and description as a search result, compare the canonical with the address you expect, and confirm that indexing is allowed.",
+          "Social tags and structured data come next. Test a preview in the platform where the link will be shared. Finally, use a checker that reads raw HTML. If tags are injected only by client-side JavaScript, a social scraper may never see them even when a browser does. The [Website Metadata Checker](/website-metadata-checker) groups these fields and flags common problems in one report.",
+        ],
+        example: {
+          title: "Example: a pricing page with a campaign parameter",
+          lines: [
+            "Requested URL: https://example.com/pricing?ref=newsletter",
+            "Canonical: https://example.com/pricing",
+            "Status: 200, with no redirect",
+            "Title: 52 characters; description: 141 characters",
+            "Social image: absolute URL, 1200 by 630 pixels",
+          ],
+        },
+        note:
+          "A checker reads the final HTML document after any redirects. It cannot see a logged-in view, a consent wall, or content that appears only after JavaScript runs. It also cannot predict how Google or a social platform will render the preview.",
+      },
+    ],
+    faq: [
+      {
+        question: "Why does Google show a different description?",
+        answer:
+          "Google may rewrite a meta description when it believes another passage better matches the query. A clear, specific description still helps, but it is a suggestion rather than a guarantee.",
+      },
+      {
+        question: "Why is my social preview still outdated?",
+        answer:
+          "Social platforms cache preview data. Update the tags, then use the platform's re-scrape or sharing debugger tool, or wait for the cache to expire. The page must return the new tags to an unauthenticated scraper.",
+      },
+      {
+        question: "Do meta keywords still matter?",
+        answer:
+          "No major search engine uses the meta keywords tag for ranking. It is not harmful, but it is not a useful place to spend effort. Focus on the visible page and the metadata that shapes indexing and previews.",
+      },
+      {
+        question: "Can JavaScript add metadata?",
+        answer:
+          "Google can render JavaScript, but many social scrapers and other crawlers read only the initial HTML. Server-render or statically include essential title, description, canonical, robots, and Open Graph tags when previews and indexing matter.",
+      },
+    ],
+  },
+  {
+    slug: "color-contrast-for-readable-interfaces",
+    title: "Color Contrast for Readable Interfaces",
+    category: "Technology",
+    date: "2026-10-23",
+    excerpt:
+      "Learn how WCAG contrast ratios are calculated, what AA and AAA require, and how to fix a pair that looks fine to you but fails for others.",
+    tool: {
+      name: "Color Palette Generator",
+      path: "/color-palette-generator",
+    },
+    takeaways: [
+      "Contrast ratio compares relative luminance, not hue difference or perceived brightness.",
+      "WCAG AA requires 4.5:1 for normal text and 3:1 for large text and UI components; AAA raises normal text to 7:1.",
+      "Adjusting lightness while preserving hue is the most predictable way to fix a failing pair.",
+    ],
+    sections: [
+      {
+        heading: "What Contrast Ratio Measures",
+        paragraphs: [
+          "Contrast ratio compares the relative luminance of two colors. It is not the same as hue difference or how bright a color feels. The formula produces a number from 1:1, where the colors are identical, to 21:1 for black against white.",
+          "Relative luminance weights red, green, and blue according to human sensitivity. That is why a saturated blue and a light gray can have less contrast than expected, even though they look different. The ratio is symmetric: swapping text and background does not change it.",
+        ],
+        formula: "ratio = (lighter luminance + 0.05) / (darker luminance + 0.05)",
+      },
+      {
+        heading: "The WCAG Thresholds",
+        paragraphs: [
+          "WCAG 2.2 sets minimum contrast for text and non-text content. AA is the common target: 4.5:1 for normal text, 3:1 for large text, and 3:1 for user-interface components and graphical objects needed to understand content. AAA raises normal text to 7:1 and large text to 4.5:1.",
+          "Large text is commonly defined as 18 point regular or 14 point bold, roughly 24 pixels or 18.66 pixels in CSS. The exact rendered size depends on the font, so do not rely on a nominal font size alone. Logos and incidental decoration are exempt; body text and essential labels are not.",
+        ],
+        list: [
+          "AA normal text: 4.5:1.",
+          "AA large text: 3:1.",
+          "AA UI components and meaningful graphics: 3:1.",
+          "AAA normal text: 7:1; AAA large text: 4.5:1.",
+        ],
+      },
+      {
+        heading: "A Palette Can Look Fine and Fail",
+        paragraphs: [
+          "Designers often judge contrast on a bright monitor in a bright room. A pair that looks acceptable there can disappear on a phone in sunlight, a projector, or a low-quality display. Thin weights, small sizes, and anti-aliasing make the problem worse.",
+          "Color-vision differences matter too. Red and green can have similar luminance even when they look distinct to one viewer. Contrast is not a complete accessibility test, but it is a measurable baseline that does not depend on color perception.",
+        ],
+      },
+      {
+        heading: "Fix a Pair Without Changing the Brand",
+        paragraphs: [
+          "The most predictable fix is to change lightness while preserving hue and saturation. Darkening text on a light background or lightening it on a dark background usually increases contrast without leaving the brand color family. The [Color Palette Generator](/color-palette-generator) suggests the nearest lightness adjustment that reaches the next WCAG target.",
+          "Other options include changing the background, swapping text and background, adding a solid surface behind text, or using a larger, heavier typeface. Changing only the font weight does not change the formal contrast ratio, though it can improve legibility. Do not use a gradient as the only contrast fix if text crosses the lightest part.",
+        ],
+        example: {
+          title: "Example: three pairs on white",
+          lines: [
+            "#2563eb on #ffffff = 5.17:1. Passes AA normal text, fails AAA normal text.",
+            "#64748b on #ffffff = 4.76:1. Passes AA normal text with little margin.",
+            "#94a3b8 on #ffffff = 2.56:1. Fails AA for normal and large text.",
+          ],
+        },
+      },
+      {
+        heading: "Check States and Components",
+        paragraphs: [
+          "A button can pass in its default state and fail on hover. Links, focus rings, disabled controls, form borders, icons that carry meaning, and chart labels all need attention. The 3:1 requirement applies to component boundaries and focus indicators, not only to paragraphs.",
+          "Placeholder text is often too light. Disabled text is sometimes exempt from formal contrast requirements, but it should still be readable enough to understand. Test focus states with a keyboard, because a focus indicator that disappears against the background is a functional defect.",
+        ],
+      },
+      {
+        heading: "A Practical Workflow",
+        paragraphs: [
+          "Start with the pair that carries the most text. Check it at the sizes and weights you actually use. If it fails, try a lightness adjustment before changing the palette. Then test the same colors on the surfaces where they appear: white cards, tinted sections, images, and dark mode.",
+          "Record the final hex values and the ratio in the design system, and recheck after a theme change. Small changes to a background tint can push a borderline pair below the threshold. Treat contrast as part of the component, not a one-time choice made in a palette tool.",
+        ],
+        list: [
+          "Check body text, headings, links, buttons, borders, and focus states.",
+          "Test both light and dark surfaces if the interface supports them.",
+          "Prefer lightness changes when the brand hue must stay recognizable.",
+          "Recheck after changing a font size, weight, or background tint.",
+        ],
+        note:
+          "Passing AA does not make an interface accessible on its own. Keyboard access, labels, reading order, motion, and clear error messages still matter.",
+      },
+    ],
+    faq: [
+      {
+        question: "Does every piece of text need 4.5:1?",
+        answer:
+          "Normal text generally needs 4.5:1 for AA. Large text can use 3:1, and logos or purely decorative text are exempt. Text inside a logo is different from ordinary interface text that happens to be styled prominently.",
+      },
+      {
+        question: "Why does black on white score 21:1?",
+        answer:
+          "Black has a relative luminance near zero and white near one. Applying the formula gives (1 + 0.05) divided by (0 + 0.05), which equals 21. That is the maximum possible ratio.",
+      },
+      {
+        question: "Can color alone show an error?",
+        answer:
+          "No. A red border or red text without a message, icon, or other cue can be missed by people who cannot distinguish the color. Use color as an additional signal, not the only one.",
+      },
+      {
+        question: "Do disabled controls need contrast?",
+        answer:
+          "WCAG exempts inactive user-interface components from the contrast requirement. Usability still improves when disabled text remains readable, so avoid making it so faint that users cannot tell what the control says.",
+      },
+    ],
+  },
 ];

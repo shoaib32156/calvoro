@@ -79,7 +79,7 @@ CALVORO </Link>
       </h1>
 
       <p style={{ color: "#64748b" }}>
-        Last updated: September 27, 2026
+        Last updated: October 24, 2026
       </p>
 
       <p>
@@ -194,7 +194,36 @@ CALVORO </Link>
         calculator fields unless the website specifically requests it.
       </p>
 
-      <h2>7. Contact Information</h2>
+      <h2>7. Website Metadata Checker</h2>
+
+      <p>
+        The Website Metadata Checker sends the URL you enter to CALVORO's
+        Cloudflare Worker. To reduce abuse, the Worker uses a short-lived
+        rate-limit counter keyed to your IP address. The counter expires
+        automatically and is not used for analytics. The Worker then
+        resolves the hostname through Cloudflare's DNS-over-HTTPS resolver
+        and rejects private, loopback, link-local, and reserved
+        destinations before requesting the page. The DNS query contains the
+        hostname and no page content.
+      </p>
+
+      <p>
+        After validation, the Worker requests the public page so it can
+        read its title, description, social preview tags, headings, and
+        related metadata. Every redirect is checked against the same
+        destination rules before it is followed. The target website will
+        see a request from Cloudflare.
+      </p>
+
+      <p>
+        CALVORO does not store the fetched page content, does not forward
+        cookies or authorization headers to the target site, and does not
+        send API credentials with the request. Only public HTTP and HTTPS
+        pages on standard ports are supported. Results are returned to
+        your browser and are not saved by CALVORO.
+      </p>
+
+      <h2>8. Contact Information</h2>
 
       <p>
         If you contact CALVORO through a contact form or another available
@@ -202,7 +231,7 @@ CALVORO </Link>
         respond to your request, provide support, or improve the website.
       </p>
 
-      <h2>8. Data Security</h2>
+      <h2>9. Data Security</h2>
 
       <p>
         We take reasonable measures to help protect information handled by
@@ -210,7 +239,7 @@ CALVORO </Link>
         storage system can be guaranteed to be completely secure.
       </p>
 
-      <h2>9. Children's Privacy</h2>
+      <h2>10. Children's Privacy</h2>
 
       <p>
         CALVORO is a general-purpose website and is not specifically
@@ -218,7 +247,7 @@ CALVORO </Link>
         information from children through the website.
       </p>
 
-      <h2>10. External Links</h2>
+      <h2>11. External Links</h2>
 
       <p>
         CALVORO may contain links to external websites or services. We are
@@ -226,7 +255,7 @@ CALVORO </Link>
         third-party websites.
       </p>
 
-      <h2>11. Changes to This Privacy Policy</h2>
+      <h2>12. Changes to This Privacy Policy</h2>
 
       <p>
         This Privacy Policy may be updated from time to time as CALVORO
@@ -235,7 +264,7 @@ CALVORO </Link>
         date.
       </p>
 
-      <h2>12. Contact Us</h2>
+      <h2>13. Contact Us</h2>
 
       <p>
         If you have questions about this Privacy Policy or CALVORO's

@@ -270,8 +270,17 @@ const toolComponents = {
   "/markdown-previewer": lazy(() =>
     import("./tools/MarkdownPreviewer.jsx")
   ),
+  "/website-metadata-checker": lazy(() =>
+    import("./tools/WebsiteMetadataChecker.jsx")
+  ),
   "/color-palette-generator": lazy(() =>
     import("./tools/ColorPaletteGenerator.jsx")
+  ),
+  "/multiplication-practice": lazy(() =>
+    import("./tools/MultiplicationPractice.jsx")
+  ),
+  "/vocabulary-flashcards": lazy(() =>
+    import("./tools/VocabularyFlashcards.jsx")
   ),
 };
 

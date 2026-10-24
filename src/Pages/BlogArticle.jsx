@@ -177,8 +177,8 @@ export default function BlogArticle() {
                 </span>
                 <h2>{post.tool.name}</h2>
                 <p>
-                  Enter your own values in the CALVORO calculator and see the
-                  result without creating an account.
+                  {post.tool.description ||
+                    "Enter your own values in the CALVORO calculator and see the result without creating an account."}
                 </p>
                 <Link to={post.tool.path}>
                   Open {post.tool.name} <span aria-hidden="true">→</span>
@@ -202,7 +202,8 @@ export default function BlogArticle() {
                 <span className="calvoro-journal-kicker">Related tool</span>
                 <h2>{post.tool.name}</h2>
                 <p>
-                  Apply the calculation from this guide with your own numbers.
+                  {post.tool.description ||
+                    "Apply the calculation from this guide with your own numbers."}
                 </p>
                 <Link
                   to={post.tool.path}
