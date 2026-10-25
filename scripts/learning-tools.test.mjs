@@ -642,7 +642,7 @@ test("the sitemap contains valid, unique URLs for all new pages", async () => {
   assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
   assert.match(sitemap, /<urlset[^>]+>/);
   assert.match(sitemap, /<\/urlset>\s*$/);
-  assert.equal(urls.length, 127);
+  assert.equal(urls.length, 133);
   assert.equal(new Set(urls).size, urls.length);
 
   for (const url of urls) {
@@ -760,6 +760,6 @@ test("the package exposes the zero-dependency test command", async () => {
 
   assert.equal(
     packageJson.scripts.test,
-    "node --test scripts/learning-tools.test.mjs"
+    "node --test scripts/learning-tools.test.mjs scripts/creative-tools.test.mjs scripts/puzzle-games.test.mjs scripts/phase-a-integration.test.mjs"
   );
 });

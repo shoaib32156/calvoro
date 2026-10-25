@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-route-html.mjs",
     "lint": "eslint .",
-    "test": "node --test scripts/learning-tools.test.mjs",
+    "test": "node --test scripts/learning-tools.test.mjs scripts/creative-tools.test.mjs scripts/puzzle-games.test.mjs scripts/phase-a-integration.test.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

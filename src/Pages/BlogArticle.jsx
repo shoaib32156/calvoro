@@ -84,6 +84,7 @@ export default function BlogArticle() {
         <SEO
           title="Article not found | CALVORO"
           description="The requested CALVORO Journal article could not be found."
+          noindex
         />
         <section className="calvoro-journal-hero">
           <div className="calvoro-journal-container">
