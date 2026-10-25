@@ -39,7 +39,6 @@ fontWeight: "800",
 >
 CALVORO </Link>
 
-```
       <Link
         to="/"
         style={{
@@ -79,7 +78,7 @@ CALVORO </Link>
       </h1>
 
       <p style={{ color: "#64748b" }}>
-        Last updated: October 24, 2026
+        Last updated: October 25, 2026
       </p>
 
       <p>
@@ -194,7 +193,45 @@ CALVORO </Link>
         calculator fields unless the website specifically requests it.
       </p>
 
-      <h2>7. Website Metadata Checker</h2>
+      <h2>7. AI Writing Tools</h2>
+
+      <p>
+        CALVORO provides AI-assisted tools including a text summarizer, text
+        rewriter, grammar checker, translator, text generator, and email
+        writer. When you use one of these tools, the text you paste or type
+        — or, for the generator and email writer, the topic, purpose, tone,
+        length, or type you provide — is sent as a JSON request to CALVORO's
+        Cloudflare Worker.
+      </p>
+
+      <p>
+        The Worker builds a prompt that includes your input and sends it to
+        OpenRouter, an external AI service, using a free model routed by
+        OpenRouter. Fallback routing is enabled, so the underlying AI model
+        provider may vary. The generated result is returned to your browser.
+        CALVORO does not attach your name, email address, or account details
+        to the AI request; the AI tools do not require an account.
+      </p>
+
+      <p>
+        CALVORO's Worker code does not store AI prompts or responses in an
+        application database. The Worker logs request status information,
+        such as the AI provider's response status and whether a response was
+        received. Standard technical information may still be processed by
+        Cloudflare as the hosting provider and by OpenRouter and the selected
+        model provider under their own privacy policies and retention
+        practices. CALVORO does not control those third-party practices.
+      </p>
+
+      <p>
+        Do not submit passwords, financial account numbers, medical records,
+        private identity documents, or other sensitive personal information
+        to an AI tool unless you are comfortable with it being processed by
+        the services described above. AI-generated output may contain errors
+        and should be reviewed before you rely on it.
+      </p>
+
+      <h2>8. Website Metadata Checker</h2>
 
       <p>
         The Website Metadata Checker sends the URL you enter to CALVORO's
@@ -223,7 +260,7 @@ CALVORO </Link>
         your browser and are not saved by CALVORO.
       </p>
 
-      <h2>8. Contact Information</h2>
+      <h2>9. Contact Information</h2>
 
       <p>
         If you contact CALVORO through a contact form or another available
@@ -231,7 +268,7 @@ CALVORO </Link>
         respond to your request, provide support, or improve the website.
       </p>
 
-      <h2>9. Data Security</h2>
+      <h2>10. Data Security</h2>
 
       <p>
         We take reasonable measures to help protect information handled by
@@ -239,7 +276,7 @@ CALVORO </Link>
         storage system can be guaranteed to be completely secure.
       </p>
 
-      <h2>10. Children's Privacy</h2>
+      <h2>11. Children's Privacy</h2>
 
       <p>
         CALVORO is a general-purpose website and is not specifically
@@ -247,7 +284,7 @@ CALVORO </Link>
         information from children through the website.
       </p>
 
-      <h2>11. External Links</h2>
+      <h2>12. External Links</h2>
 
       <p>
         CALVORO may contain links to external websites or services. We are
@@ -255,7 +292,7 @@ CALVORO </Link>
         third-party websites.
       </p>
 
-      <h2>12. Changes to This Privacy Policy</h2>
+      <h2>13. Changes to This Privacy Policy</h2>
 
       <p>
         This Privacy Policy may be updated from time to time as CALVORO
@@ -264,7 +301,7 @@ CALVORO </Link>
         date.
       </p>
 
-      <h2>13. Contact Us</h2>
+      <h2>14. Contact Us</h2>
 
       <p>
         If you have questions about this Privacy Policy or CALVORO's

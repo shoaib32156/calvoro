@@ -408,6 +408,7 @@ export const utilityCategories = [
   "Developer",
   "Productivity",
   "Design",
+  "Games",
 ];
 
 export const utilityTools = [
@@ -589,6 +590,52 @@ export const utilityTools = [
       "academic vocabulary",
       "learn new words",
       "word cards",
+    ],
+  },
+  {
+    name: "Meme Generator",
+    path: "/meme-generator",
+    category: "Image",
+    description:
+      "Add wrapped top and bottom captions to a local image, adjust the font and outline, and download a PNG or JPEG.",
+    aliases: [
+      "meme",
+      "meme generator",
+      "caption image",
+      "image caption",
+      "funny photo",
+      "top bottom text",
+    ],
+  },
+  {
+    name: "Passport Photo Maker",
+    path: "/passport-photo-maker",
+    category: "Image",
+    description:
+      "Crop a local photo to a common or custom passport size, then download a correctly sized image or printable PDF sheet.",
+    aliases: [
+      "passport photo",
+      "id photo",
+      "visa photo",
+      "2x2 photo",
+      "35x45 photo",
+      "print passport photo",
+    ],
+  },
+  {
+    name: "Puzzle Games",
+    path: "/puzzle-games",
+    category: "Games",
+    description:
+      "Play eight free browser puzzles, including Sudoku, word search, memory matching, jigsaw, 2048, and word scramble, with a daily challenge for each.",
+    aliases: [
+      "puzzles",
+      "brain games",
+      "sudoku",
+      "word search",
+      "jigsaw puzzle",
+      "2048",
+      "daily puzzle",
     ],
   },
 ];

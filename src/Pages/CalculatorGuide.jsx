@@ -1138,6 +1138,403 @@ const guides = {
       },
     ],
   },
+
+  "/time-duration": {
+    label: "Date & time guide",
+    title: "How the Time Duration Calculator works",
+    intro:
+      "This calculator measures the elapsed time between a start time and an end time. Enter both times in the time fields and the calculator returns the duration in hours and minutes.",
+    howTo: [
+      "Enter the start time in the first time field.",
+      "Enter the end time in the second time field.",
+      "Select Calculate Duration.",
+      "Read the result as hours and minutes, with total minutes and decimal hours shown below.",
+    ],
+    formula:
+      "Duration = End time − Start time. If the end time is earlier than the start time, 24 hours are added before subtracting.",
+    example:
+      "From 09:30 to 14:45 is 5 hours and 15 minutes, which is 315 total minutes or 5.25 total hours.",
+    notes: [
+      "If the end time is earlier than the start time, the calculator treats the end time as the next day. For example, 23:00 to 01:30 returns 2 hours 30 minutes.",
+      "The result is a clock duration rather than a date. The calculator does not account for daylight-saving changes because only times are entered.",
+      "The time fields use hours and minutes, so seconds are not part of the result.",
+    ],
+    faqs: [
+      {
+        question:
+          "Why did I get a result when the end time is earlier than the start time?",
+        answer:
+          "The calculator assumes the end time falls on the next day and adds 24 hours before subtracting. This is useful for overnight shifts of less than 24 hours.",
+      },
+      {
+        question: "Does the result include seconds?",
+        answer:
+          "No. The time fields use hours and minutes, and the duration is displayed in hours and minutes.",
+      },
+      {
+        question: "How do I convert the result to decimal hours?",
+        answer:
+          "The calculator displays total hours to two decimal places. You can also divide the total minutes by 60.",
+      },
+      {
+        question: "Can it calculate an overnight shift?",
+        answer:
+          "Yes, provided the shift is shorter than 24 hours. Enter the actual start and end times and the next-day assumption handles the crossing of midnight.",
+      },
+    ],
+  },
+
+  "/date-difference": {
+    label: "Date & time guide",
+    title: "How the Date Difference Calculator works",
+    intro:
+      "This calculator counts the number of days between two calendar dates. It also breaks the total into years, months, and days.",
+    howTo: [
+      "Enter the start date.",
+      "Enter the end date.",
+      "Select Calculate Difference.",
+      "Read the total number of days and the years, months, and days breakdown.",
+    ],
+    formula:
+      "Total days = the absolute difference between the two dates in whole days. The breakdown divides the total by 365 days per year and 30 days per month.",
+    example:
+      "From January 1, 2026 to March 1, 2026 is 59 days. The calculator shows 0 years, 1 month, and 29 days because 59 days is treated as one 30-day month plus 29 days.",
+    notes: [
+      "The total day count is the primary result. The years, months, and days breakdown is approximate because it uses 365-day years and 30-day months.",
+      "The order of the dates does not affect the result because the calculator uses the absolute difference.",
+      "Dates are compared at midnight, so times of day are not part of the calculation.",
+      "The total day count reflects the actual calendar dates, including leap years.",
+    ],
+    faqs: [
+      {
+        question: "Why is the month value not a true calendar month?",
+        answer:
+          "The breakdown uses a fixed 30-day month, so it is an approximate decomposition of the total days rather than a count of calendar month boundaries.",
+      },
+      {
+        question: "Does the end date count as an extra day?",
+        answer:
+          "No. The result measures the span between the two dates; it does not add a day for the end date.",
+      },
+      {
+        question: "Can I compare dates in the past?",
+        answer:
+          "Yes. Any valid dates can be compared because the calculator uses the absolute difference between them.",
+      },
+      {
+        question: "Does the calculator account for leap years?",
+        answer:
+          "The total day count comes from the actual dates, so leap days are included. Only the year and month breakdown uses fixed 365-day and 30-day conversions.",
+      },
+    ],
+  },
+
+  "/speed": {
+    label: "Everyday guide",
+    title: "How the Speed Calculator works",
+    intro:
+      "This calculator finds average speed from the distance traveled and the time taken. Distance is entered in kilometers and time in hours.",
+    howTo: [
+      "Enter the distance in kilometers.",
+      "Enter the time in hours. Use a decimal for partial hours, such as 1.5 for 90 minutes.",
+      "Select Calculate Speed.",
+      "Read the average speed in kilometers per hour and miles per hour.",
+    ],
+    formula: "Speed = Distance ÷ Time",
+    example:
+      "A distance of 120 km covered in 2 hours gives an average speed of 60 km/h, which is about 37.28 mph.",
+    notes: [
+      "The time field uses hours, not minutes. Divide minutes by 60 before entering a partial hour.",
+      "The result is the average speed for the whole trip and does not show changes in speed during the journey.",
+      "The mph value is converted using 1 km/h = 0.621371 mph.",
+    ],
+    faqs: [
+      {
+        question: "How do I enter 45 minutes?",
+        answer:
+          "Divide 45 by 60 to get 0.75, then enter 0.75 in the time field.",
+      },
+      {
+        question: "How is speed different from velocity?",
+        answer:
+          "This calculator returns average speed, which has no direction. Velocity also includes direction and is not calculated here.",
+      },
+      {
+        question: "Can I use miles instead of kilometers?",
+        answer:
+          "The distance field is labeled in kilometers. Convert miles to kilometers before calculating; the result also shows the equivalent speed in mph.",
+      },
+      {
+        question: "Why is the mph value not a whole number?",
+        answer:
+          "The kilometer-to-mile conversion is not exact, so the equivalent speed is usually a decimal rounded to two places.",
+      },
+    ],
+  },
+
+  "/distance": {
+    label: "Everyday guide",
+    title: "How the Distance Calculator works",
+    intro:
+      "This calculator estimates the distance traveled from an average speed and a travel time. Speed is entered in kilometers per hour and time in hours.",
+    howTo: [
+      "Enter the average speed in kilometers per hour.",
+      "Enter the travel time in hours, using a decimal for partial hours.",
+      "Select Calculate Distance.",
+      "Read the distance in kilometers and miles.",
+    ],
+    formula: "Distance = Speed × Time",
+    example:
+      "At 60 km/h for 2 hours, the distance is 120 km, which is about 74.56 miles.",
+    notes: [
+      "The time must be entered in hours. For 30 minutes, enter 0.5.",
+      "The result assumes the entered speed stays constant for the whole trip.",
+      "The miles value is converted using 1 km = 0.621371 miles.",
+      "The result is only as accurate as the speed and time you enter.",
+    ],
+    faqs: [
+      {
+        question: "Can I use this for walking or running?",
+        answer:
+          "Yes, as long as the speed is in km/h and the time is in hours. If you know pace in minutes per kilometer, use the Pace or Running Pace calculator first.",
+      },
+      {
+        question: "How do I enter 2 hours 30 minutes?",
+        answer:
+          "Combine the time as 2.5 hours and enter 2.5.",
+      },
+      {
+        question: "Why might the calculated distance differ from a real trip?",
+        answer:
+          "The result depends on the speed and time entered. If the speed is an estimate rather than a measured average, the calculated distance inherits that uncertainty.",
+      },
+      {
+        question: "Does this calculator account for direction?",
+        answer:
+          "No. It estimates distance traveled rather than displacement or route direction.",
+      },
+    ],
+  },
+
+  "/pace": {
+    label: "Fitness guide",
+    title: "How the Pace Calculator works",
+    intro:
+      "This calculator converts a distance and total time into pace per kilometer and per mile. It also shows the average speed for the same distance and time.",
+    howTo: [
+      "Enter the distance in kilometers.",
+      "Enter the total time using the hours, minutes, and seconds fields.",
+      "Select Calculate Pace.",
+      "Read the pace per kilometer, pace per mile, total time, and average speed.",
+    ],
+    formula:
+      "Pace per km = Total time in seconds ÷ Distance in km. Pace per mile = Pace per km × 1.609344.",
+    example:
+      "Running 10 km in 1:30:00 gives 5,400 seconds ÷ 10 = 540 seconds per km, or 9:00 /km. That is about 14:29 /mile and an average speed of 6.67 km/h.",
+    notes: [
+      "The result is the average pace for the whole distance, not the pace of each kilometer.",
+      "Keep the minutes and seconds fields within 0–59 when possible, and carry larger values into the hours field.",
+      "A faster time over the same distance produces a lower pace value.",
+    ],
+    faqs: [
+      {
+        question: "What is the difference between pace and speed?",
+        answer:
+          "Pace is time per unit of distance, while speed is distance per unit of time. This calculator displays both.",
+      },
+      {
+        question: "How is pace per mile calculated?",
+        answer:
+          "The pace per kilometer is multiplied by 1.609344, the number of kilometers in a mile.",
+      },
+      {
+        question: "Why is my pace different from a running app?",
+        answer:
+          "Apps may use GPS distance, moving time, or different rounding. This calculator divides the exact distance and total time you enter.",
+      },
+      {
+        question: "Can I use this calculator for walking?",
+        answer:
+          "Yes. Any distance and time can be converted to pace; the page mentions running because pace is commonly used for running.",
+      },
+    ],
+  },
+
+  "/running-speed": {
+    label: "Fitness guide",
+    title: "How the Running Speed Calculator works",
+    intro:
+      "This calculator converts a running distance and total time into average speed in kilometers per hour and miles per hour.",
+    howTo: [
+      "Enter the running distance in kilometers.",
+      "Enter the total time using the hours, minutes, and seconds fields.",
+      "Select Calculate Speed.",
+      "Read the average speed in km/h and mph.",
+    ],
+    formula:
+      "Speed = Distance ÷ Total time in hours",
+    example:
+      "A 10 km run completed in 1:30:00 takes 1.5 hours, so the average speed is 10 ÷ 1.5 = 6.67 km/h, or about 4.14 mph.",
+    notes: [
+      "The result is the average speed for the full run, including any walking or stops within the entered total time.",
+      "If you know pace in minutes per kilometer but not total time, use the Running Time calculator to find the duration first.",
+      "The mph value is converted using 1 km/h = 0.621371 mph.",
+    ],
+    faqs: [
+      {
+        question: "How is running speed different from running pace?",
+        answer:
+          "Speed is distance per hour, while pace is minutes per kilometer or mile. They describe the same run from opposite directions.",
+      },
+      {
+        question: "Should I enter moving time or total time?",
+        answer:
+          "That depends on what you want to measure. The calculator uses exactly the elapsed time you enter, so choose one convention and use it consistently.",
+      },
+      {
+        question: "Why are two speed units shown?",
+        answer:
+          "The calculator converts the km/h result to mph so the same run can be read in either unit.",
+      },
+      {
+        question: "Can I enter the distance in miles?",
+        answer:
+          "The distance field is in kilometers. Convert miles to kilometers first, or read the equivalent mph result shown by the calculator.",
+      },
+    ],
+  },
+
+  "/time-to-run": {
+    label: "Fitness guide",
+    title: "How the Time to Run Calculator works",
+    intro:
+      "This calculator estimates how long a distance will take at a chosen average speed. Distance is entered in kilometers and speed in kilometers per hour.",
+    howTo: [
+      "Enter the distance in kilometers.",
+      "Enter the speed in kilometers per hour.",
+      "Select Calculate Time.",
+      "Read the estimated time in hours, minutes, and seconds.",
+    ],
+    formula: "Time in hours = Distance ÷ Speed",
+    example:
+      "Running 5 km at 12 km/h takes 5 ÷ 12 = 0.4167 hours, which is 25 minutes or 1,500 seconds.",
+    notes: [
+      "The estimate assumes the chosen speed is held for the entire distance.",
+      "The result is rounded to the nearest second.",
+      "This tool takes speed, not pace. Use the Running Time calculator if you know minutes per kilometer.",
+    ],
+    faqs: [
+      {
+        question: "How do I convert the result to minutes?",
+        answer:
+          "The calculator shows total minutes below the hours, minutes, and seconds result. You can also multiply total hours by 60.",
+      },
+      {
+        question: "What speed should I enter?",
+        answer:
+          "Use an average speed you can realistically sustain for the full distance rather than a short burst.",
+      },
+      {
+        question: "Does the estimate include warm-up or rest stops?",
+        answer:
+          "No. It is a constant-speed estimate and does not add breaks.",
+      },
+      {
+        question: "Can I use this for cycling or walking?",
+        answer:
+          "Yes. Any distance in kilometers and speed in km/h can be used, although the page is labeled for running.",
+      },
+    ],
+  },
+
+  "/running-time": {
+    label: "Fitness guide",
+    title: "How the Running Time Calculator works",
+    intro:
+      "This calculator estimates total running time from a distance and a pace per kilometer. Pace is entered as minutes and seconds.",
+    howTo: [
+      "Enter the running distance in kilometers.",
+      "Enter the pace minutes per kilometer.",
+      "Enter the pace seconds per kilometer.",
+      "Select Calculate Running Time.",
+      "Read the total time in hours, minutes, and seconds.",
+    ],
+    formula:
+      "Running time = Distance × Pace per kilometer",
+    example:
+      "At 6:30 per kilometer, a 10 km run takes 10 × 390 seconds = 3,900 seconds, which is 1:05:00 or 65 minutes.",
+    notes: [
+      "The pace seconds field accepts values below 60. Enter 90 seconds as 1 minute and 30 seconds in the two fields.",
+      "The pace is assumed to stay constant for the whole run.",
+      "The result is rounded to the nearest second.",
+    ],
+    faqs: [
+      {
+        question: "What if I only know my speed?",
+        answer:
+          "Convert speed to pace first. For example, 12 km/h equals 5:00 per kilometer, which you can enter as 5 minutes and 0 seconds.",
+      },
+      {
+        question: "Why are pace minutes and seconds separate fields?",
+        answer:
+          "Pace is commonly written as minutes and seconds, such as 6:30, so the calculator accepts both parts directly.",
+      },
+      {
+        question: "Can I enter a pace of 6.5 minutes?",
+        answer:
+          "Enter 6 in the minutes field and 30 in the seconds field. Decimal minutes are not accepted as a single combined value.",
+      },
+      {
+        question: "Does the calculator add a warm-up or cool-down?",
+        answer:
+          "No. It calculates running time from the distance and pace only.",
+      },
+    ],
+  },
+
+  "/running-pace": {
+    label: "Fitness guide",
+    title: "How the Running Pace Calculator works",
+    intro:
+      "This calculator finds average running pace per kilometer and per mile from a distance and total time. It also shows the equivalent average speed.",
+    howTo: [
+      "Enter the running distance in kilometers.",
+      "Enter the total time using the hours, minutes, and seconds fields.",
+      "Select Calculate Pace.",
+      "Read the pace per kilometer, pace per mile, and average speed.",
+    ],
+    formula:
+      "Pace per km = Total time in seconds ÷ Distance in km. Pace per mile = Pace per km × 1.609344.",
+    example:
+      "A 10 km run in 50:00 gives 3,000 seconds ÷ 10 = 300 seconds per km, or 5:00 /km. That is about 8:03 /mile and 12.00 km/h.",
+    notes: [
+      "The minutes and seconds fields are limited to 0–59. Enter 75 minutes as 1 hour and 15 minutes.",
+      "The result is the average pace for the whole distance.",
+      "Pace per mile uses the exact conversion 1 mile = 1.609344 kilometers.",
+    ],
+    faqs: [
+      {
+        question: "How is this different from the Pace Calculator?",
+        answer:
+          "Both use the same pace formula. The Running Pace Calculator limits minutes and seconds to 0–59 and is labeled for running.",
+      },
+      {
+        question: "What is a good running pace?",
+        answer:
+          "That depends on fitness, distance, terrain, and goals. The calculator measures your pace but does not judge whether it is fast or slow.",
+      },
+      {
+        question: "Why do pace and speed move in opposite directions?",
+        answer:
+          "A faster run covers more distance per hour but takes fewer minutes per kilometer.",
+      },
+      {
+        question: "Should I use moving time or total elapsed time?",
+        answer:
+          "Use the time that matches what you want to measure. The calculator simply divides the total time you enter by the distance.",
+      },
+    ],
+  },
 };
 
 // ======================================================

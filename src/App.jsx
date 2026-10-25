@@ -282,6 +282,13 @@ const toolComponents = {
   "/vocabulary-flashcards": lazy(() =>
     import("./tools/VocabularyFlashcards.jsx")
   ),
+  "/meme-generator": lazy(() =>
+    import("./tools/MemeGenerator.jsx")
+  ),
+  "/passport-photo-maker": lazy(() =>
+    import("./tools/PassportPhotoMaker.jsx")
+  ),
+  "/puzzle-games": lazy(() => import("./tools/PuzzleGames.jsx")),
 };
 
 // ======================================================
@@ -385,14 +392,15 @@ function GlobalHeader() {
         <Link
           to="/"
           className="calvoro-brand"
-          aria-label="CALVORO home"
           onClick={() => setMenuOpen(false)}
         >
-          <span className="calvoro-brand-mark" aria-hidden="true">C</span>
-          <span>
-            <strong>CALVORO</strong>
-            <small>Online calculators</small>
-          </span>
+          <img
+            src="/brand/calvoro-logo.png"
+            alt="CALVORO home"
+            className="calvoro-brand-logo"
+            width="569"
+            height="171"
+          />
         </Link>
 
         <nav
@@ -1920,6 +1928,12 @@ function NotFound() {
   return (
     <div className="calvoro-not-found">
 
+      <SEO
+        title="Page not found - CALVORO"
+        description="The page you requested could not be found. Return to CALVORO to use free online calculators and tools."
+        noindex
+      />
+
       <div>
 
         <span className="calvoro-eyebrow">
@@ -1988,7 +2002,6 @@ function GlobalCalvoroStyle() {
           display: inline-flex;
           flex: 0 0 auto;
           align-items: center;
-          gap: 10px;
           color: var(--calvoro-navy);
           text-decoration: none;
         }
@@ -1997,36 +2010,12 @@ function GlobalCalvoroStyle() {
           color: var(--calvoro-navy);
         }
 
-        .calvoro-brand-mark {
-          width: 38px;
-          height: 38px;
-          border-radius: 11px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background: var(--calvoro-blue);
-          color: #ffffff;
-          font-size: 19px;
-          font-weight: 900;
-          box-shadow: 0 4px 11px rgba(37, 99, 235, 0.18);
-        }
-
-        .calvoro-brand strong {
+        .calvoro-brand-logo {
           display: block;
-          color: var(--calvoro-navy);
-          font-size: 17px;
-          font-weight: 900;
-          letter-spacing: 1px;
-          line-height: 1;
-        }
-
-        .calvoro-brand small {
-          display: block;
-          margin-top: 4px;
-          color: var(--calvoro-muted);
-          font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 1.3px;
+          width: auto;
+          height: 52px;
+          max-width: 100%;
+          object-fit: contain;
         }
 
         .calvoro-main-nav {
@@ -3354,14 +3343,9 @@ function GlobalCalvoroStyle() {
             padding: 9px 17px;
           }
 
-          .calvoro-brand strong {
-            font-size:
-              17px;
-          }
-
-          .calvoro-brand small {
-            font-size:
-              7px;
+          .calvoro-brand-logo {
+            height:
+              46px;
           }
 
           .calvoro-hero-copy h1 {
@@ -4024,6 +4008,7 @@ export default function App() {
               path="/math-solver"
               element={
                 <PageFrame>
+                  <SEO />
                   <MathSolver />
                 </PageFrame>
               }
@@ -4033,6 +4018,7 @@ export default function App() {
               path="/image-math-solver"
               element={
                 <PageFrame>
+                  <SEO />
                   <ImageMathSolver />
                 </PageFrame>
               }
@@ -4044,6 +4030,7 @@ export default function App() {
               path="/ai-summarizer"
               element={
                 <PageFrame>
+                  <SEO />
                   <AISummarizer />
                 </PageFrame>
               }
@@ -4053,6 +4040,7 @@ export default function App() {
               path="/ai-rewriter"
               element={
                 <PageFrame>
+                  <SEO />
                   <AITextRewriter />
                 </PageFrame>
               }
@@ -4062,6 +4050,7 @@ export default function App() {
               path="/ai-grammar-checker"
               element={
                 <PageFrame>
+                  <SEO />
                   <AIGrammarChecker />
                 </PageFrame>
               }
@@ -4071,6 +4060,7 @@ export default function App() {
               path="/ai-translator"
               element={
                 <PageFrame>
+                  <SEO />
                   <AITranslator />
                 </PageFrame>
               }
@@ -4080,6 +4070,7 @@ export default function App() {
               path="/ai-text-generator"
               element={
                 <PageFrame>
+                  <SEO />
                   <AITextGenerator />
                 </PageFrame>
               }
@@ -4089,6 +4080,7 @@ export default function App() {
               path="/ai-email-writer"
               element={
                 <PageFrame>
+                  <SEO />
                   <AIEmailWriter />
                 </PageFrame>
               }

@@ -327,6 +327,7 @@ export default function Contact() {
 
             <form onSubmit={handleSubmit}>
               <label
+                htmlFor="contact-name"
                 style={{
                   display: "block",
                   marginBottom: "8px",
@@ -338,6 +339,7 @@ export default function Contact() {
               </label>
 
               <input
+                id="contact-name"
                 type="text"
                 name="name"
                 placeholder="Your name"
@@ -354,6 +356,7 @@ export default function Contact() {
               />
 
               <label
+                htmlFor="contact-email"
                 style={{
                   display: "block",
                   marginBottom: "8px",
@@ -365,6 +368,7 @@ export default function Contact() {
               </label>
 
               <input
+                id="contact-email"
                 type="email"
                 name="email"
                 placeholder="your@email.com"
@@ -381,6 +385,7 @@ export default function Contact() {
               />
 
               <label
+                htmlFor="contact-message"
                 style={{
                   display: "block",
                   marginBottom: "8px",
@@ -392,6 +397,7 @@ export default function Contact() {
               </label>
 
               <textarea
+                id="contact-message"
                 name="message"
                 placeholder="Write your message..."
                 required

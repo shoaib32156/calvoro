@@ -1,0 +1,162 @@
+.calvoro-creative-empty {
+  margin: 18px 0 0;
+  padding: 16px;
+  border: 1px dashed #cbd8e8;
+  border-radius: 10px;
+  background: #f8fbff;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.calvoro-meme-layout,
+.calvoro-passport-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: 22px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.calvoro-meme-preview-column,
+.calvoro-passport-preview-column,
+.calvoro-meme-controls,
+.calvoro-passport-controls {
+  min-width: 0;
+}
+
+.calvoro-meme-preview-column,
+.calvoro-passport-preview-column {
+  display: grid;
+  gap: 14px;
+}
+
+.calvoro-creative-preview {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  padding: 14px;
+  border: 1px solid #dbe3ef;
+  border-radius: 14px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+
+.calvoro-meme-canvas {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 560px;
+  height: auto;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+}
+
+.calvoro-meme-caption-input {
+  min-height: 76px !important;
+}
+
+.calvoro-passport-frame {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0;
+  border: 3px solid #ffffff;
+  outline: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
+  overflow: hidden;
+}
+
+.calvoro-passport-frame canvas {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  touch-action: none;
+  cursor: grab;
+}
+
+.calvoro-passport-frame canvas:active {
+  cursor: grabbing;
+}
+
+.calvoro-passport-summary {
+  display: grid;
+  gap: 7px;
+  padding: 13px 14px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  background: #f8fbff;
+  color: #334155;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.calvoro-passport-summary span {
+  display: block;
+}
+
+.calvoro-passport-summary span:first-child {
+  color: #1e3a8a;
+  font-weight: 800;
+}
+
+.calvoro-creative-callout {
+  padding: 14px;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  background: #fffbeb;
+  color: #78350f;
+}
+
+.calvoro-creative-callout strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.calvoro-creative-callout p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+@media (max-width: 980px) {
+  .calvoro-meme-layout,
+  .calvoro-passport-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .calvoro-meme-canvas {
+    max-height: 460px;
+  }
+}
+
+@media (max-width: 680px) {
+  .calvoro-creative-preview {
+    min-height: 180px;
+    padding: 10px;
+  }
+
+  .calvoro-meme-canvas {
+    max-height: 340px;
+  }
+
+  .calvoro-passport-preview-column {
+    justify-items: center;
+  }
+
+  .calvoro-passport-preview-column .calvoro-field,
+  .calvoro-passport-preview-column .calvoro-file-list,
+  .calvoro-passport-preview-column .calvoro-tool-actions,
+  .calvoro-passport-preview-column .calvoro-field-hint {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calvoro-passport-frame canvas {
+    scroll-behavior: auto;
+  }
+}

@@ -673,4 +673,266 @@ export const everydayArticles = [
       },
     ],
   },
+  {
+    slug: "how-to-make-a-meme-without-uploading-photos",
+    title: "How to Make a Meme Without Uploading Your Photos",
+    category: "Everyday",
+    date: "2026-10-24",
+    excerpt:
+      "Build a meme from a local image, write captions that fit the frame, choose readable text, and export a clean PNG or JPEG without sending the photo to a server.",
+    tool: {
+      name: "Meme Generator",
+      path: "/meme-generator",
+      description:
+        "Add top and bottom captions to a local image, adjust the font and outline, and download a PNG or JPEG.",
+    },
+    takeaways: [
+      "A local canvas editor keeps the original image in the browser tab instead of sending it to a server.",
+      "Top and bottom captions need short lines, deliberate wrapping, and enough contrast to survive a small screen.",
+      "PNG preserves transparency and sharp edges; JPEG is smaller but turns transparent areas white.",
+      "Check that you have the right to use and share the underlying image before you publish the meme.",
+    ],
+    sections: [
+      {
+        heading: "Why Local Editing Is the Safest Default",
+        paragraphs: [
+          "A meme is usually made from a personal photo, a screenshot, or an image found online. Uploading that file to an unfamiliar converter creates a copy on someone else's server, along with questions about retention, access, and deletion. A browser-based editor avoids that transfer: the file is read locally, drawn on a canvas, and exported by your own device.",
+          "Local processing does not make every image appropriate to share, and it does not settle copyright questions. It does remove one unnecessary risk from the workflow. The [Meme Generator](/meme-generator) decodes the image in the current tab, keeps it there while you edit, and downloads the finished result directly.",
+        ],
+      },
+      {
+        heading: "Start With an Image You Have the Right to Use",
+        paragraphs: [
+          "The safest source is an image you created: a photo from your camera, a drawing, or a screenshot of your own work. If you use someone else's image, confirm the license or permission covers the way you plan to share it. A meme that is fine among friends may still be inappropriate to publish on a public page.",
+          "Also consider the people in the image. A photo of a friend may be private even if you took it. Avoid using images of minors, confidential screens, or identifiable people in a context they did not agree to. Humor does not remove consent or privacy obligations.",
+        ],
+        list: [
+          "Use your own photo, artwork, or screenshot when possible.",
+          "Check the license before republishing an image you found online.",
+          "Ask before sharing a picture of someone else.",
+          "Remove personal details such as addresses, badges, and account names.",
+        ],
+      },
+      {
+        heading: "Build the Classic Top-and-Bottom Layout",
+        paragraphs: [
+          "The familiar format places one caption at the top and another at the bottom, leaving the middle of the image visible. That structure works because viewers can read the setup, look at the image, and then read the punchline. It also gives the picture room to carry the joke rather than covering it with text.",
+          "Keep each caption to a few words. The tool wraps text to 90 percent of the image width and caps each block at six lines. A long paragraph will either shrink into unreadable text or fill the frame. If a caption needs more than three short lines, consider cutting a clause or splitting the idea across the two positions.",
+        ],
+        example: {
+          title: "Example: a balanced two-line setup",
+          lines: [
+            "Top: WHEN THE WEEKEND HAS PLANS",
+            "Bottom: AND YOU HAVE NONE",
+            "The image supplies the reaction; the captions supply the contrast.",
+          ],
+        },
+      },
+      {
+        heading: "Write Captions That Fit the Frame",
+        paragraphs: [
+          "Read the caption at the size it will appear on a phone. A line that looks comfortable on a large monitor may become a thin ribbon of text in a chat app. Short words, concrete nouns, and a clear turn between the top and bottom line are easier to scan than a long explanation.",
+          "Capitalization is a style choice, not a requirement. All caps can make a short line punchy, but a long all-caps block feels shouted and is harder to read. Test the uppercase setting with the real caption, then judge the preview rather than the text box.",
+        ],
+        list: [
+          "Put the setup at the top and the turn at the bottom.",
+          "Prefer specific words over general ones.",
+          "Cut anything the image already communicates.",
+          "Check the preview on a narrow screen before exporting.",
+        ],
+      },
+      {
+        heading: "Make the Text Readable",
+        paragraphs: [
+          "Text needs contrast against the busiest part of the image, not just the average background. White text with a dark outline is a reliable starting point because the outline separates the letters from both light and dark areas. A light fill with a dark outline works in the opposite direction.",
+          "Font size should be large enough to read at a glance. Increase the size before adding more caption text, and use the outline width to strengthen the edge without turning the letters into blobs. A bold display font may look energetic but can lose detail at small sizes; a simpler font is safer when the meme will be viewed in a feed.",
+        ],
+      },
+      {
+        heading: "Preview, Export, and Pick the Right Format",
+        paragraphs: [
+          "The preview is generated by the same canvas that produces the download, so it is the best guide to the final placement. Check that no line is clipped, that the text does not cover an important face or object, and that the outline remains visible over the brightest and darkest parts of the picture.",
+          "Choose PNG when the image has transparency, fine text, or flat graphics. PNG keeps those edges crisp and supports an alpha channel. Choose JPEG when file size matters more and the image is a photograph; JPEG cannot store transparency, so transparent areas are filled with white. Both exports use the original image dimensions, not the smaller preview.",
+        ],
+        note:
+          "Canvas output uses the fonts installed on your device. A font that is available on one computer may be substituted on another, so check the exported file rather than assuming every viewer sees the same typeface.",
+      },
+      {
+        heading: "A Repeatable Five-Minute Workflow",
+        paragraphs: [
+          "Start with the smallest version of the idea: one sentence for the top, one for the bottom. Load the image, type both lines, and adjust the size until the text is readable without hiding the subject. Change one setting at a time so you can see which adjustment helped.",
+          "When the preview looks right, export once and open the downloaded file. This catches font substitutions, transparency surprises, and captions that looked fine only in the editor. If the file is going into a group chat, send a compressed preview first and keep the full-size export as the original.",
+        ],
+        list: [
+          "Choose and verify the source image.",
+          "Write two short captions before touching the style controls.",
+          "Set the font size, fill, and outline for contrast.",
+          "Export, reopen the file, and check it at phone size.",
+        ],
+      },
+      {
+        heading: "Before You Share",
+        paragraphs: [
+          "A meme can travel far beyond the conversation where it started. Check the caption for inside jokes that only make sense to you, names that should not be public, and references that could embarrass someone at work or school. The image may also carry metadata or visible details that were not obvious in the preview.",
+          "If the meme is for a public account, treat it like any other published image. Credit the photographer or artist when required, follow the platform's rules, and be ready to remove it if a person in the photo asks you to. Local editing protects the file in transit; it does not replace judgment about what should be published.",
+        ],
+        note:
+          "This guide is general information, not legal advice. Copyright and privacy rules vary by country and by how an image is used.",
+      },
+    ],
+    faq: [
+      {
+        question: "Is a browser-based meme generator private?",
+        answer:
+          "It can be, if the image is processed locally and never uploaded. Verify that the tool says it uses the Canvas API in your browser and that no upload request is made. The CALVORO Meme Generator follows that model, but you should still avoid loading sensitive images into any site you do not trust.",
+      },
+      {
+        question: "Why does my exported meme look different from the preview?",
+        answer:
+          "The most likely cause is a font substitution on the device that rendered the export. Another possibility is a format difference: JPEG cannot store transparency and fills those areas with white. Reopen the exported file before sharing it.",
+      },
+      {
+        question: "Should I use PNG or JPEG for a meme?",
+        answer:
+          "Use PNG for screenshots, transparent images, and crisp text. Use JPEG for photographs when a smaller file is more important than perfect edges. Both formats are supported by the generator and keep the source image's dimensions.",
+      },
+      {
+        question: "How long can the captions be?",
+        answer:
+          "Each caption can hold up to 240 characters, but the visible limit is much shorter. Text wraps to six lines per position, and a caption that fills all six lines usually covers too much of the image. Two or three short lines per position is a practical target.",
+      },
+    ],
+  },
+  {
+    slug: "passport-photo-sizes-and-printing-guide",
+    title: "Passport Photo Sizes and Printing: A Practical Guide",
+    category: "Everyday",
+    date: "2026-10-24",
+    excerpt:
+      "Understand common passport photo dimensions, convert millimetres to pixels at 300 and 600 DPI, and print a correctly sized photo sheet without accidental scaling.",
+    tool: {
+      name: "Passport Photo Maker",
+      path: "/passport-photo-maker",
+      description:
+        "Crop and zoom a local photo to a common or custom size, then download an image, single PDF, or printable sheet.",
+    },
+    takeaways: [
+      "Start with the exact size required by the receiving authority, not a size that looks close.",
+      "The pixel dimensions of a printed photo depend on both its millimetre size and the chosen DPI.",
+      "Print at 100 percent or actual size and verify the result with a ruler before cutting the sheet.",
+      "A correctly sized photo can still be rejected for pose, background, lighting, or expression rules.",
+    ],
+    sections: [
+      {
+        heading: "Start With the Size Your Form Requires",
+        paragraphs: [
+          "Passport and identity photo requirements are set by the issuing authority, not by a universal standard. Two countries can both ask for a 35 × 45 mm photo while imposing different rules for head height, background, and margins. The dimensions are only one part of the specification.",
+          "Find the current instructions for the exact document you are applying for. Save or print that page so you can check the details while editing. If the instructions give a size in inches, convert it carefully; small rounding differences matter when a photo is measured against a template.",
+        ],
+      },
+      {
+        heading: "Common Sizes and Where They Appear",
+        paragraphs: [
+          "The tool includes four presets: US 2 × 2 inches, 35 × 45 mm, 33 × 48 mm, and 50 × 70 mm. The 2 × 2 inch size is 50.8 × 50.8 mm, which is why it cannot be treated as a neat 50 mm square. The 35 × 45 mm and 33 × 48 mm sizes appear in passport and visa systems in different regions, while 50 × 70 mm is a larger format used by some countries.",
+          "A preset is a starting point, not a guarantee that the photo meets the receiving country's rules. Use a custom size when the instructions call for something else. The [Passport Photo Maker](/passport-photo-maker) keeps the physical dimensions visible so you can compare the output with the form before downloading.",
+        ],
+        list: [
+          "US 2 × 2 in: 50.8 × 50.8 mm.",
+          "35 × 45 mm: a common passport and visa size.",
+          "33 × 48 mm: used by some national photo specifications.",
+          "50 × 70 mm: a larger format for specific documents.",
+        ],
+      },
+      {
+        heading: "Millimetres, Inches, and Pixels",
+        paragraphs: [
+          "Millimetres and inches describe the physical size of the printed photo. Pixels describe the digital image. The bridge between them is resolution, measured in dots per inch (DPI). At 300 DPI, one inch contains 300 pixels; at 600 DPI, it contains 600.",
+          "To convert a millimetre width to pixels, divide by 25.4 to get inches and multiply by the DPI. A 35 mm photo at 300 DPI is about 413 pixels wide; at 600 DPI it is about 827 pixels. The physical size stays the same, but the file contains more detail for the printer to use.",
+        ],
+        formula: "Pixels = (Millimetres ÷ 25.4) × DPI",
+        example: {
+          title: "Example: a 35 × 45 mm photo",
+          lines: [
+            "At 300 DPI: 35 mm ≈ 413 px wide, 45 mm ≈ 531 px tall.",
+            "At 600 DPI: 35 mm ≈ 827 px wide, 45 mm ≈ 1,063 px tall.",
+            "The printed size is identical; only the pixel density changes.",
+          ],
+        },
+      },
+      {
+        heading: "Why DPI Matters for Printing",
+        paragraphs: [
+          "A printer cannot create detail that is not in the file. If the source image is cropped to a small pixel area and then enlarged to fill a 600 DPI photo, the extra pixels are interpolated rather than real. The print may look soft even though its dimensions are correct.",
+          "Choose 300 DPI for most home and photo-lab printing. It is a well-established target that keeps file sizes manageable. Use 600 DPI when the receiving instructions require it or when a printer explicitly benefits, and make sure the original photo has enough resolution to support the crop.",
+        ],
+      },
+      {
+        heading: "Framing the Face with Crop, Pan, and Zoom",
+        paragraphs: [
+          "The crop decides what appears inside the photo. Start with the head roughly centered and the eyes in the upper portion of the frame, then check the official guidance for head size and margin. Most passport rules leave space above the head and show the top of the shoulders at the bottom.",
+          "Zoom controls how much of the source image fills the frame; pan moves the crop window without changing its size. Make small adjustments and check the preview each time. If the image is low resolution, excessive zoom will expose blur or noise. It is better to start with a sharper source photo than to enlarge a small face.",
+        ],
+        list: [
+          "Keep the whole head and the top of the shoulders visible.",
+          "Leave the required space above the head.",
+          "Center the face rather than cropping it to one side.",
+          "Avoid zooming so far that the image becomes soft.",
+        ],
+      },
+      {
+        heading: "Printable Sheets: A4 and 4 × 6",
+        paragraphs: [
+          "A single photo file is convenient for an online application, but a printed sheet is more practical when you need several copies. The tool can arrange the selected photo on an A4 portrait page or a 4 × 6 inch portrait page, adding thin cut guides around each copy.",
+          "The sheet does not change the photo's physical size. It places the same dimensions repeatedly with a margin between them. Check how many copies fit before printing, then use the guides to cut evenly. A paper trimmer produces straighter edges than scissors, especially for small photos.",
+        ],
+      },
+      {
+        heading: "Print at Actual Size and Verify with a Ruler",
+        paragraphs: [
+          "The most common printing failure is accidental scaling. A printer driver set to fit the page, shrink oversized content, or add borders can reduce a 35 × 45 mm photo to something slightly smaller. Look for a setting labelled 100 percent, Actual size, or Scale: none.",
+          "After printing, measure the photo before cutting the whole sheet. Check both width and height against the required dimensions. If the copy is off, adjust the printer setting rather than the crop. A ruler check takes seconds and catches a problem while the sheet is still intact.",
+        ],
+        example: {
+          title: "Example: checking a 35 × 45 mm print",
+          lines: [
+            "Measure the width: it should read 35 mm.",
+            "Measure the height: it should read 45 mm.",
+            "If both are short by the same percentage, the printer scaled the page.",
+            "If one dimension is wrong, check the selected preset and aspect ratio.",
+          ],
+        },
+      },
+      {
+        heading: "What This Tool Does Not Do",
+        paragraphs: [
+          "The maker crops, resizes, and arranges photos. It does not detect faces, remove backgrounds, adjust lighting, verify expression, or decide whether a photo meets an official specification. Those requirements vary, and a photo can be the right size while still failing for another reason.",
+          "Some authorities require a plain background, a neutral expression, no glasses, or a specific head height. Others reject shadows, reflections, or digitally altered images. Read the current rules for your document and use the tool as a careful cropping and printing aid, not as a guarantee of acceptance.",
+        ],
+        note:
+          "Photo processing happens locally with canvas and pdf-lib. The source image is not uploaded to CALVORO. Check the receiving authority's current requirements before submitting any photo.",
+      },
+    ],
+    faq: [
+      {
+        question: "How many pixels is a 35 × 45 mm photo at 300 DPI?",
+        answer:
+          "About 413 × 531 pixels. Divide each millimetre value by 25.4 to get inches, then multiply by 300. At 600 DPI the same photo is about 827 × 1,063 pixels.",
+      },
+      {
+        question: "Why did my printed photo come out the wrong size?",
+        answer:
+          "The printer probably scaled the page to fit or added a border. Choose 100 percent or Actual size in the print dialog, then measure the printed result before cutting it. The digital dimensions can be correct while the print settings change the physical output.",
+      },
+      {
+        question: "Can I use a phone photo for a passport picture?",
+        answer:
+          "Often, if the photo is sharp, well lit, and large enough for the crop. Avoid digital zoom, heavy filters, and shadows. The source resolution must support the chosen DPI without excessive enlargement, and the result must still meet the pose and background rules.",
+      },
+      {
+        question: "Does a correctly sized photo guarantee acceptance?",
+        answer:
+          "No. Size is only one requirement. Pose, background, lighting, expression, image quality, and whether digital editing is allowed all matter. Check the current instructions from the authority that will receive the photo.",
+      },
+    ],
+  },
 ];

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Layered mountain sunrise</title>
+  <desc id="desc">An original abstract landscape with a warm sun, layered mountains, water, and geometric highlights.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#172554"/>
+      <stop offset="0.45" stop-color="#7c3aed"/>
+      <stop offset="0.75" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#fdba74"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#082f49"/>
+    </linearGradient>
+    <linearGradient id="ridgeFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="ridgeMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c1d95"/>
+      <stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="ridgeNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e293b"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fef3c7"/>
+      <stop offset="0.45" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f97316" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sky)"/>
+  <circle cx="760" cy="300" r="260" fill="url(#sunGlow)"/>
+  <circle cx="760" cy="300" r="105" fill="#fde68a"/>
+  <circle cx="760" cy="300" r="72" fill="#fef9c3"/>
+  <g fill="#f8fafc" opacity="0.85">
+    <circle cx="150" cy="120" r="4"/>
+    <circle cx="230" cy="190" r="3"/>
+    <circle cx="340" cy="90" r="5"/>
+    <circle cx="450" cy="160" r="3"/>
+    <circle cx="530" cy="80" r="4"/>
+    <circle cx="980" cy="110" r="4"/>
+    <circle cx="1080" cy="200" r="3"/>
+    <circle cx="900" cy="70" r="3"/>
+    <circle cx="660" cy="140" r="2"/>
+    <circle cx="110" cy="260" r="3"/>
+  </g>
+  <path d="M0 470 L180 300 L310 430 L450 280 L610 470 L760 380 L920 470 L1080 330 L1200 460 L1200 800 L0 800 Z" fill="url(#ridgeFar)" opacity="0.9"/>
+  <path d="M0 540 L140 430 L290 520 L430 410 L590 545 L730 470 L880 550 L1030 460 L1200 560 L1200 800 L0 800 Z" fill="url(#ridgeMid)"/>
+  <path d="M0 630 L160 530 L330 620 L500 520 L690 640 L860 560 L1010 640 L1200 580 L1200 800 L0 800 Z" fill="url(#ridgeNear)"/>
+  <path d="M0 690 C200 650 360 720 540 690 C720 660 900 720 1200 680 L1200 800 L0 800 Z" fill="url(#water)"/>
+  <g stroke="#5eead4" stroke-linecap="round" opacity="0.7">
+    <path d="M90 730 h160" stroke-width="7"/>
+    <path d="M330 755 h230" stroke-width="5"/>
+    <path d="M650 720 h180" stroke-width="6"/>
+    <path d="M900 760 h200" stroke-width="5"/>
+    <path d="M180 780 h270" stroke-width="4"/>
+    <path d="M700 790 h340" stroke-width="6"/>
+  </g>
+  <g fill="#fbbf24" opacity="0.9">
+    <circle cx="240" cy="380" r="6"/>
+    <circle cx="400" cy="340" r="5"/>
+    <circle cx="1020" cy="390" r="6"/>
+    <circle cx="950" cy="330" r="4"/>
+  </g>
+  <g fill="#f8fafc" opacity="0.8">
+    <path d="M530 430 l40 -70 l36 70 z"/>
+    <path d="M1010 400 l28 -50 l26 50 z"/>
+  </g>
+  <path d="M0 0 h1200 v800 h-1200 z" fill="none" stroke="#0f172a" stroke-width="16"/>
+</svg>
