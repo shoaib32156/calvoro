@@ -1,0 +1,11 @@
+{
+  "name": "calvoro-email",
+  "main": "worker/email-worker.js",
+  "compatibility_date": "2026-10-01",
+  "kv_namespaces": [
+    {
+      "binding": "TEMP_MAIL_KV",
+      "id": "d8e6641b487d428ba665f5f4a244daf4"
+    }
+  ]
+}
