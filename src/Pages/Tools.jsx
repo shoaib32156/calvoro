@@ -165,6 +165,31 @@ export default function Tools() {
               </button>
             </div>
           )}
+
+          <aside
+            className="calvoro-sponsored-card"
+            aria-label="Sponsored offers"
+          >
+            <div className="calvoro-sponsored-copy">
+              <span className="calvoro-sponsored-badge">
+                Advertisement
+              </span>
+              <h2>Sponsored Offers</h2>
+              <p>
+                Offers and promotions from CALVORO's advertising
+                partner. CALVORO does not operate or control the
+                external site.
+              </p>
+            </div>
+            <a
+              href="https://uplcm.com/4/12184594"
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+              className="calvoro-sponsored-cta"
+            >
+              View offers
+            </a>
+          </aside>
         </div>
       </main>
     </div>
