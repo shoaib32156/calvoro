@@ -623,6 +623,23 @@ export const utilityTools = [
     ],
   },
   {
+    name: "Temporary Email",
+    path: "/temporary-email",
+    category: "Productivity",
+    description:
+      "Generate a free disposable email address, read incoming messages in a temporary inbox, and copy verification codes without exposing your personal email.",
+    aliases: [
+      "temp mail",
+      "temporary email",
+      "disposable email",
+      "fake email",
+      "burner email",
+      "throwaway email",
+      "temp inbox",
+      "verification email",
+    ],
+  },
+  {
     name: "Puzzle Games",
     path: "/puzzle-games",
     category: "Games",

@@ -16,7 +16,7 @@ const DIST_DIR = path.join(REPO_ROOT, "dist");
 const TEMPLATE_PATH = path.join(DIST_DIR, "index.html");
 const SITEMAP_PATH = path.join(REPO_ROOT, "public", "sitemap.xml");
 const NOT_FOUND_PATH = path.join(DIST_DIR, "404.html");
-const EXPECTED_SITEMAP_ROUTE_COUNT = 133;
+const EXPECTED_SITEMAP_ROUTE_COUNT = 134;
 
 const NOT_FOUND_METADATA = {
   title: "Page not found - CALVORO",

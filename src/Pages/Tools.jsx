@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { Zap } from "lucide-react";
 import SEO from "../SEO";
 import {
   calculatorCatalog,
@@ -8,6 +9,7 @@ import {
   matchesCatalogSearch,
   utilityTools,
 } from "../calculatorCatalog.js";
+import "../tools/tempMail.css";
 
 const tools = [
   ...utilityTools,
@@ -54,6 +56,24 @@ export default function Tools() {
 
       <main className="calvoro-home-section calvoro-paper-band">
         <div className="calvoro-container">
+          <Link to="/temporary-email" className="calvoro-tools-featured">
+            <div className="calvoro-tools-featured-copy">
+              <span className="calvoro-tools-featured-label">
+                NEW — Free Temporary Email
+              </span>
+              <h2>CALVORO Temporary Email</h2>
+              <p>
+                Generate a disposable email address, read incoming
+                messages in a temporary inbox, and copy verification
+                codes without exposing your personal email.
+              </p>
+            </div>
+            <span className="calvoro-tools-featured-cta">
+              <Zap size={16} aria-hidden="true" />
+              Open Temporary Email
+            </span>
+          </Link>
+
           <div className="calvoro-directory-toolbar">
             <label htmlFor="all-tools-search">
               Search calculators and extra tools
@@ -145,6 +165,31 @@ export default function Tools() {
               </button>
             </div>
           )}
+
+          <aside
+            className="calvoro-sponsored-card"
+            aria-label="Sponsored offers"
+          >
+            <div className="calvoro-sponsored-copy">
+              <span className="calvoro-sponsored-badge">
+                Advertisement
+              </span>
+              <h2>Sponsored Offers</h2>
+              <p>
+                Offers and promotions from CALVORO's advertising
+                partner. CALVORO does not operate or control the
+                external site.
+              </p>
+            </div>
+            <a
+              href="https://uplcm.com/4/12184594"
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+              className="calvoro-sponsored-cta"
+            >
+              View offers
+            </a>
+          </aside>
         </div>
       </main>
     </div>

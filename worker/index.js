@@ -1,3 +1,11 @@
+import {
+  TempMailError,
+  createTempMailbox,
+  deleteTempMailbox,
+  getTempMailMessage,
+  listTempMailInbox,
+} from "./temp-mail-service.js";
+
 const AI_ENDPOINTS = new Set([
   "/api/summarize",
   "/api/rewrite",
@@ -23,6 +31,34 @@ const METADATA_DNS_MAX_BYTES = 64_000;
 const METADATA_RATE_LIMIT = 30;
 const METADATA_RATE_WINDOW_MS = 60_000;
 const METADATA_RATE_LIMIT_KEY = "METADATA_RATE_LIMITER";
+
+const TEMP_MAIL_MAILBOX_ENDPOINT = "/api/temp-mail/mailbox";
+const TEMP_MAIL_INBOX_ENDPOINT = "/api/temp-mail/inbox";
+const TEMP_MAIL_MESSAGE_ENDPOINT = "/api/temp-mail/message";
+const EVENTS_ENDPOINT = "/api/events";
+
+const TEMP_MAIL_CREATE_LIMIT = 8;
+const TEMP_MAIL_CREATE_WINDOW_MS = 60 * 60 * 1000;
+const TEMP_MAIL_READ_LIMIT = 120;
+const TEMP_MAIL_READ_WINDOW_MS = 60_000;
+const EVENTS_LIMIT = 60;
+const EVENTS_WINDOW_MS = 60_000;
+
+const tempMailCreateBuckets = new Map();
+const tempMailReadBuckets = new Map();
+const eventsBuckets = new Map();
+
+// Privacy-conscious analytics: only allowlisted event names are
+// accepted and only aggregate counters are kept. No email contents,
+// addresses, or identifiers ever reach this endpoint.
+const ALLOWED_EVENT_NAMES = new Set([
+  "temp_mail_page_view",
+  "temp_mail_generate",
+  "temp_mail_refresh",
+  "temp_mail_message_open",
+  "temp_mail_delete",
+]);
+const eventCounters = new Map();
 
 const BLOCKED_HOSTNAMES = new Set([
   "home.arpa",
@@ -1338,6 +1374,224 @@ async function handleMetadataRequest(request, env) {
   });
 }
 
+function requestIp(request) {
+  const forwarded = request.headers
+    .get("x-forwarded-for")
+    ?.split(",")[0]
+    ?.trim();
+
+  return (
+    request.headers.get("cf-connecting-ip") ||
+    forwarded ||
+    "local"
+  );
+}
+
+function consumeBucket(buckets, key, limit, windowMs) {
+  const now = Date.now();
+  const bucket = buckets.get(key);
+
+  if (!bucket || now - bucket.windowStart >= windowMs) {
+    buckets.set(key, { windowStart: now, count: 1 });
+
+    if (buckets.size > 5_000) {
+      for (const bucketKey of buckets.keys()) {
+        buckets.delete(bucketKey);
+
+        if (buckets.size <= 4_000) break;
+      }
+    }
+
+    return true;
+  }
+
+  bucket.count = Math.min(bucket.count + 1, limit + 1);
+  return bucket.count <= limit;
+}
+
+function isTempMailCreateAllowed(request) {
+  return consumeBucket(
+    tempMailCreateBuckets,
+    requestIp(request),
+    TEMP_MAIL_CREATE_LIMIT,
+    TEMP_MAIL_CREATE_WINDOW_MS
+  );
+}
+
+function isTempMailReadAllowed(request) {
+  return consumeBucket(
+    tempMailReadBuckets,
+    requestIp(request),
+    TEMP_MAIL_READ_LIMIT,
+    TEMP_MAIL_READ_WINDOW_MS
+  );
+}
+
+function isEventTrackAllowed(request) {
+  return consumeBucket(
+    eventsBuckets,
+    requestIp(request),
+    EVENTS_LIMIT,
+    EVENTS_WINDOW_MS
+  );
+}
+
+function requireQueryParam(url, name) {
+  const value = (url.searchParams.get(name) || "").trim();
+
+  if (!value || value.length > 128) {
+    throw new TempMailError(400, `A valid "${name}" parameter is required.`);
+  }
+
+  return value;
+}
+
+async function handleTempMailApi(endpoint, request, env) {
+  const method = request.method.toUpperCase();
+  const url = new URL(request.url);
+
+  if (endpoint === TEMP_MAIL_MAILBOX_ENDPOINT) {
+    if (method === "POST") {
+      if (!isTempMailCreateAllowed(request)) {
+        return jsonResponse(
+          429,
+          {
+            error:
+              "Too many mailboxes were created. Wait a while and try again.",
+          },
+          { "Retry-After": "3600" }
+        );
+      }
+
+      const mailbox = await createTempMailbox(env);
+
+      return jsonResponse(201, { mailbox });
+    }
+
+    if (method === "DELETE") {
+      if (!isTempMailReadAllowed(request)) {
+        return jsonResponse(
+          429,
+          { error: "Too many requests. Wait a minute and try again." },
+          { "Retry-After": "60" }
+        );
+      }
+
+      const mailboxId = requireQueryParam(url, "id");
+      const token = requireQueryParam(url, "token");
+
+      await deleteTempMailbox(env, mailboxId, token);
+
+      return new Response(null, {
+        status: 204,
+        headers: {
+          ...CORS_HEADERS,
+        },
+      });
+    }
+
+    return jsonResponse(
+      405,
+      {
+        error:
+          "Method not allowed. Use POST to create or DELETE to remove a mailbox.",
+      },
+      { Allow: "POST, DELETE, OPTIONS" }
+    );
+  }
+
+  if (endpoint === TEMP_MAIL_INBOX_ENDPOINT) {
+    if (method !== "GET") {
+      return jsonResponse(
+        405,
+        { error: "Method not allowed. Use GET for this endpoint." },
+        { Allow: "GET, OPTIONS" }
+      );
+    }
+
+    if (!isTempMailReadAllowed(request)) {
+      return jsonResponse(
+        429,
+        { error: "Too many requests. Wait a minute and try again." },
+        { "Retry-After": "60" }
+      );
+    }
+
+    const mailboxId = requireQueryParam(url, "id");
+    const token = requireQueryParam(url, "token");
+    const inbox = await listTempMailInbox(env, mailboxId, token);
+
+    return jsonResponse(200, inbox);
+  }
+
+  if (endpoint === TEMP_MAIL_MESSAGE_ENDPOINT) {
+    if (method !== "GET") {
+      return jsonResponse(
+        405,
+        { error: "Method not allowed. Use GET for this endpoint." },
+        { Allow: "GET, OPTIONS" }
+      );
+    }
+
+    if (!isTempMailReadAllowed(request)) {
+      return jsonResponse(
+        429,
+        { error: "Too many requests. Wait a minute and try again." },
+        { "Retry-After": "60" }
+      );
+    }
+
+    const mailboxId = requireQueryParam(url, "id");
+    const token = requireQueryParam(url, "token");
+    const messageId = requireQueryParam(url, "messageId");
+    const message = await getTempMailMessage(
+      env,
+      mailboxId,
+      token,
+      messageId
+    );
+
+    return jsonResponse(200, { message });
+  }
+
+  return jsonResponse(404, {
+    error: "CALVORO temporary email endpoint not found.",
+  });
+}
+
+async function handleEventsRequest(request) {
+  if (request.method !== "POST") {
+    return jsonResponse(
+      405,
+      { error: "Method not allowed. Use POST for this endpoint." },
+      { Allow: "POST, OPTIONS" }
+    );
+  }
+
+  if (!isEventTrackAllowed(request)) {
+    return new Response(null, {
+      status: 204,
+      headers: CORS_HEADERS,
+    });
+  }
+
+  const data = await readJsonBody(request, 512);
+  const name = String(data.name || "").slice(0, 80);
+
+  if (!ALLOWED_EVENT_NAMES.has(name)) {
+    return jsonResponse(400, {
+      error: "Unknown event name.",
+    });
+  }
+
+  eventCounters.set(name, (eventCounters.get(name) || 0) + 1);
+
+  return new Response(null, {
+    status: 204,
+    headers: CORS_HEADERS,
+  });
+}
+
 async function handleApi(request, env) {
   const url = new URL(request.url);
   const endpoint =
@@ -1395,6 +1649,42 @@ async function handleApi(request, env) {
     }
   }
 
+  const isTempMailEndpoint =
+    endpoint === TEMP_MAIL_MAILBOX_ENDPOINT ||
+    endpoint === TEMP_MAIL_INBOX_ENDPOINT ||
+    endpoint === TEMP_MAIL_MESSAGE_ENDPOINT;
+
+  if (isTempMailEndpoint) {
+    try {
+      return await handleTempMailApi(endpoint, request, env);
+    } catch (error) {
+      if (error instanceof TempMailError) {
+        return jsonResponse(error.statusCode, {
+          error: error.message,
+        });
+      }
+
+      console.error("CALVORO temporary email error:", error);
+
+      return jsonResponse(500, {
+        error: "The temporary email service failed unexpectedly.",
+      });
+    }
+  }
+
+  if (endpoint === EVENTS_ENDPOINT) {
+    try {
+      return await handleEventsRequest(request);
+    } catch (error) {
+      console.error("CALVORO events endpoint error:", error);
+
+      return new Response(null, {
+        status: 204,
+        headers: CORS_HEADERS,
+      });
+    }
+  }
+
   if (
     method === "GET" &&
     (endpoint === "/api" || endpoint === "/api/health")
@@ -1405,6 +1695,7 @@ async function handleApi(request, env) {
       service: "CALVORO",
       message: "CALVORO AI function is working.",
       aiConfigured: Boolean(getConfig(env).apiKey),
+      events: Object.fromEntries(eventCounters),
     });
   }
 

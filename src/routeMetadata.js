@@ -333,6 +333,13 @@ const coreRouteMetadata = {
     type: "WebPage",
   },
 
+  "/temporary-email": {
+    title: "Free Temporary Email – Receive Emails Online | CALVORO",
+    description:
+      "Generate a free temporary email address with CALVORO. Receive verification emails, read messages online, and protect your personal inbox.",
+    type: "WebApplication",
+  },
+
   "/blog": {
     title: "CALVORO Journal - Practical Guides for Everyday Numbers",
     description:
@@ -399,12 +406,14 @@ const aiMathRouteMetadata = {
   },
 };
 
-const utilityRouteMetadata = utilityTools.map((tool) => ({
-  path: tool.path,
-  title: `${tool.name} - Free Online Tool | CALVORO`,
-  description: tool.description,
-  type: "WebApplication",
-}));
+const utilityRouteMetadata = utilityTools
+  .filter((tool) => !Object.hasOwn(coreRouteMetadata, tool.path))
+  .map((tool) => ({
+    path: tool.path,
+    title: `${tool.name} - Free Online Tool | CALVORO`,
+    description: tool.description,
+    type: "WebApplication",
+  }));
 
 const articleRouteMetadata = articles.map((article) => ({
   path: `/blog/${article.slug}`,

@@ -144,7 +144,7 @@ test("the sitemap includes all Phase A pages and remains well formed", async () 
   assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
   assert.match(sitemap, /<urlset[^>]+>/);
   assert.match(sitemap, /<\/urlset>\s*$/);
-  assert.equal(urls.length, 133);
+  assert.equal(urls.length, 134);
   assert.equal(new Set(urls).size, urls.length);
 
   for (const url of urls) {

@@ -22,10 +22,12 @@ import {
   Percent,
   PenLine,
   QrCode,
+  Shield,
   Sparkles,
   Timer,
   Type,
   X,
+  Zap,
 } from "lucide-react";
 import {
   BrowserRouter,
@@ -289,6 +291,9 @@ const toolComponents = {
     import("./tools/PassportPhotoMaker.jsx")
   ),
   "/puzzle-games": lazy(() => import("./tools/PuzzleGames.jsx")),
+  "/temporary-email": lazy(() =>
+    import("./tools/TemporaryEmail.jsx")
+  ),
 };
 
 // ======================================================
@@ -451,6 +456,16 @@ function GlobalHeader() {
             Blog
           </Link>
           <Link
+            to="/temporary-email"
+            className={navClassName(isActive("/temporary-email"))}
+            aria-current={
+              isActive("/temporary-email") ? "page" : undefined
+            }
+            onClick={() => setMenuOpen(false)}
+          >
+            Temp Email
+          </Link>
+          <Link
             to="/about"
             className={navClassName(isActive("/about"))}
             aria-current={isActive("/about") ? "page" : undefined}
@@ -539,6 +554,10 @@ function GlobalFooter() {
 
           <div>
             <h3>Browser tools</h3>
+
+            <Link to="/temporary-email">
+              Temporary Email
+            </Link>
 
             <Link to="/pdf-studio">
               PDF Studio
@@ -1508,6 +1527,113 @@ function AIToolsSection() {
 // HOME
 // ======================================================
 
+// ======================================================
+// TEMP MAIL FEATURE (HOME)
+// ======================================================
+
+function TempMailFeature() {
+  return (
+    <section
+      id="temporary-email"
+      className="calvoro-home-section calvoro-temp-feature"
+    >
+      <div className="calvoro-container">
+        <div className="calvoro-temp-feature-inner">
+          <div>
+            <span className="calvoro-temp-feature-label">
+              NEW — Free Temporary Email
+            </span>
+
+            <h2>
+              Receive verification emails without exposing
+              your real inbox.
+            </h2>
+
+            <p>
+              Generate a disposable email address in one click, read
+              incoming messages online, and copy verification codes.
+              The temporary mailbox expires automatically after 60
+              minutes.
+            </p>
+
+            <div className="calvoro-temp-feature-actions">
+              <Link
+                to="/temporary-email"
+                className="calvoro-temp-feature-primary"
+              >
+                <Zap size={17} aria-hidden="true" />
+                Generate Free Email
+              </Link>
+              <Link
+                to="/temporary-email"
+                className="calvoro-temp-feature-secondary"
+              >
+                See how it works →
+              </Link>
+            </div>
+
+            <p className="calvoro-temp-feature-note">
+              The inbox runs in demo mode today. Real inbound delivery
+              is prepared and can be switched on after mail routing is
+              configured for the CALVORO domain.
+            </p>
+          </div>
+
+          <div className="calvoro-temp-feature-points">
+            <div className="calvoro-temp-feature-point">
+              <span
+                className="calvoro-temp-feature-point-icon"
+                aria-hidden="true"
+              >
+                <Zap size={18} />
+              </span>
+              <div>
+                <strong>Instant address</strong>
+                <span>
+                  One click creates a random @calvorotool.com address
+                  you can copy straight away.
+                </span>
+              </div>
+            </div>
+
+            <div className="calvoro-temp-feature-point">
+              <span
+                className="calvoro-temp-feature-point-icon"
+                aria-hidden="true"
+              >
+                <Shield size={18} />
+              </span>
+              <div>
+                <strong>Protects your inbox</strong>
+                <span>
+                  Signups, trials, and one-time emails stay out of
+                  your personal mailbox.
+                </span>
+              </div>
+            </div>
+
+            <div className="calvoro-temp-feature-point">
+              <span
+                className="calvoro-temp-feature-point-icon"
+                aria-hidden="true"
+              >
+                <Timer size={18} />
+              </span>
+              <div>
+                <strong>Auto-expires</strong>
+                <span>
+                  The mailbox and every message in it are deleted
+                  60 minutes after creation.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] =
@@ -1680,6 +1806,8 @@ function Home() {
         </div>
 
       </section>
+
+      <TempMailFeature />
 
       {/* CALCULATORS */}
 
