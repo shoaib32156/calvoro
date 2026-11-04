@@ -1864,3 +1864,77 @@ hr {
     padding: 0 18px 18px;
   }
 }
+
+/* Sponsored offers smartlink card (puzzle games) */
+
+.calvoro-smartlink-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-top: 34px;
+  padding: 20px 22px;
+  border: 1px dashed #c7d7ef;
+  border-radius: var(--calvoro-radius);
+  background: #fff;
+}
+
+.calvoro-smartlink-copy {
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.calvoro-smartlink-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--calvoro-blue-light);
+  color: var(--calvoro-blue-dark);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.calvoro-smartlink-copy p {
+  margin: 10px 0 0;
+  color: var(--calvoro-muted);
+  font-size: .92rem;
+  line-height: 1.65;
+}
+
+.calvoro-smartlink-cta {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid #c7d7ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.calvoro-smartlink-cta:hover {
+  background: var(--calvoro-blue-light);
+}
+
+.calvoro-smartlink-cta:focus-visible {
+  outline: 3px solid var(--calvoro-blue);
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  .calvoro-smartlink-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calvoro-smartlink-cta {
+    width: 100%;
+  }
+}

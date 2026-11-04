@@ -91,6 +91,25 @@ function formatDailyDate(dateStamp) {
   });
 }
 
+function ProPushSmartLinkCard() {
+  return (
+    <aside className="calvoro-smartlink-card" aria-label="Sponsored offers">
+      <div className="calvoro-smartlink-copy">
+        <span className="calvoro-smartlink-badge">Advertisement</span>
+        <p>This link leads to third-party sponsored offers.</p>
+      </div>
+      <a
+        href="https://rm358.com/4/12192850?var={your_source_id}&ymid={your_clickid_here}"
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+        className="calvoro-smartlink-cta"
+      >
+        Sponsored Offers
+      </a>
+    </aside>
+  );
+}
+
 function Hub({ daily, dateStamp }) {
   const featured = GAMES.find((game) => game.id === getDailyGame(dateStamp));
 
@@ -139,6 +158,8 @@ function Hub({ daily, dateStamp }) {
             </article>
           ))}
         </div>
+
+        <ProPushSmartLinkCard />
       </div>
     );
   }
@@ -203,6 +224,8 @@ function Hub({ daily, dateStamp }) {
           </article>
         ))}
       </div>
+
+      <ProPushSmartLinkCard />
     </div>
   );
 }
