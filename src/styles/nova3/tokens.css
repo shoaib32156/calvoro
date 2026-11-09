@@ -1,0 +1,129 @@
+/* CALVORO design tokens — white interface, navy primary, gold accent.
+   Ported from the NOVA3 token architecture into plain CSS custom properties. */
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/QGYvz_MVcBeNP4NJtEtq.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/satoshi-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/satoshi-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/satoshi-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("/fonts/satoshi-900.woff2") format("woff2");
+}
+
+:root {
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-surface-dim: #eef2f8;
+  --color-surface-bright: #ffffff;
+  --color-on-surface: #0c1f3a;
+  --color-on-surface-variant: #4a5a72;
+  --color-outline: #c3cede;
+  --color-outline-variant: #e2e8f2;
+
+  /* Brand */
+  --color-brand-primary: #1d3e6e;
+  --color-brand-primary-bright: #2f5da8;
+  --color-brand-accent: #c99b3f;
+  --color-brand-accent-bright: #dbb45c;
+  --color-brand-dark: #0c1f3a;
+  --color-brand-light: #ffffff;
+  --color-brand-cream: #f4f7fb;
+
+  /* Semantic */
+  --color-success: #177245;
+  --color-success-container: #e0f2e9;
+  --color-warning: #b45309;
+  --color-warning-container: #fdf0dc;
+  --color-error: #b42318;
+  --color-error-container: #fde8e6;
+  --color-info: #1d5fa8;
+  --color-info-container: #e3eefb;
+
+  /* Category hues */
+  --color-cat-mathematics: #2563eb;
+  --color-cat-finance: #0e7f5b;
+  --color-cat-business: #b7791f;
+  --color-cat-datetime: #6d4fc2;
+  --color-cat-health: #c2453e;
+  --color-cat-education: #0e7490;
+  --color-cat-everyday: #c2611f;
+  --color-cat-fitness: #4d8b1f;
+  --color-cat-pdf: #b42318;
+  --color-cat-image: #7c3aed;
+  --color-cat-text: #2563eb;
+  --color-cat-developer: #334155;
+  --color-cat-productivity: #0e7f5b;
+  --color-cat-design: #be185d;
+  --color-cat-games: #b7791f;
+  --color-cat-ai: #1d3e6e;
+
+  /* Spacing & shape */
+  --spacing-container-px: clamp(1rem, 4vw, 4rem);
+  --spacing-section-py: clamp(3.25rem, 6.5vw, 5.5rem);
+  --ui-radius-sm: 0.5rem;
+  --ui-radius-base: 0.75rem;
+  --ui-radius-md: 1rem;
+  --ui-radius-lg: 1.5rem;
+  --ui-radius-xl: 2rem;
+  --ui-radius-full: 9999px;
+
+  /* Elevation */
+  --ui-elevation-soft: 0 14px 40px -24px rgb(12 31 58 / 0.25);
+  --ui-elevation-strong: 0 28px 80px -32px rgb(12 31 58 / 0.35);
+
+  /* Typography */
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ui-type-heading-tracking: -0.03em;
+  --ui-type-body-leading: 1.7;
+
+  --site-header-height: 4.75rem;
+  --ui-container: 76rem;
+
+  /* Legacy CALVORO tokens remapped onto the NOVA3 palette so every
+     existing calculator stylesheet inherits the new brand automatically. */
+  --calvoro-blue: var(--color-brand-primary);
+  --calvoro-blue-dark: var(--color-brand-dark);
+  --calvoro-blue-light: var(--color-brand-cream);
+  --calvoro-navy: var(--color-brand-dark);
+  --calvoro-navy-light: #142f55;
+  --calvoro-text: var(--color-brand-dark);
+  --calvoro-muted: var(--color-on-surface-variant);
+  --calvoro-border: var(--color-outline-variant);
+  --calvoro-border-dark: var(--color-outline);
+  --calvoro-bg: var(--color-brand-cream);
+  --calvoro-paper: #f7f9fc;
+  --calvoro-white: #ffffff;
+  --calvoro-radius: var(--ui-radius-md);
+  --calvoro-radius-small: var(--ui-radius-base);
+  --calvoro-shadow: var(--ui-elevation-soft);
+  --calvoro-shadow-hover: var(--ui-elevation-strong);
+}

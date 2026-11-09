@@ -1,92 +1,37 @@
 import { Link } from "react-router-dom";
 import SEO from "../SEO";
+import Breadcrumbs from "../components/editorial/Breadcrumbs.jsx";
 
 export default function PrivacyPolicy() {
-return (
-<div
-style={{
-minHeight: "100vh",
-background: "#f8fafc",
-fontFamily: "Arial, sans-serif",
-color: "#0f172a",
-}}
->
-<SEO />
-<header
-style={{
-background: "#2563eb",
-padding: "18px 20px",
-}}
->
-<div
-style={{
-maxWidth: "1100px",
-margin: "0 auto",
-display: "flex",
-justifyContent: "space-between",
-alignItems: "center",
-gap: "20px",
-}}
->
-<Link
-to="/"
-style={{
-color: "white",
-textDecoration: "none",
-fontSize: "24px",
-fontWeight: "800",
-}}
->
-CALVORO </Link>
+  return (
+    <div className="calvoro-content-page">
+      <SEO />
 
-      <Link
-        to="/"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          fontWeight: "600",
-        }}
-      >
-        Home
-      </Link>
-    </div>
-  </header>
+      <section className="calvoro-content-hero">
+        <div className="calvoro-container">
+          <div className="calvoro-content-hero-inner">
+            <Breadcrumbs
+              items={[{ label: "Home", to: "/" }, { label: "Privacy Policy" }]}
+            />
+            <span className="ui-eyebrow">Legal</span>
+            <h1>Privacy Policy</h1>
+            <span className="calvoro-content-updated">
+              Last updated: October 25, 2026
+            </span>
+            <p>
+              Welcome to CALVORO. Your privacy is important to us. This Privacy
+              Policy explains how information may be collected, used, and
+              protected when you use the CALVORO website and its online
+              calculators and tools.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  <main
-    style={{
-      maxWidth: "900px",
-      margin: "0 auto",
-      padding: "50px 20px",
-    }}
-  >
-    <article
-      style={{
-        background: "white",
-        padding: "40px",
-        borderRadius: "16px",
-        boxShadow: "0 8px 30px rgba(15, 23, 42, 0.06)",
-      }}
-    >
-      <h1
-        style={{
-          fontSize: "38px",
-          marginTop: 0,
-          marginBottom: "12px",
-        }}
-      >
-        Privacy Policy
-      </h1>
-
-      <p style={{ color: "#64748b" }}>
-        Last updated: October 25, 2026
-      </p>
-
-      <p>
-        Welcome to CALVORO. Your privacy is important to us. This Privacy
-        Policy explains how information may be collected, used, and
-        protected when you use the CALVORO website and its online
-        calculators and tools.
-      </p>
+      <main className="calvoro-content-main">
+        <div className="calvoro-container">
+          <div className="calvoro-content-layout">
+            <article className="calvoro-content-card">
 
       <h2>1. Information We Collect</h2>
 
@@ -318,28 +263,39 @@ CALVORO </Link>
         .
       </p>
 
-      <div
-        style={{
-          marginTop: "40px",
-          paddingTop: "25px",
-          borderTop: "1px solid #e2e8f0",
-        }}
-      >
-        <Link
-          to="/"
-          style={{
-            color: "#2563eb",
-            textDecoration: "none",
-            fontWeight: "600",
-          }}
-        >
-          ← Back to CALVORO
-        </Link>
-      </div>
-    </article>
-  </main>
-</div>
+              <div className="calvoro-content-footer">
+                <Link to="/" className="calvoro-text-link">
+                  ← Back to CALVORO
+                </Link>
+              </div>
+            </article>
 
-
-);
+            <aside className="calvoro-content-aside">
+              <div className="calvoro-content-aside-card">
+                <h2>Legal and help</h2>
+                <p>
+                  Read the terms that govern use of the site, or send a question
+                  about this policy.
+                </p>
+                <div className="calvoro-content-aside-links">
+                  <Link to="/terms">
+                    Terms &amp; Conditions
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link to="/contact">
+                    Contact CALVORO
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link to="/about">
+                    About CALVORO
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }

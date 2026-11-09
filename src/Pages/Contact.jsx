@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../SEO";
-import {
-  Mail,
-  MessageSquare,
-  Send,
-  CheckCircle,
-} from "lucide-react";
+import { Mail, MessageSquare, Send, CheckCircle } from "lucide-react";
+import Breadcrumbs from "../components/editorial/Breadcrumbs.jsx";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -38,115 +34,24 @@ export default function Contact() {
 
   if (sent) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "#f8fafc",
-          fontFamily: "Arial, sans-serif",
-        }}
-      >
+      <div className="calvoro-content-page">
         <SEO />
-        <header
-          style={{
-            background: "#2563eb",
-            padding: "18px 24px",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "1100px",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Link
-              to="/"
-              style={{
-                color: "white",
-                fontSize: "24px",
-                fontWeight: "800",
-                textDecoration: "none",
-              }}
-            >
-              CALVORO
-            </Link>
+        <main className="calvoro-content-main">
+          <div className="calvoro-container">
+            <div className="calvoro-contact-card calvoro-contact-success">
+              <CheckCircle size={56} aria-hidden="true" />
 
-            <Link
-              to="/"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                fontWeight: "600",
-              }}
-            >
-              ← Home
-            </Link>
-          </div>
-        </header>
+              <h2>Message Sent Successfully!</h2>
 
-        <main
-          style={{
-            maxWidth: "700px",
-            margin: "70px auto",
-            padding: "20px",
-          }}
-        >
-          <div
-            style={{
-              background: "white",
-              borderRadius: "20px",
-              padding: "50px 30px",
-              textAlign: "center",
-              boxShadow:
-                "0 10px 30px rgba(0,0,0,0.08)",
-            }}
-          >
-            <CheckCircle
-              size={70}
-              style={{
-                color: "#16a34a",
-                marginBottom: "20px",
-              }}
-            />
+              <p>
+                Thank you for contacting CALVORO. Your message has been
+                submitted successfully.
+              </p>
 
-            <h1
-              style={{
-                fontSize: "32px",
-                color: "#111827",
-                marginBottom: "15px",
-              }}
-            >
-              Message Sent Successfully!
-            </h1>
-
-            <p
-              style={{
-                color: "#6b7280",
-                fontSize: "17px",
-                lineHeight: "1.7",
-              }}
-            >
-              Thank you for contacting CALVORO.
-              Your message has been submitted successfully.
-            </p>
-
-            <Link
-              to="/"
-              style={{
-                display: "inline-block",
-                marginTop: "25px",
-                background: "#2563eb",
-                color: "white",
-                padding: "13px 25px",
-                borderRadius: "10px",
-                textDecoration: "none",
-                fontWeight: "700",
-              }}
-            >
-              Back to Home
-            </Link>
+              <Link to="/" className="calvoro-primary-button">
+                Back to Home
+              </Link>
+            </div>
           </div>
         </main>
       </div>
@@ -154,288 +59,91 @@ export default function Contact() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f8fafc",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
+    <div className="calvoro-content-page">
       <SEO />
-      <header
-        style={{
-          background: "#2563eb",
-          padding: "18px 24px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Link
-            to="/"
-            style={{
-              color: "white",
-              fontSize: "24px",
-              fontWeight: "800",
-              textDecoration: "none",
-            }}
-          >
-            CALVORO
-          </Link>
 
-          <Link
-            to="/"
-            style={{
-              color: "white",
-              textDecoration: "none",
-              fontWeight: "600",
-            }}
-          >
-            ← Home
-          </Link>
-        </div>
-      </header>
-
-      <main
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "60px 20px",
-        }}
-      >
-        <div
-          style={{
-            textAlign: "center",
-            marginBottom: "45px",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "42px",
-              color: "#111827",
-              marginBottom: "12px",
-            }}
-          >
-            Contact CALVORO
-          </h1>
-
-          <p
-            style={{
-              color: "#6b7280",
-              fontSize: "18px",
-            }}
-          >
-            Have a question, suggestion, or need help?
-            Send us a message.
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "30px",
-          }}
-        >
-          <div
-            style={{
-              background: "white",
-              padding: "35px",
-              borderRadius: "18px",
-              boxShadow:
-                "0 8px 25px rgba(0,0,0,0.07)",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginBottom: "20px",
-              }}
-            >
-              <Mail
-                size={28}
-                style={{ color: "#2563eb" }}
-              />
-
-              <h2
-                style={{
-                  margin: 0,
-                  color: "#111827",
-                }}
-              >
-                Get in Touch
-              </h2>
-            </div>
-
-            <p
-              style={{
-                color: "#6b7280",
-                lineHeight: "1.7",
-              }}
-            >
-              We are here to help with questions about
-              CALVORO calculators, features, suggestions,
-              and technical issues.
+      <section className="calvoro-content-hero">
+        <div className="calvoro-container">
+          <div className="calvoro-content-hero-inner">
+            <Breadcrumbs
+              items={[{ label: "Home", to: "/" }, { label: "Contact" }]}
+            />
+            <span className="ui-eyebrow">Contact</span>
+            <h1>Contact CALVORO</h1>
+            <p>
+              Have a question, suggestion, or need help? Send us a message.
             </p>
-
-            <div
-              style={{
-                marginTop: "30px",
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-              }}
-            >
-              <MessageSquare
-                size={24}
-                style={{ color: "#2563eb" }}
-              />
-
-              <span style={{ color: "#374151" }}>
-                Support & Feedback
-              </span>
-            </div>
           </div>
+        </div>
+      </section>
 
-          <div
-            style={{
-              background: "white",
-              padding: "35px",
-              borderRadius: "18px",
-              boxShadow:
-                "0 8px 25px rgba(0,0,0,0.07)",
-            }}
-          >
-            <h2
-              style={{
-                marginTop: 0,
-                marginBottom: "25px",
-                color: "#111827",
-              }}
-            >
-              Send Us a Message
-            </h2>
+      <main className="calvoro-content-main">
+        <div className="calvoro-container">
+          <div className="calvoro-contact-grid">
+            <div className="calvoro-contact-card">
+              <h2>Send Us a Message</h2>
 
-            <form onSubmit={handleSubmit}>
-              <label
-                htmlFor="contact-name"
-                style={{
-                  display: "block",
-                  marginBottom: "8px",
-                  fontWeight: "600",
-                  color: "#374151",
-                }}
-              >
-                Name
-              </label>
+              <form className="calvoro-contact-form" onSubmit={handleSubmit}>
+                <div className="calvoro-contact-field">
+                  <label htmlFor="contact-name">Name</label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
 
-              <input
-                id="contact-name"
-                type="text"
-                name="name"
-                placeholder="Your name"
-                required
-                style={{
-                  width: "100%",
-                  boxSizing: "border-box",
-                  padding: "14px",
-                  marginBottom: "20px",
-                  border: "1px solid #d1d5db",
-                  borderRadius: "9px",
-                  fontSize: "16px",
-                }}
-              />
+                <div className="calvoro-contact-field">
+                  <label htmlFor="contact-email">Email</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    placeholder="your@email.com"
+                    required
+                  />
+                </div>
 
-              <label
-                htmlFor="contact-email"
-                style={{
-                  display: "block",
-                  marginBottom: "8px",
-                  fontWeight: "600",
-                  color: "#374151",
-                }}
-              >
-                Email
-              </label>
+                <div className="calvoro-contact-field">
+                  <label htmlFor="contact-message">Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    placeholder="Write your message..."
+                    required
+                    rows="6"
+                  />
+                </div>
 
-              <input
-                id="contact-email"
-                type="email"
-                name="email"
-                placeholder="your@email.com"
-                required
-                style={{
-                  width: "100%",
-                  boxSizing: "border-box",
-                  padding: "14px",
-                  marginBottom: "20px",
-                  border: "1px solid #d1d5db",
-                  borderRadius: "9px",
-                  fontSize: "16px",
-                }}
-              />
+                <button type="submit" className="calvoro-primary-button">
+                  <Send size={19} aria-hidden="true" />
+                  Send Message
+                </button>
+              </form>
+            </div>
 
-              <label
-                htmlFor="contact-message"
-                style={{
-                  display: "block",
-                  marginBottom: "8px",
-                  fontWeight: "600",
-                  color: "#374151",
-                }}
-              >
-                Message
-              </label>
+            <aside className="calvoro-contact-info">
+              <div className="calvoro-contact-card">
+                <div className="calvoro-contact-heading">
+                  <Mail size={24} aria-hidden="true" />
+                  <h2>Get in Touch</h2>
+                </div>
 
-              <textarea
-                id="contact-message"
-                name="message"
-                placeholder="Write your message..."
-                required
-                rows="6"
-                style={{
-                  width: "100%",
-                  boxSizing: "border-box",
-                  padding: "14px",
-                  marginBottom: "20px",
-                  border: "1px solid #d1d5db",
-                  borderRadius: "9px",
-                  fontSize: "16px",
-                  resize: "vertical",
-                }}
-              />
+                <p>
+                  We are here to help with questions about CALVORO calculators,
+                  features, suggestions, and technical issues.
+                </p>
 
-              <button
-                type="submit"
-                style={{
-                  width: "100%",
-                  padding: "15px",
-                  background: "#2563eb",
-                  color: "white",
-                  border: "none",
-                  borderRadius: "10px",
-                  fontSize: "16px",
-                  fontWeight: "700",
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "10px",
-                }}
-              >
-                <Send size={19} />
-                Send Message
-              </button>
-            </form>
+                <div className="calvoro-contact-item">
+                  <MessageSquare size={24} aria-hidden="true" />
+                  <div>
+                    <strong>Support & Feedback</strong>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
         </div>
       </main>

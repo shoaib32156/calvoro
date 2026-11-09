@@ -1,0 +1,609 @@
+/* CALVORO homepage bands, hero and marketing sections. */
+
+.calvoro-hero-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-brand-light);
+}
+
+.calvoro-hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38rem 20rem at 50% -6rem, rgb(47 93 168 / 0.12), transparent 70%),
+    radial-gradient(24rem 18rem at 92% 18%, rgb(201 155 63 / 0.14), transparent 70%),
+    radial-gradient(22rem 16rem at 4% 40%, rgb(37 99 235 / 0.07), transparent 70%);
+}
+
+.calvoro-hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    linear-gradient(rgb(29 62 110 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(29 62 110 / 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 72% 62% at 50% 34%, #000 28%, transparent 76%);
+  -webkit-mask-image: radial-gradient(ellipse 72% 62% at 50% 34%, #000 28%, transparent 76%);
+}
+
+.calvoro-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding-block: clamp(3.25rem, 7vw, 5.5rem) clamp(3rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.calvoro-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  border: 1px solid color-mix(in oklab, var(--color-brand-primary) 16%, white);
+  border-radius: var(--ui-radius-full);
+  background: color-mix(in oklab, var(--color-brand-primary) 6%, white);
+  color: var(--color-brand-primary);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.calvoro-hero-badge svg { color: var(--color-brand-accent); }
+
+.calvoro-hero-inner h1 {
+  margin-top: 1.4rem;
+  font-size: clamp(2.3rem, calc(1.5rem + 3.6vw), 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-hero-inner h1 em {
+  font-style: normal;
+  color: var(--color-brand-primary-bright);
+}
+
+.calvoro-hero-lead {
+  max-width: 40rem;
+  margin: 1.15rem 0 0;
+  font-size: clamp(1rem, calc(0.9rem + 0.4vw), 1.125rem);
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--color-brand-dark) 64%, white);
+}
+
+.calvoro-hero-search-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1.9rem;
+}
+
+.calvoro-hero-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+  font-size: 0.85rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 45%, white);
+}
+
+.calvoro-hero-quicklinks a {
+  padding: 0.32rem 0.8rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 70%, white);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.calvoro-hero-quicklinks a:hover {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  width: 100%;
+  max-width: 40rem;
+  margin-top: 2.6rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: var(--color-outline-variant);
+  overflow: hidden;
+}
+
+.calvoro-hero-stat {
+  padding: 1rem;
+  background: #fff;
+  text-align: center;
+}
+
+.calvoro-hero-stat strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  line-height: 1.1;
+}
+
+.calvoro-hero-stat span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-brand-dark) 50%, white);
+}
+
+/* Bands */
+
+.calvoro-home-band {
+  padding-block: var(--spacing-section-py);
+}
+
+.calvoro-home-band.is-cream { background: var(--color-brand-cream); }
+.calvoro-home-band.is-white { background: #fff; }
+.calvoro-home-band.is-dark {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(44rem 22rem at 88% -10%, rgb(47 93 168 / 0.45), transparent 65%),
+    radial-gradient(32rem 18rem at 0% 110%, rgb(201 155 63 / 0.18), transparent 65%),
+    var(--color-brand-dark);
+  color: #fff;
+}
+
+.calvoro-home-band.is-dark h2,
+.calvoro-home-band.is-dark h3 { color: #fff; }
+
+.calvoro-band-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.calvoro-band-head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  max-width: 42rem;
+}
+
+.calvoro-band-head-text h2 {
+  font-size: clamp(1.65rem, calc(1.3rem + 2vw), 2.6rem);
+  line-height: 1.1;
+}
+
+.calvoro-band-head-text h2 em {
+  font-style: normal;
+  color: var(--color-brand-primary-bright);
+}
+
+.calvoro-band-head-text p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+}
+
+.calvoro-home-band.is-dark .calvoro-band-head-text p { color: rgb(255 255 255 / 0.66); }
+
+.calvoro-band-head.is-centered { flex-direction: column; align-items: center; text-align: center; }
+.calvoro-band-head.is-centered .calvoro-band-head-text { align-items: center; }
+
+/* Trust band */
+
+.calvoro-trust-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.calvoro-trust-card {
+  padding: 1.5rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: var(--ui-radius-lg);
+  background: rgb(255 255 255 / 0.06);
+  transition: border-color 240ms ease, background-color 240ms ease;
+}
+
+.calvoro-trust-card:hover {
+  border-color: color-mix(in oklab, var(--color-brand-accent) 45%, transparent);
+  background: rgb(255 255 255 / 0.09);
+}
+
+.calvoro-trust-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--ui-radius-base);
+  background: color-mix(in oklab, var(--color-brand-accent) 18%, transparent);
+  color: var(--color-brand-accent);
+}
+
+.calvoro-trust-card h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.calvoro-trust-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: rgb(255 255 255 / 0.64);
+}
+
+/* Steps */
+
+.calvoro-steps-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.calvoro-step-card {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.5rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+.calvoro-step-number {
+  position: absolute;
+  top: -1rem;
+  left: 1.5rem;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--ui-radius-full);
+  background: var(--color-brand-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 10px 22px -12px rgb(29 62 110 / 0.9);
+}
+
+.calvoro-step-card svg { color: var(--color-brand-primary-bright); }
+
+.calvoro-step-card h3 {
+  margin: 0.7rem 0 0.4rem;
+  font-size: 1.1rem;
+}
+
+.calvoro-step-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+/* AI cards */
+
+.calvoro-ai-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.calvoro-ai-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.4rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  color: var(--color-brand-dark);
+  text-decoration: none;
+  transition: transform 240ms cubic-bezier(0.33, 1, 0.68, 1), box-shadow 240ms ease, border-color 240ms ease;
+}
+
+.calvoro-ai-card:hover {
+  transform: translateY(-0.25rem);
+  border-color: color-mix(in oklab, var(--color-brand-primary) 32%, var(--color-outline));
+  box-shadow: 0 1.5rem 3.5rem color-mix(in oklab, var(--color-brand-dark) 12%, transparent);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-ai-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.calvoro-ai-icon {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.65rem;
+  background: color-mix(in oklab, var(--color-brand-primary) 8%, white);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-ai-badge {
+  padding: 0.24rem 0.55rem;
+  border-radius: var(--ui-radius-full);
+  background: var(--color-success-container);
+  color: var(--color-success);
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.calvoro-ai-card h3 {
+  margin: 0.95rem 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.calvoro-ai-card p {
+  flex: 1;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-brand-primary);
+}
+
+/* Homepage SEO guide */
+
+.calvoro-home-guide {
+  background: var(--color-brand-cream);
+}
+
+.calvoro-home-guide-inner {
+  max-width: 52rem;
+}
+
+.calvoro-home-guide-inner h2 { margin-bottom: 1rem; }
+
+.calvoro-home-guide-inner h3 {
+  margin: 2rem 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+.calvoro-home-guide-inner p {
+  color: color-mix(in oklab, var(--color-brand-dark) 64%, white);
+}
+
+.calvoro-home-guide-list {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 64%, white);
+}
+
+.calvoro-home-guide-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.65;
+}
+
+.calvoro-home-guide-list strong { color: var(--color-brand-dark); }
+
+.calvoro-home-guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+/* FAQ (shared with calculator guides) */
+
+.calvoro-faq-list {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.calvoro-faq-item {
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: #fff;
+}
+
+.calvoro-faq-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.05rem 1.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-brand-dark);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  transition: color 180ms ease;
+}
+
+.calvoro-faq-button:hover { color: var(--color-brand-primary); }
+
+.calvoro-faq-button span:last-child {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  flex-shrink: 0;
+  border-radius: var(--ui-radius-full);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-primary);
+  font-size: 1rem;
+  transition: transform 240ms ease;
+}
+
+.calvoro-faq-item.is-open .calvoro-faq-button span:last-child { transform: rotate(45deg); }
+
+.calvoro-faq-panel {
+  padding: 0 1.25rem 1.2rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.calvoro-faq-panel p { margin: 0; }
+
+/* How it works */
+
+.calvoro-how-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.calvoro-how-card {
+  padding: 1.6rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+.calvoro-how-number {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--ui-radius-full);
+  background: color-mix(in oklab, var(--color-brand-primary) 9%, white);
+  color: var(--color-brand-primary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.calvoro-how-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+
+.calvoro-how-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+/* Final CTA */
+
+.calvoro-cta-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-brand-dark);
+  color: #fff;
+}
+
+.calvoro-cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(36rem 18rem at 92% -20%, rgb(47 93 168 / 0.55), transparent 65%),
+    radial-gradient(26rem 16rem at 4% 120%, rgb(201 155 63 / 0.22), transparent 65%);
+}
+
+.calvoro-cta-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+}
+
+.calvoro-cta-inner h2 {
+  max-width: 34rem;
+  color: #fff;
+  font-size: clamp(1.8rem, calc(1.4rem + 2.2vw), 2.8rem);
+}
+
+.calvoro-cta-inner h2 em { font-style: normal; color: var(--color-brand-accent); }
+
+.calvoro-cta-inner p {
+  max-width: 34rem;
+  margin: 0;
+  color: rgb(255 255 255 / 0.66);
+}
+
+.calvoro-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.calvoro-cta-section .calvoro-primary-button {
+  background: var(--color-brand-accent);
+  color: var(--color-brand-dark);
+  box-shadow: none;
+}
+
+.calvoro-cta-section .calvoro-primary-button:hover {
+  background: var(--color-brand-accent-bright);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-cta-section .calvoro-secondary-button {
+  background: transparent;
+  border-color: rgb(255 255 255 / 0.28);
+  color: #fff;
+}
+
+.calvoro-cta-section .calvoro-secondary-button:hover {
+  border-color: var(--color-brand-accent);
+  background: rgb(255 255 255 / 0.06);
+  color: var(--color-brand-accent);
+}
+
+@media (min-width: 640px) {
+  .calvoro-hero-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .calvoro-trust-grid,
+  .calvoro-steps-grid,
+  .calvoro-ai-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .calvoro-how-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .calvoro-trust-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .calvoro-ai-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

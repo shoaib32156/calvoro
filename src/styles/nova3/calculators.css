@@ -1,0 +1,668 @@
+/* CALVORO calculator shell and generic calculator controls.
+   Page-specific calculator CSS keeps its formulas and markup; this layer
+   restyles the shared surfaces, controls and results around them. */
+
+#root .calvoro-universal-calculator-page,
+#root .calvoro-calculator-page {
+  min-height: 0;
+  background: var(--color-brand-light);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-calc-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background:
+    radial-gradient(34rem 16rem at 88% -30%, rgb(201 155 63 / 0.13), transparent 65%),
+    radial-gradient(38rem 20rem at 6% -10%, rgb(47 93 168 / 0.09), transparent 65%),
+    #fff;
+}
+
+.calvoro-calc-hero-inner {
+  padding-block: 1.6rem 2.6rem;
+}
+
+.calvoro-calc-hero .calvoro-universal-breadcrumb {
+  margin-bottom: 1.6rem;
+}
+
+.calvoro-calc-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.calvoro-calc-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.75rem;
+  border: 1px solid color-mix(in oklab, var(--cat, var(--color-brand-primary)) 24%, white);
+  border-radius: var(--ui-radius-full);
+  background: color-mix(in oklab, var(--cat, var(--color-brand-primary)) 8%, white);
+  color: var(--cat, var(--color-brand-primary));
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.calvoro-calc-hero h1 {
+  margin: 0.8rem 0 0.55rem;
+  font-size: clamp(2rem, calc(1.4rem + 2.6vw), 3.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.calvoro-calc-hero p {
+  max-width: 42rem;
+  margin: 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.calvoro-calc-hero-icon {
+  display: grid;
+  place-items: center;
+  width: 5.25rem;
+  height: 5.25rem;
+  border: 1px solid color-mix(in oklab, var(--cat, var(--color-brand-primary)) 22%, white);
+  border-radius: var(--ui-radius-lg);
+  background: color-mix(in oklab, var(--cat, var(--color-brand-primary)) 9%, white);
+  color: var(--cat, var(--color-brand-primary));
+}
+
+.calvoro-calc-hero-icon svg { width: 2rem; height: 2rem; }
+
+.calvoro-calc-main {
+  padding-block: clamp(2rem, 4vw, 3.25rem) clamp(3rem, 6vw, 5rem);
+}
+
+.calvoro-calc-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.calvoro-calc-panel {
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-calc-panel-head {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background: #fff;
+}
+
+.calvoro-calc-panel-kicker {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+.calvoro-calc-panel-head h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.calvoro-calc-panel-body {
+  padding: clamp(1.1rem, 2.4vw, 1.75rem);
+}
+
+/* The embedded calculator owns its own page chrome. Neutralise it. */
+#root .calvoro-calc-panel-body > div:first-child {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+#root .calvoro-universal-tool header,
+#root .calvoro-universal-tool footer {
+  display: none !important;
+}
+
+/* Hide duplicate internal page heroes and back links across calculators. */
+#root .calvoro-universal-tool [class$="-breadcrumb"],
+#root .calvoro-universal-tool [class$="-back"],
+#root .calvoro-universal-tool .back-home,
+#root .calvoro-universal-tool .calvoro-percentage-hero,
+#root .calvoro-universal-tool .calvoro-percentage-sidebar {
+  display: none !important;
+}
+
+#root .calvoro-universal-tool :is(
+  .age-header,
+  .average-header,
+  .bmi-header,
+  .breakeven-header,
+  .compound-header,
+  .date-difference-header,
+  .discount-header,
+  .distance-header,
+  .emi-header,
+  .fraction-header,
+  .fuel-header,
+  .future-value-header,
+  .gpa-header,
+  .inflation-header,
+  .investment-header,
+  .loan-header,
+  .mortgage-header,
+  .net-worth-header,
+  .pace-header,
+  .payback-header,
+  .percentage-change-header,
+  .present-value-header,
+  .profit-header,
+  .roi-header,
+  .ratio-header,
+  .running-pace-header,
+  .running-speed-header,
+  .running-time-header,
+  .salary-header,
+  .savings-header,
+  .speed-header,
+  .tax-header,
+  .duration-header,
+  .time-run-header,
+  .tip-header
+) {
+  display: none !important;
+}
+
+/* Internal calculator containers become flat. */
+#root .calvoro-universal-tool [class$="-container"] {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Inputs, selects and textareas */
+
+#root .calvoro-universal-tool input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+#root .calvoro-universal-tool textarea,
+#root .calvoro-universal-tool select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+  color: var(--color-brand-dark);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+#root .calvoro-universal-tool input:focus,
+#root .calvoro-universal-tool textarea:focus,
+#root .calvoro-universal-tool select:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-brand-primary) 12%, transparent);
+}
+
+#root .calvoro-universal-tool input::placeholder,
+#root .calvoro-universal-tool textarea::placeholder {
+  color: color-mix(in oklab, var(--color-brand-dark) 32%, white);
+  font-weight: 400;
+}
+
+#root .calvoro-universal-tool label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 78%, white);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+#root .calvoro-universal-tool input[type="range"] {
+  accent-color: var(--color-brand-primary);
+}
+
+#root .calvoro-universal-tool input[type="checkbox"],
+#root .calvoro-universal-tool input[type="radio"] {
+  accent-color: var(--color-brand-primary);
+}
+
+/* Buttons */
+
+#root .calvoro-universal-tool button {
+  min-height: 44px;
+  padding: 0.6rem 1.2rem;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 76%, white);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+#root .calvoro-universal-tool button:hover {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+#root .calvoro-universal-tool :is(
+  [class*="calculate"],
+  [class*="primary"],
+  [class*="submit"],
+  .loan-calculate-btn,
+  .payback-calculate-btn
+) {
+  border-color: var(--color-brand-primary);
+  background: var(--color-brand-primary);
+  color: #fff;
+  box-shadow: 0 12px 26px -18px rgb(29 62 110 / 0.9);
+}
+
+#root .calvoro-universal-tool :is(
+  [class*="calculate"]:hover,
+  [class*="primary"]:hover,
+  [class*="submit"]:hover,
+  .loan-calculate-btn:hover,
+  .payback-calculate-btn:hover
+) {
+  border-color: var(--color-brand-dark);
+  background: var(--color-brand-dark);
+  color: #fff;
+}
+
+#root .calvoro-universal-tool :is([class*="clear"], [class*="reset"]) {
+  background: #fff;
+  border-color: var(--color-outline);
+  color: color-mix(in oklab, var(--color-brand-dark) 66%, white);
+}
+
+/* Result surfaces */
+
+#root .calvoro-universal-tool [class$="-result"],
+#root .calvoro-universal-tool .percentage-result {
+  border: 0;
+  border-radius: var(--ui-radius-lg);
+  background:
+    radial-gradient(28rem 12rem at 100% 0%, rgb(47 93 168 / 0.45), transparent 65%),
+    var(--color-brand-dark);
+  color: #fff;
+  padding: 1.5rem;
+  box-shadow: none;
+}
+
+#root .calvoro-universal-tool [class$="-result"] :is(h2, h3, strong, p, span, div, small, label),
+#root .calvoro-universal-tool .percentage-result :is(h2, h3, strong, p, span, div, small) {
+  color: inherit;
+}
+
+#root .calvoro-universal-tool [class$="-result"] :is(.summary-box, .age-box, .result-box) {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: var(--ui-radius-base);
+  background: rgb(255 255 255 / 0.07);
+}
+
+#root .calvoro-universal-tool .summary-box strong,
+#root .calvoro-universal-tool .age-box strong,
+#root .calvoro-universal-tool .monthly-payment,
+#root .calvoro-universal-tool .percentage-result strong {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cards inside calculators */
+
+#root .calvoro-universal-tool :is(.loan-card, .age-card, .bmi-card, .emi-card, .tip-card, .discount-card, .percentage-card, .calvoro-percentage-card) {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#root .calvoro-universal-tool :is(
+  .loan-input-grid,
+  .input-grid,
+  .bmi-form,
+  .emi-form,
+  .tip-form,
+  .discount-form
+) {
+  gap: 1rem;
+}
+
+#root .calvoro-universal-tool .calvoro-percentage-layout,
+#root .calvoro-universal-tool .percentage-layout {
+  grid-template-columns: minmax(0, 1fr) !important;
+  display: block !important;
+}
+
+#root .calvoro-universal-tool .calvoro-percentage-card {
+  overflow: visible;
+}
+
+#root .calvoro-universal-tool .calvoro-percentage-card-header,
+#root .calvoro-universal-tool .percentage-card-header {
+  display: none !important;
+}
+
+#root .calvoro-universal-tool .calvoro-percentage-form-area,
+#root .calvoro-universal-tool .percentage-form-area {
+  padding: 0;
+}
+
+#root .calvoro-universal-tool .calvoro-percentage-info {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+/* Tables */
+
+#root .calvoro-universal-tool table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+#root .calvoro-universal-tool th {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--color-outline);
+  color: var(--color-brand-dark);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+#root .calvoro-universal-tool td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+  color: color-mix(in oklab, var(--color-brand-dark) 72%, white);
+}
+
+/* Guide */
+
+#root .calvoro-calc-guide-wrap {
+  margin-top: 1.5rem;
+}
+
+#root .calvoro-calculator-guide {
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+#root .calvoro-guide-header {
+  padding: 1.4rem 1.6rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background: var(--color-brand-cream);
+}
+
+#root .calvoro-guide-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+#root .calvoro-guide-header h2 { margin: 0; font-size: 1.35rem; }
+
+#root .calvoro-guide-body { padding: 1.6rem; }
+
+#root .calvoro-guide-section { margin-bottom: 1.75rem; }
+#root .calvoro-guide-section:last-child { margin-bottom: 0; }
+
+#root .calvoro-guide-section h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
+}
+
+#root .calvoro-guide-section p,
+#root .calvoro-guide-section li {
+  color: color-mix(in oklab, var(--color-brand-dark) 64%, white);
+  font-size: 0.925rem;
+  line-height: 1.7;
+}
+
+#root .calvoro-guide-formula,
+#root .calvoro-guide-example,
+#root .calvoro-guide-note {
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--color-outline-variant);
+  border-left: 3px solid var(--color-brand-accent);
+  border-radius: var(--ui-radius-base);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+  font-size: 0.925rem;
+  line-height: 1.65;
+}
+
+#root .calvoro-guide-steps { display: grid; gap: 0.75rem; }
+
+#root .calvoro-guide-step {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+}
+
+#root .calvoro-guide-step-number {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  border-radius: var(--ui-radius-full);
+  background: var(--color-brand-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+#root .calvoro-guide-faq details {
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+#root .calvoro-guide-faq summary {
+  padding: 0.9rem 0;
+  color: var(--color-brand-dark);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#root .calvoro-guide-faq p {
+  padding-bottom: 0.9rem;
+  margin: 0;
+}
+
+/* Sidebar */
+
+.calvoro-calc-sidebar {
+  display: grid;
+  gap: 1rem;
+}
+
+.calvoro-calc-side-card {
+  padding: 1.4rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+.calvoro-calc-side-kicker {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+.calvoro-calc-side-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.85rem;
+  border-radius: var(--ui-radius-base);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-calc-side-card h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+}
+
+.calvoro-calc-side-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-calc-side-tag {
+  display: inline-flex;
+  margin-top: 0.9rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--ui-radius-full);
+  background: var(--color-brand-cream);
+  color: color-mix(in oklab, var(--color-brand-dark) 58%, white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.calvoro-calc-related {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.calvoro-calc-related-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+  color: var(--color-brand-dark);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease;
+}
+
+.calvoro-calc-related-link small {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: color-mix(in oklab, var(--color-brand-dark) 50%, white);
+}
+
+.calvoro-calc-related-link:hover {
+  border-color: var(--color-brand-primary);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-calc-journal {
+  background:
+    radial-gradient(24rem 10rem at 100% 0%, rgb(47 93 168 / 0.5), transparent 65%),
+    var(--color-brand-dark);
+  border-color: transparent;
+  color: #fff;
+}
+
+.calvoro-calc-journal h3 { color: #fff; }
+.calvoro-calc-journal p { color: rgb(255 255 255 / 0.66); }
+.calvoro-calc-journal .calvoro-calc-side-kicker { color: var(--color-brand-accent); }
+
+.calvoro-calc-journal .calvoro-calc-related-link {
+  margin-top: 0.9rem;
+  border-color: rgb(255 255 255 / 0.2);
+  background: transparent;
+  color: #fff;
+}
+
+.calvoro-calc-journal .calvoro-calc-related-link:hover {
+  border-color: var(--color-brand-accent);
+  background: rgb(255 255 255 / 0.08);
+  color: var(--color-brand-accent);
+}
+
+@media (min-width: 640px) {
+  .calvoro-calc-layout { gap: 1.75rem; }
+}
+
+@media (min-width: 900px) {
+  .calvoro-calc-layout {
+    grid-template-columns: minmax(0, 1fr) 19rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .calvoro-calc-hero-grid {
+    grid-template-columns: minmax(0, 1fr) 3.5rem;
+    gap: 1rem;
+  }
+
+  .calvoro-calc-hero-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--ui-radius-md);
+  }
+
+  .calvoro-calc-hero-icon svg { width: 1.5rem; height: 1.5rem; }
+
+  .calvoro-calc-panel-body { padding: 1rem; }
+
+  #root .calvoro-calc-panel-body button { width: 100%; }
+
+  #root .calvoro-universal-tool :is(.loan-buttons, .age-buttons, .bmi-buttons, .emi-buttons, .tip-buttons, .discount-buttons) {
+    flex-direction: column;
+  }
+}

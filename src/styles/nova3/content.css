@@ -1,0 +1,1213 @@
+/* CALVORO content layer — directory, journal, articles, browser tools,
+   legal pages and the 404 screen. Legacy page styles are recoloured onto
+   the NOVA3 palette without changing markup contracts or content. */
+
+/* ---------------------------------------------------------------
+   Shared page hero
+--------------------------------------------------------------- */
+
+.calvoro-page-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background:
+    radial-gradient(34rem 18rem at 88% -20%, rgb(201 155 63 / 0.14), transparent 65%),
+    radial-gradient(42rem 22rem at 0% -10%, rgb(47 93 168 / 0.1), transparent 65%),
+    #fff;
+}
+
+.calvoro-page-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(2.25rem, 5vw, 3.75rem) clamp(2rem, 4vw, 3rem);
+}
+
+.calvoro-page-hero .calvoro-breadcrumbs,
+.calvoro-page-hero .calvoro-universal-breadcrumb {
+  margin-bottom: 1.5rem;
+}
+
+.calvoro-page-hero h1 {
+  max-width: 46rem;
+  margin: 0.85rem 0 0.7rem;
+  font-size: clamp(2.2rem, calc(1.5rem + 3vw), 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.calvoro-page-hero p {
+  max-width: 44rem;
+  margin: 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.calvoro-page-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.4rem;
+}
+
+.calvoro-page-hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 66%, white);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.calvoro-page-hero-chip svg { color: var(--color-brand-accent); }
+
+/* ---------------------------------------------------------------
+   Tools directory
+--------------------------------------------------------------- */
+
+.calvoro-tools-page {
+  background: var(--color-brand-light);
+}
+
+.calvoro-tools-main {
+  padding-block: clamp(2rem, 4vw, 3.25rem) clamp(3.5rem, 7vw, 5.5rem);
+  background: var(--color-brand-cream);
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.calvoro-directory-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+  padding: 1.1rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-directory-toolbar > label:not(.calvoro-tools-sort) {
+  flex: 1 1 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--color-brand-dark) 72%, white);
+}
+
+.calvoro-directory-toolbar label > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.calvoro-directory-toolbar .calvoro-search-input {
+  min-height: 46px;
+}
+
+.calvoro-directory-toolbar .calvoro-clear-filters {
+  min-height: 46px;
+  white-space: nowrap;
+}
+
+.calvoro-tools-sort {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--color-brand-dark) 72%, white);
+}
+
+.calvoro-tools-sort select {
+  min-height: 46px;
+  padding: 0.55rem 2.2rem 0.55rem 0.85rem;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+  color: var(--color-brand-dark);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.calvoro-tools-sort select:focus {
+  outline: none;
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-brand-primary) 12%, transparent);
+}
+
+.calvoro-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: calc(var(--site-header-height) + 1rem);
+}
+
+.calvoro-category-row .calvoro-category {
+  min-height: 42px;
+}
+
+.calvoro-calculator-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.calvoro-calculator-grid .calvoro-calculator-card {
+  min-height: 12rem;
+}
+
+/* ---------------------------------------------------------------
+   Legacy home aliases shared by FAQ, How it works, SEO content
+--------------------------------------------------------------- */
+
+.calvoro-home-section {
+  padding-block: var(--spacing-section-py);
+}
+
+.calvoro-paper-band { background: var(--color-brand-cream); }
+
+.calvoro-white-band {
+  background: #fff;
+  border-block: 1px solid var(--color-outline-variant);
+}
+
+.calvoro-light-band { background: color-mix(in oklab, var(--color-brand-cream) 55%, white); }
+
+.calvoro-component-band { background: #fff; }
+
+.calvoro-section-heading {
+  max-width: 46rem;
+  margin: 0 auto clamp(2rem, 4vw, 2.75rem);
+  text-align: center;
+  padding-inline: 0.5rem;
+}
+
+.calvoro-section-heading h2,
+.calvoro-editorial-heading h2 {
+  margin: 0.9rem 0 0.65rem;
+  font-size: clamp(1.7rem, calc(1.35rem + 1.8vw), 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.calvoro-section-heading p,
+.calvoro-editorial-heading p {
+  margin: 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.calvoro-editorial-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.calvoro-editorial-heading > div { max-width: 44rem; }
+
+.calvoro-tool-count {
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.calvoro-about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem;
+}
+
+.calvoro-about-layout h2 {
+  margin: 0.9rem 0 0;
+  font-size: clamp(1.7rem, calc(1.35rem + 1.8vw), 2.5rem);
+}
+
+.calvoro-about-text {
+  margin: 0 0 1rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 64%, white);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.calvoro-faq { background: #fff; }
+.calvoro-how { background: var(--color-brand-cream); }
+
+/* ---------------------------------------------------------------
+   Journal and article pages
+--------------------------------------------------------------- */
+
+.calvoro-journal-page,
+.calvoro-article-page {
+  background: var(--color-brand-light);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-journal-hero,
+.calvoro-article-hero {
+  background:
+    radial-gradient(44rem 22rem at 88% -18%, rgb(47 93 168 / 0.48), transparent 62%),
+    radial-gradient(32rem 18rem at 2% 120%, rgb(201 155 63 / 0.2), transparent 62%),
+    var(--color-brand-dark);
+  color: #fff;
+}
+
+.calvoro-journal-hero {
+  padding-block: 2.25rem 3.75rem;
+}
+
+.calvoro-article-hero {
+  padding-block: 2.25rem 4rem;
+}
+
+.calvoro-journal-kicker,
+.calvoro-article-section-kicker {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+.calvoro-journal-hero .calvoro-journal-kicker,
+.calvoro-article-hero .calvoro-journal-kicker {
+  color: var(--color-brand-accent-bright);
+}
+
+.calvoro-journal-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, calc(1.5rem + 3vw), 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: #fff;
+}
+
+.calvoro-journal-hero p {
+  color: rgb(255 255 255 / 0.72);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.calvoro-journal-stats div {
+  border-color: rgb(255 255 255 / 0.14);
+  border-radius: var(--ui-radius-md);
+  background: rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(8px);
+}
+
+.calvoro-journal-stats dt {
+  font-family: var(--font-heading);
+  color: rgb(255 255 255 / 0.58);
+}
+
+.calvoro-journal-stats dd {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-brand-accent-bright);
+}
+
+.calvoro-journal-main {
+  padding-block: clamp(2.25rem, 4vw, 3.25rem) clamp(3.5rem, 7vw, 5rem);
+  background: var(--color-brand-cream);
+}
+
+.calvoro-journal-featured,
+.calvoro-journal-side-card,
+.calvoro-journal-mini-card,
+.calvoro-editorial-card {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-journal-featured {
+  overflow: hidden;
+}
+
+.calvoro-journal-featured-lead:hover { color: inherit; }
+
+.calvoro-journal-featured-visual {
+  background:
+    radial-gradient(24rem 16rem at 85% 10%, rgb(201 155 63 / 0.35), transparent 60%),
+    linear-gradient(140deg, var(--color-brand-primary) 0%, var(--color-brand-dark) 100%);
+  color: #fff;
+}
+
+.calvoro-journal-featured-visual span,
+.calvoro-journal-featured-visual small {
+  font-family: var(--font-heading);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.calvoro-journal-featured-visual strong {
+  font-family: var(--font-heading);
+  color: var(--color-brand-accent-bright);
+}
+
+.calvoro-journal-featured-copy h2 {
+  font-size: clamp(1.4rem, calc(1.15rem + 1.1vw), 1.9rem);
+  letter-spacing: -0.025em;
+}
+
+.calvoro-journal-featured-copy p {
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+}
+
+.calvoro-journal-featured-meta {
+  color: color-mix(in oklab, var(--color-brand-dark) 48%, white);
+  font-family: var(--font-heading);
+}
+
+.calvoro-journal-read-link,
+.calvoro-editorial-read-link,
+.calvoro-journal-text-link {
+  color: var(--color-brand-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.calvoro-journal-featured-side {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+.calvoro-journal-featured-side h2 {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-brand-dark) 48%, white);
+}
+
+.calvoro-journal-mini-card {
+  box-shadow: none;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+.calvoro-journal-mini-card:hover {
+  border-color: color-mix(in oklab, var(--color-brand-primary) 36%, var(--color-outline));
+  background: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-journal-mini-card span {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+.calvoro-journal-mini-card strong {
+  font-family: var(--font-heading);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-journal-sidebar { align-self: start; }
+
+.calvoro-journal-side-card {
+  padding: 1.4rem;
+  box-shadow: none;
+}
+
+.calvoro-journal-side-card h2 {
+  font-size: 1.05rem;
+}
+
+.calvoro-journal-side-card p {
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.calvoro-journal-link-list a {
+  border-color: var(--color-outline-variant);
+  border-radius: var(--ui-radius-base);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+.calvoro-journal-link-list a:hover {
+  border-color: var(--color-brand-primary);
+  background: #fff;
+  color: var(--color-brand-primary);
+}
+
+.calvoro-journal-side-note {
+  background:
+    radial-gradient(22rem 10rem at 100% 0%, rgb(47 93 168 / 0.42), transparent 65%),
+    var(--color-brand-dark);
+  border-color: transparent;
+  color: #fff;
+}
+
+.calvoro-journal-side-note h2 { color: #fff; }
+.calvoro-journal-side-note p { color: rgb(255 255 255 / 0.66); }
+.calvoro-journal-side-note a { color: var(--color-brand-accent); }
+
+.calvoro-journal-heading-row h2 {
+  font-size: clamp(1.5rem, calc(1.25rem + 1.1vw), 2rem);
+  letter-spacing: -0.025em;
+}
+
+.calvoro-journal-count {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 58%, white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.calvoro-journal-toolbar {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-journal-toolbar label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.calvoro-journal-empty {
+  border: 1.5px dashed var(--color-outline);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+}
+
+.calvoro-journal-empty strong {
+  font-family: var(--font-heading);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-journal-load-more {
+  border-color: var(--color-outline);
+  background: #fff;
+  color: var(--color-brand-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+.calvoro-journal-load-more:hover {
+  border-color: var(--color-brand-primary);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-journal-pagination span {
+  color: color-mix(in oklab, var(--color-brand-dark) 50%, white);
+}
+
+/* Editorial cards */
+
+.calvoro-editorial-card {
+  box-shadow: none;
+  transition:
+    transform 240ms cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 240ms ease,
+    border-color 240ms ease;
+}
+
+.calvoro-editorial-card:hover {
+  transform: translateY(-0.25rem);
+  border-color: color-mix(in oklab, var(--color-brand-primary) 32%, var(--color-outline));
+  box-shadow: 0 1.5rem 3.5rem color-mix(in oklab, var(--color-brand-dark) 12%, transparent);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-editorial-badge {
+  border: 1px solid color-mix(in oklab, var(--color-brand-accent) 28%, white);
+  border-radius: var(--ui-radius-full);
+  background: color-mix(in oklab, var(--color-brand-accent) 10%, white);
+  color: color-mix(in oklab, var(--color-brand-accent) 72%, var(--color-brand-dark));
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.calvoro-editorial-card h3 {
+  font-size: 1.15rem;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.calvoro-editorial-card p {
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-editorial-card-footer {
+  border-top-color: var(--color-outline-variant);
+  color: color-mix(in oklab, var(--color-brand-dark) 48%, white);
+}
+
+/* Article page */
+
+.calvoro-article-hero h1 {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, calc(1.5rem + 2.6vw), 3.2rem);
+  line-height: 1.07;
+  letter-spacing: -0.035em;
+}
+
+.calvoro-article-category {
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: var(--ui-radius-full);
+  background: rgb(255 255 255 / 0.08);
+  color: var(--color-brand-accent-bright);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.calvoro-article-deck {
+  color: rgb(255 255 255 / 0.74);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.calvoro-article-meta {
+  color: rgb(255 255 255 / 0.55);
+  font-family: var(--font-heading);
+}
+
+.calvoro-article-meta span + span::before { color: rgb(255 255 255 / 0.3); }
+
+.calvoro-article-body {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-article-body h2,
+.calvoro-article-body h3 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.calvoro-article-body p,
+.calvoro-article-body li {
+  color: color-mix(in oklab, var(--color-brand-dark) 74%, white);
+}
+
+.calvoro-article-body a { color: var(--color-brand-primary); }
+
+.calvoro-article-takeaways {
+  border: 1px solid color-mix(in oklab, var(--color-brand-accent) 26%, white);
+  border-radius: var(--ui-radius-md);
+  background: color-mix(in oklab, var(--color-brand-accent) 7%, white);
+}
+
+.calvoro-article-takeaways li::marker { color: var(--color-brand-accent); }
+
+.calvoro-article-tool-cta {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: var(--color-brand-cream);
+}
+
+.calvoro-article-formula,
+.calvoro-article-example,
+.calvoro-article-note {
+  border: 1px solid var(--color-outline-variant);
+  border-left: 3px solid var(--color-brand-accent);
+  border-radius: var(--ui-radius-base);
+  background: var(--color-brand-cream);
+}
+
+.calvoro-article-toc {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: var(--color-brand-cream);
+}
+
+.calvoro-article-toc a { color: var(--color-brand-primary); }
+
+.calvoro-article-sidebar { align-self: start; }
+
+.calvoro-article-side-button {
+  background: var(--color-brand-primary);
+  color: #fff;
+}
+
+.calvoro-article-related-list a {
+  border-color: var(--color-outline-variant);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-article-related-list a:hover {
+  border-color: var(--color-brand-primary);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-article-pagination a {
+  border-color: var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: #fff;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-article-pagination a:hover {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+.calvoro-article-pagination .is-next { text-align: right; }
+
+.calvoro-article-disclosure {
+  border-color: var(--color-outline-variant);
+  color: color-mix(in oklab, var(--color-brand-dark) 52%, white);
+}
+
+/* Breadcrumbs inside dark heroes */
+
+.calvoro-breadcrumbs-dark { color: rgb(255 255 255 / 0.5); }
+.calvoro-breadcrumbs-dark a { color: rgb(255 255 255 / 0.74); }
+.calvoro-breadcrumbs-dark a:hover { color: var(--color-brand-accent-bright); }
+.calvoro-breadcrumbs-dark span[aria-current="page"] { color: #fff; }
+.calvoro-breadcrumbs-dark b { color: rgb(255 255 255 / 0.3); }
+
+/* ---------------------------------------------------------------
+   Browser tool pages (tools.css loads lazily, so scope with #root)
+--------------------------------------------------------------- */
+
+#root .calvoro-tool-page {
+  min-height: 0;
+  background: var(--color-brand-light);
+  color: var(--color-brand-dark);
+}
+
+#root .calvoro-tool-hero {
+  background:
+    radial-gradient(40rem 20rem at 88% -20%, rgb(47 93 168 / 0.5), transparent 62%),
+    radial-gradient(30rem 16rem at 0% 120%, rgb(201 155 63 / 0.18), transparent 62%),
+    var(--color-brand-dark);
+  color: #fff;
+}
+
+#root .calvoro-tool-hero .calvoro-tool-kicker {
+  color: var(--color-brand-accent-bright);
+  font-family: var(--font-heading);
+  letter-spacing: 0.18em;
+}
+
+#root .calvoro-tool-hero h1 {
+  font-family: var(--font-heading);
+  color: #fff;
+  font-size: clamp(2rem, calc(1.5rem + 2.6vw), 3.2rem);
+  letter-spacing: -0.035em;
+}
+
+#root .calvoro-tool-hero > .calvoro-tool-container > p {
+  color: rgb(255 255 255 / 0.72);
+}
+
+#root .calvoro-tool-privacy {
+  border-color: rgb(255 255 255 / 0.18);
+  background: rgb(255 255 255 / 0.07);
+  color: rgb(255 255 255 / 0.76);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+#root .calvoro-tool-privacy > span { background: var(--color-brand-accent); }
+
+#root .calvoro-tool-main {
+  padding-block: clamp(2rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+  background: var(--color-brand-cream);
+}
+
+#root .calvoro-tool-workspace {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+#root .calvoro-tool-aside section {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: #fff;
+}
+
+#root .calvoro-tool-aside h2 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand-accent);
+}
+
+#root .calvoro-tool-aside p,
+#root .calvoro-tool-aside li {
+  color: color-mix(in oklab, var(--color-brand-dark) 64%, white);
+}
+
+#root .calvoro-tool-aside-links a {
+  border-color: var(--color-outline-variant);
+  border-radius: var(--ui-radius-base);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+}
+
+#root .calvoro-tool-aside-links a:hover {
+  border-color: var(--color-brand-primary);
+  background: #fff;
+  color: var(--color-brand-primary);
+}
+
+#root .calvoro-tool-notes {
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+#root .calvoro-tool-notes li { color: color-mix(in oklab, var(--color-brand-dark) 68%, white); }
+
+/* ---------------------------------------------------------------
+   Legal, about and contact pages
+--------------------------------------------------------------- */
+
+.calvoro-content-page { background: var(--color-brand-light); }
+
+.calvoro-content-hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background:
+    radial-gradient(34rem 18rem at 90% -20%, rgb(201 155 63 / 0.14), transparent 65%),
+    radial-gradient(40rem 22rem at 0% -10%, rgb(47 93 168 / 0.1), transparent 65%),
+    #fff;
+}
+
+.calvoro-content-hero-inner {
+  max-width: 52rem;
+  padding-block: clamp(2.25rem, 5vw, 3.5rem) clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.calvoro-content-hero h1 {
+  margin: 0.85rem 0 0.7rem;
+  font-size: clamp(2.1rem, calc(1.5rem + 2.7vw), 3.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+}
+
+.calvoro-content-hero p {
+  margin: 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.calvoro-content-main {
+  padding-block: clamp(2rem, 4vw, 3rem) clamp(3.5rem, 7vw, 5rem);
+  background: var(--color-brand-cream);
+}
+
+.calvoro-content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.calvoro-content-card {
+  padding: clamp(1.4rem, 3vw, 2.75rem);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-content-card > :first-child { margin-top: 0; }
+
+.calvoro-content-card h2 {
+  margin: 2.2rem 0 0.75rem;
+  font-size: clamp(1.35rem, calc(1.15rem + 0.9vw), 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+.calvoro-content-card h3 {
+  margin: 1.6rem 0 0.55rem;
+  font-size: 1.15rem;
+}
+
+.calvoro-content-card p,
+.calvoro-content-card li {
+  color: color-mix(in oklab, var(--color-brand-dark) 74%, white);
+  line-height: 1.75;
+}
+
+.calvoro-content-card ul,
+.calvoro-content-card ol {
+  margin: 0.75rem 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.calvoro-content-card li { margin-bottom: 0.45rem; }
+.calvoro-content-card li::marker { color: var(--color-brand-accent); }
+
+.calvoro-content-card a {
+  color: var(--color-brand-primary);
+  font-weight: 500;
+}
+
+.calvoro-content-card strong { color: var(--color-brand-dark); }
+
+.calvoro-content-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.calvoro-content-hero .calvoro-content-updated { margin-top: 0; }
+
+.calvoro-content-hero .calvoro-content-updated + p { margin-top: 1rem; }
+
+.calvoro-content-updated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  background: #fff;
+  color: color-mix(in oklab, var(--color-brand-dark) 56%, white);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.calvoro-content-aside {
+  display: grid;
+  gap: 1rem;
+}
+
+.calvoro-content-aside-card {
+  padding: 1.4rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+}
+
+.calvoro-content-aside-card h2 {
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+}
+
+.calvoro-content-aside-card p {
+  margin: 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.calvoro-content-aside-links {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.calvoro-content-aside-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-base);
+  background: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.calvoro-content-aside-links a:hover {
+  border-color: var(--color-brand-primary);
+  background: #fff;
+  color: var(--color-brand-primary);
+}
+
+/* Contact */
+
+.calvoro-contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.calvoro-contact-card {
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-contact-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+}
+
+.calvoro-contact-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.calvoro-contact-heading svg { color: var(--color-brand-primary); }
+
+.calvoro-contact-heading h2 { margin: 0; }
+
+.calvoro-contact-item + .calvoro-contact-item { margin-top: 0.75rem; }
+
+.calvoro-contact-card > p {
+  margin: 0 0 1.4rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  font-size: 0.95rem;
+}
+
+.calvoro-contact-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.calvoro-contact-field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.calvoro-contact-field label {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--color-brand-dark) 76%, white);
+}
+
+.calvoro-contact-field input,
+.calvoro-contact-field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--ui-radius-base);
+  background: #fff;
+  color: var(--color-brand-dark);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.calvoro-contact-field textarea { min-height: 10rem; resize: vertical; }
+
+.calvoro-contact-field input:focus,
+.calvoro-contact-field textarea:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-brand-primary) 12%, transparent);
+}
+
+.calvoro-contact-success {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.calvoro-contact-success svg { color: var(--color-success); }
+
+.calvoro-contact-success h2 { margin: 0; }
+
+.calvoro-contact-success p {
+  max-width: 26rem;
+  margin: 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-contact-info {
+  display: grid;
+  gap: 1rem;
+}
+
+.calvoro-contact-item {
+  display: flex;
+  gap: 0.85rem;
+  padding: 1.1rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: #fff;
+}
+
+.calvoro-contact-item svg {
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+}
+
+.calvoro-contact-item strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+}
+
+.calvoro-contact-item p {
+  margin: 0.2rem 0 0;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.calvoro-contact-note {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1.75rem;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in oklab, var(--color-brand-accent) 26%, white);
+  border-radius: var(--ui-radius-md);
+  background: color-mix(in oklab, var(--color-brand-accent) 7%, white);
+  color: color-mix(in oklab, var(--color-brand-dark) 68%, white);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.calvoro-contact-note strong {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-contact-note p { margin: 0; }
+
+.calvoro-contact-note .calvoro-primary-button {
+  justify-self: start;
+  margin-top: 0.35rem;
+}
+
+/* ---------------------------------------------------------------
+   404
+--------------------------------------------------------------- */
+
+.calvoro-not-found {
+  display: grid;
+  place-items: center;
+  min-height: 60vh;
+  padding: clamp(3rem, 8vw, 6rem) var(--spacing-container-px);
+  text-align: center;
+  background:
+    radial-gradient(30rem 18rem at 50% 0%, rgb(47 93 168 / 0.1), transparent 65%),
+    var(--color-brand-cream);
+}
+
+.calvoro-not-found > div { max-width: 32rem; }
+
+.calvoro-404-number {
+  margin: 1.25rem 0 0.25rem;
+  font-family: var(--font-heading);
+  font-size: clamp(4.5rem, 12vw, 7rem);
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--color-brand-primary);
+}
+
+.calvoro-404-number span { color: var(--color-brand-accent); }
+
+.calvoro-not-found h1 {
+  margin: 0.75rem 0 0.6rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.calvoro-not-found p {
+  margin: 0 0 1.6rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+  line-height: 1.7;
+}
+
+.calvoro-not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ---------------------------------------------------------------
+   Responsive
+--------------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  .calvoro-calculator-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 900px) {
+  .calvoro-about-layout { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 3rem; }
+  .calvoro-contact-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); }
+}
+
+@media (min-width: 1024px) {
+  .calvoro-calculator-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .calvoro-content-layout { grid-template-columns: minmax(0, 1fr) 18rem; }
+}
+
+@media (min-width: 1280px) {
+  .calvoro-calculator-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 639px) {
+  .calvoro-directory-toolbar { align-items: stretch; }
+  .calvoro-directory-toolbar .calvoro-clear-filters { width: 100%; }
+  .calvoro-category-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+    scrollbar-width: thin;
+  }
+  .calvoro-category-row .calvoro-category { flex: 0 0 auto; }
+  .calvoro-journal-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .calvoro-content-card { padding: 1.15rem; }
+}

@@ -1,115 +1,36 @@
 import { Link } from "react-router-dom";
 import SEO from "../SEO";
+import Breadcrumbs from "../components/editorial/Breadcrumbs.jsx";
 
 function Terms() {
-return (
-<div
-style={{
-minHeight: "100vh",
-background: "#f8fafc",
-color: "#0f172a",
-}}
->
-<SEO />
-<header
-style={{
-background: "#2563eb",
-color: "white",
-padding: "18px 24px",
-}}
->
-<div
-style={{
-maxWidth: "1100px",
-margin: "0 auto",
-display: "flex",
-alignItems: "center",
-justifyContent: "space-between",
-gap: "20px",
-flexWrap: "wrap",
-}}
->
-<Link
-to="/"
-style={{
-color: "white",
-textDecoration: "none",
-fontSize: "26px",
-fontWeight: "900",
-letterSpacing: "1px",
-}}
->
-CALVORO </Link>
+  return (
+    <div className="calvoro-content-page">
+      <SEO />
 
-      <Link
-        to="/"
-        style={{
-          color: "white",
-          textDecoration: "none",
-          fontWeight: "700",
-        }}
-      >
-        Home
-      </Link>
-    </div>
-  </header>
+      <section className="calvoro-content-hero">
+        <div className="calvoro-container">
+          <div className="calvoro-content-hero-inner">
+            <Breadcrumbs
+              items={[{ label: "Home", to: "/" }, { label: "Terms" }]}
+            />
+            <span className="ui-eyebrow">Legal</span>
+            <h1>Terms & Conditions</h1>
+            <span className="calvoro-content-updated">
+              Last updated: September 27, 2026
+            </span>
+            <p>
+              Welcome to CALVORO. By accessing or using this website, you agree
+              to these Terms & Conditions. If you do not agree with these terms,
+              please do not use the website.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  <main
-    style={{
-      maxWidth: "900px",
-      margin: "0 auto",
-      padding: "70px 24px",
-    }}
-  >
-    <article
-      style={{
-        background: "white",
-        borderRadius: "18px",
-        padding: "45px",
-        border: "1px solid #e2e8f0",
-        boxShadow: "0 10px 30px rgba(15, 23, 42, 0.08)",
-      }}
-    >
-      <div
-        style={{
-          display: "inline-block",
-          background: "#dbeafe",
-          color: "#1d4ed8",
-          padding: "7px 13px",
-          borderRadius: "999px",
-          fontSize: "13px",
-          fontWeight: "800",
-          marginBottom: "18px",
-        }}
-      >
-        CALVORO
-      </div>
-
-      <h1
-        style={{
-          fontSize: "clamp(34px, 6vw, 52px)",
-          lineHeight: "1.1",
-          margin: "0 0 12px",
-          fontWeight: "900",
-        }}
-      >
-        Terms & Conditions
-      </h1>
-
-      <p
-        style={{
-          color: "#64748b",
-          marginBottom: "35px",
-        }}
-      >
-        Last updated: September 27, 2026
-      </p>
-
-      <p>
-        Welcome to CALVORO. By accessing or using this website, you agree
-        to these Terms & Conditions. If you do not agree with these terms,
-        please do not use the website.
-      </p>
+      <main className="calvoro-content-main">
+        <div className="calvoro-container">
+          <div className="calvoro-content-layout">
+            <article className="calvoro-content-card">
 
       <h2>1. Use of the Website</h2>
 
@@ -219,65 +140,49 @@ CALVORO </Link>
         contact us through the CALVORO Contact page.
       </p>
 
-      <div
-        style={{
-          marginTop: "40px",
-          paddingTop: "25px",
-          borderTop: "1px solid #e2e8f0",
-          display: "flex",
-          gap: "20px",
-          flexWrap: "wrap",
-        }}
-      >
-        <Link
-          to="/contact"
-          style={{
-            color: "#2563eb",
-            textDecoration: "none",
-            fontWeight: "800",
-          }}
-        >
-          Contact Us →
-        </Link>
+              <div className="calvoro-content-footer">
+                <Link to="/contact" className="calvoro-text-link">
+                  Contact Us →
+                </Link>
 
-        <Link
-          to="/privacy-policy"
-          style={{
-            color: "#2563eb",
-            textDecoration: "none",
-            fontWeight: "800",
-          }}
-        >
-          Privacy Policy →
-        </Link>
+                <Link to="/privacy-policy" className="calvoro-text-link">
+                  Privacy Policy →
+                </Link>
 
-        <Link
-          to="/"
-          style={{
-            color: "#2563eb",
-            textDecoration: "none",
-            fontWeight: "800",
-          }}
-        >
-          Back to CALVORO →
-        </Link>
-      </div>
-    </article>
-  </main>
+                <Link to="/" className="calvoro-text-link">
+                  Back to CALVORO →
+                </Link>
+              </div>
+            </article>
 
-  <footer
-    style={{
-      background: "#0f172a",
-      color: "#94a3b8",
-      textAlign: "center",
-      padding: "30px 24px",
-    }}
-  >
-    © {new Date().getFullYear()} CALVORO. All rights reserved.
-  </footer>
-</div>
-
-);
+            <aside className="calvoro-content-aside">
+              <div className="calvoro-content-aside-card">
+                <h2>Legal and help</h2>
+                <p>
+                  Read how CALVORO handles information, or send a question about
+                  these terms.
+                </p>
+                <div className="calvoro-content-aside-links">
+                  <Link to="/privacy-policy">
+                    Privacy Policy
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link to="/contact">
+                    Contact CALVORO
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                  <Link to="/about">
+                    About CALVORO
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
 }
 
 export default Terms;

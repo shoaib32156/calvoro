@@ -1,36 +1,89 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
+import { LayoutGrid, Search, SlidersHorizontal } from "lucide-react";
 import SEO from "../SEO";
+import ToolCard from "../components/tools/ToolCard.jsx";
+import Breadcrumbs from "../components/editorial/Breadcrumbs.jsx";
 import {
   calculatorCatalog,
   directoryCategories,
   extraDirectoryTools,
+  featuredCalculatorPaths,
+  featuredUtilityTools,
   matchesCatalogSearch,
   utilityTools,
 } from "../calculatorCatalog.js";
 
-const tools = [
-  ...utilityTools,
-  ...calculatorCatalog,
-  ...extraDirectoryTools,
+const tools = [...utilityTools, ...calculatorCatalog, ...extraDirectoryTools];
+
+const featuredPaths = new Set([
+  ...featuredCalculatorPaths,
+  ...featuredUtilityTools.map((tool) => tool.path),
+]);
+
+const calculatorPaths = new Set(calculatorCatalog.map((tool) => tool.path));
+
+const SORT_OPTIONS = [
+  { value: "recommended", label: "Recommended" },
+  { value: "az", label: "Name A–Z" },
+  { value: "category", label: "Category" },
 ];
 
 export default function Tools() {
-  const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [params, setParams] = useSearchParams();
+  const rawCategory = params.get("category");
+  const activeCategory = directoryCategories.includes(rawCategory)
+    ? rawCategory
+    : "All";
+  const search = params.get("q") || "";
+  const sort = SORT_OPTIONS.some((option) => option.value === params.get("sort"))
+    ? params.get("sort")
+    : "recommended";
+
+  const updateParams = (changes) => {
+    const next = new URLSearchParams(params);
+
+    Object.entries(changes).forEach(([key, value]) => {
+      if (!value || value === "All") {
+        next.delete(key);
+      } else {
+        next.set(key, value);
+      }
+    });
+
+    setParams(next, { replace: true });
+  };
 
   const filteredTools = useMemo(() => {
-    return tools.filter((tool) => {
+    const filtered = tools.filter((tool) => {
       const matchesCategory =
         activeCategory === "All" || tool.category === activeCategory;
 
       return matchesCategory && matchesCatalogSearch(tool, search);
     });
-  }, [search, activeCategory]);
+
+    return [...filtered].sort((a, b) => {
+      if (sort === "az") {
+        return a.name.localeCompare(b.name);
+      }
+
+      if (sort === "category") {
+        return (
+          a.category.localeCompare(b.category) || a.name.localeCompare(b.name)
+        );
+      }
+
+      const featuredDelta =
+        Number(featuredPaths.has(b.path)) - Number(featuredPaths.has(a.path));
+
+      return featuredDelta || a.name.localeCompare(b.name);
+    });
+  }, [activeCategory, search, sort]);
 
   const clearFilters = () => {
-    setSearch("");
-    setActiveCategory("All");
+    const next = new URLSearchParams();
+    next.set("sort", sort);
+    setParams(next, { replace: true });
   };
 
   return (
@@ -40,45 +93,90 @@ export default function Tools() {
         description="Browse CALVORO calculators plus browser-based PDF, image, text, developer and productivity tools. Search by task and filter by category."
       />
 
-      <section className="calvoro-home-hero calvoro-tools-hero">
+      <section className="calvoro-page-hero">
         <div className="calvoro-container">
-          <span className="calvoro-hero-label">Tool directory</span>
-          <h1>All CALVORO tools</h1>
-          <p>
-            Calculators and browser utilities in one directory. PDF and image
-            tools process files on your device, text and developer tools run
-            locally, and every calculator keeps its existing page.
-          </p>
+          <div className="calvoro-page-hero-inner">
+            <Breadcrumbs
+              items={[{ label: "Home", to: "/" }, { label: "All tools" }]}
+            />
+
+            <span className="ui-eyebrow">Tool directory</span>
+            <h1>Every CALVORO tool in one directory.</h1>
+            <p>
+              Calculators and browser utilities, searchable by task and filterable
+              by category. PDF and image tools process files on your device, text
+              and developer tools run locally, and every calculator keeps its
+              existing page.
+            </p>
+
+            <div className="calvoro-page-hero-meta">
+              <span className="calvoro-page-hero-chip">
+                <LayoutGrid size={14} aria-hidden="true" />
+                {tools.length} tools
+              </span>
+              <span className="calvoro-page-hero-chip">
+                {calculatorCatalog.length} calculators
+              </span>
+              <span className="calvoro-page-hero-chip">
+                {utilityTools.length} browser tools
+              </span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <main className="calvoro-home-section calvoro-paper-band">
+      <main className="calvoro-tools-main">
         <div className="calvoro-container">
           <div className="calvoro-directory-toolbar">
             <label htmlFor="all-tools-search">
-              Search calculators and extra tools
+              <span>
+                <Search size={14} aria-hidden="true" /> Search calculators and
+                browser tools
+              </span>
               <input
                 id="all-tools-search"
                 type="search"
                 value={search}
-                onChange={(event) => setSearch(event.target.value)}
+                onChange={(event) => updateParams({ q: event.target.value })}
                 placeholder="Try PDF, BMI, image, JSON, or mortgage"
                 className="calvoro-search-input"
                 autoComplete="off"
               />
             </label>
+
+            <label className="calvoro-tools-sort" htmlFor="all-tools-sort">
+              <span>
+                <SlidersHorizontal size={14} aria-hidden="true" /> Sort by
+              </span>
+              <select
+                id="all-tools-sort"
+                value={sort}
+                onChange={(event) => updateParams({ sort: event.target.value })}
+              >
+                {SORT_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+
             {(search || activeCategory !== "All") && (
               <button
                 type="button"
                 className="calvoro-clear-filters"
                 onClick={clearFilters}
               >
-                Clear search and category
+                Clear filters
               </button>
             )}
           </div>
 
-          <div className="calvoro-category-row" role="group" aria-label="Tool categories">
+          <div
+            className="calvoro-category-row"
+            role="group"
+            aria-label="Tool categories"
+          >
             {directoryCategories.map((category) => {
               const count =
                 category === "All"
@@ -90,7 +188,7 @@ export default function Tools() {
                 <button
                   key={category}
                   type="button"
-                  onClick={() => setActiveCategory(category)}
+                  onClick={() => updateParams({ category })}
                   className={active ? "calvoro-category active" : "calvoro-category"}
                   aria-pressed={active}
                 >
@@ -112,21 +210,13 @@ export default function Tools() {
           {filteredTools.length > 0 ? (
             <div className="calvoro-calculator-grid">
               {filteredTools.map((tool) => (
-                <Link
+                <ToolCard
                   key={tool.path}
-                  to={tool.path}
-                  className="calvoro-calculator-card"
-                >
-                  <div className="calvoro-calculator-top">
-                    <span className="calvoro-calculator-category">
-                      {tool.category}
-                    </span>
-                    <span className="calvoro-calculator-arrow">→</span>
-                  </div>
-                  <h2>{tool.name}</h2>
-                  <p>{tool.description}</p>
-                  <span className="calvoro-calculator-link">Open tool</span>
-                </Link>
+                  tool={tool}
+                  action={
+                    calculatorPaths.has(tool.path) ? "Open calculator" : "Open tool"
+                  }
+                />
               ))}
             </div>
           ) : (
@@ -135,6 +225,7 @@ export default function Tools() {
               <p>
                 Nothing matched that search in{" "}
                 {activeCategory === "All" ? "the full list" : activeCategory}.
+                Try a shorter word, another category, or clear the filters.
               </p>
               <button
                 type="button"

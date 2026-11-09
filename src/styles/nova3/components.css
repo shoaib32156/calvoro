@@ -1,0 +1,607 @@
+/* CALVORO component contracts — cards, search, chips, empty and loading states. */
+
+/* Tool and calculator cards */
+
+.calvoro-tool-card,
+.calvoro-calculator-card {
+  --cat: var(--color-brand-primary);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.4rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  color: var(--color-brand-dark);
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    transform 240ms cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 240ms cubic-bezier(0.33, 1, 0.68, 1),
+    border-color 240ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.calvoro-tool-card::before,
+.calvoro-calculator-card::before {
+  content: "";
+  position: absolute;
+  top: -2.5rem;
+  right: -2.5rem;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background: var(--cat);
+  opacity: 0.05;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .calvoro-tool-card:hover,
+  .calvoro-calculator-card:hover {
+    transform: translateY(-0.25rem);
+    border-color: color-mix(in oklab, var(--color-brand-primary) 34%, var(--color-outline));
+    box-shadow: 0 1.625rem 4rem color-mix(in oklab, var(--color-brand-dark) 12%, transparent);
+    color: var(--color-brand-dark);
+  }
+
+  .calvoro-tool-card:hover::before,
+  .calvoro-calculator-card:hover::before { opacity: 0.11; }
+}
+
+.calvoro-tool-card-top,
+.calvoro-calculator-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.calvoro-tool-icon,
+.calvoro-calculator-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.7rem;
+  background: var(--cat);
+  color: #fff;
+  box-shadow: 0 8px 18px -12px rgb(12 31 58 / 0.8);
+  flex-shrink: 0;
+}
+
+.calvoro-tool-icon svg,
+.calvoro-calculator-icon svg { width: 1.35rem; height: 1.35rem; }
+
+.calvoro-tool-popular {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: var(--ui-radius-full);
+  background: color-mix(in oklab, var(--color-brand-accent) 14%, white);
+  color: var(--color-brand-accent);
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.calvoro-tool-card h2,
+.calvoro-tool-card h3,
+.calvoro-calculator-card h2,
+.calvoro-calculator-card h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-brand-dark);
+  transition: color 200ms ease;
+}
+
+.calvoro-tool-card:hover h2,
+.calvoro-tool-card:hover h3,
+.calvoro-calculator-card:hover h2,
+.calvoro-calculator-card:hover h3 { color: var(--color-brand-primary); }
+
+.calvoro-tool-card p,
+.calvoro-calculator-card p {
+  flex: 1;
+  margin: 0.4rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-tool-card-footer,
+.calvoro-calculator-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.calvoro-tool-card-category,
+.calvoro-calculator-category {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cat);
+}
+
+.calvoro-tool-card-open,
+.calvoro-calculator-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--color-brand-dark) 48%, white);
+  transition: color 200ms ease, gap 200ms ease;
+}
+
+.calvoro-tool-card:hover .calvoro-tool-card-open,
+.calvoro-calculator-card:hover .calvoro-calculator-link {
+  gap: 0.45rem;
+  color: var(--color-brand-primary);
+}
+
+.calvoro-calculator-arrow,
+.calvoro-featured-tool-arrow {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  color: color-mix(in oklab, var(--color-brand-dark) 50%, white);
+  transition: transform 240ms ease, background-color 240ms ease, color 240ms ease, border-color 240ms ease;
+}
+
+.calvoro-calculator-card:hover .calvoro-calculator-arrow,
+.calvoro-featured-tool:hover .calvoro-featured-tool-arrow {
+  transform: translateX(3px);
+  border-color: transparent;
+  background: var(--cat, var(--color-brand-primary));
+  color: #fff;
+}
+
+/* Category cards */
+
+.calvoro-category-card {
+  --cat: var(--color-brand-primary);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  color: var(--color-brand-dark);
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    transform 240ms cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 240ms cubic-bezier(0.33, 1, 0.68, 1),
+    border-color 240ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.calvoro-category-card::before {
+  content: "";
+  position: absolute;
+  top: -3rem;
+  right: -3rem;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: var(--cat);
+  opacity: 0.07;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .calvoro-category-card:hover {
+    transform: translateY(-0.25rem);
+    border-color: color-mix(in oklab, var(--cat) 38%, var(--color-outline));
+    box-shadow: 0 1.625rem 4rem color-mix(in oklab, var(--color-brand-dark) 12%, transparent);
+    color: var(--color-brand-dark);
+  }
+  .calvoro-category-card:hover::before { opacity: 0.14; }
+}
+
+.calvoro-category-card-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--ui-radius-md);
+  background: var(--cat);
+  color: #fff;
+  box-shadow: 0 10px 22px -14px rgb(12 31 58 / 0.8);
+  margin-bottom: 1rem;
+}
+
+.calvoro-category-card-icon svg { width: 1.4rem; height: 1.4rem; }
+
+.calvoro-category-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-brand-dark);
+  transition: color 200ms ease;
+}
+
+.calvoro-category-card:hover h3 { color: var(--color-brand-primary); }
+
+.calvoro-category-card p {
+  flex: 1;
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-category-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.calvoro-category-card-count {
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--ui-radius-full);
+  background: var(--color-brand-cream);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: color-mix(in oklab, var(--color-brand-dark) 60%, white);
+}
+
+.calvoro-category-card-arrow {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-full);
+  color: color-mix(in oklab, var(--color-brand-dark) 50%, white);
+  transition: transform 240ms ease, background-color 240ms ease, color 240ms ease, border-color 240ms ease;
+}
+
+.calvoro-category-card:hover .calvoro-category-card-arrow {
+  transform: translateX(3px);
+  border-color: transparent;
+  background: var(--cat);
+  color: #fff;
+}
+
+/* Search shell */
+
+.calvoro-search {
+  position: relative;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.calvoro-search-shell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.5rem 0.45rem 1.1rem;
+  border: 1.5px solid var(--color-outline);
+  border-radius: var(--ui-radius-lg);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.calvoro-search-shell:focus-within {
+  border-color: var(--color-brand-primary);
+  box-shadow:
+    0 0 0 5px color-mix(in oklab, var(--color-brand-primary) 12%, transparent),
+    var(--ui-elevation-soft);
+}
+
+.calvoro-search-shell > svg {
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+}
+
+.calvoro-search-shell input:not([type="checkbox"]):not([type="radio"]) {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-brand-dark);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.calvoro-search-shell
+  input:not([type="checkbox"]):not([type="radio"]):focus {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.calvoro-search-shell input::placeholder {
+  color: color-mix(in oklab, var(--color-brand-dark) 36%, white);
+  font-weight: 400;
+}
+
+.calvoro-search-clear {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: var(--ui-radius-full);
+  background: transparent;
+  color: color-mix(in oklab, var(--color-brand-dark) 42%, white);
+}
+
+.calvoro-search-clear:hover {
+  background: var(--color-brand-cream);
+  color: var(--color-brand-dark);
+}
+
+.calvoro-search-submit {
+  display: none;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0.55rem 1.2rem;
+  border: 0;
+  border-radius: 0.8rem;
+  background: var(--color-brand-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 180ms ease;
+}
+
+.calvoro-search-submit:hover { background: var(--color-brand-primary-bright); }
+
+.calvoro-search-results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  max-height: 22rem;
+  overflow-y: auto;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: #fff;
+  box-shadow: var(--ui-elevation-strong);
+  text-align: left;
+}
+
+.calvoro-search-result {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-bottom: 1px solid var(--color-outline-variant);
+  background: transparent;
+  text-align: left;
+  color: var(--color-brand-dark);
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+
+.calvoro-search-result:last-of-type { border-bottom: 0; }
+.calvoro-search-result:hover,
+.calvoro-search-result.is-active { background: var(--color-brand-cream); }
+
+.calvoro-search-result-icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.55rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.calvoro-search-result-icon svg { width: 1.1rem; height: 1.1rem; }
+
+.calvoro-search-result-copy { min-width: 0; flex: 1; }
+
+.calvoro-search-result-copy strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-search-result-copy small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 55%, white);
+}
+
+.calvoro-search-result-category {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.calvoro-search-results-empty {
+  padding: 1.1rem 1rem;
+  font-size: 0.875rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+}
+
+.calvoro-search-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-top: 1px solid var(--color-outline-variant);
+  background: color-mix(in oklab, var(--color-brand-cream) 70%, white);
+  color: var(--color-brand-primary);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Empty and status states */
+
+.calvoro-empty-state {
+  margin-top: 2rem;
+  padding: 3rem 1.5rem;
+  border: 1.5px dashed var(--color-outline);
+  border-radius: var(--ui-radius-lg);
+  background: color-mix(in oklab, var(--color-brand-cream) 60%, white);
+  text-align: center;
+  color: color-mix(in oklab, var(--color-brand-dark) 62%, white);
+}
+
+.calvoro-empty-state svg {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.75rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 28%, white);
+}
+
+.calvoro-empty-state strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-empty-state p {
+  max-width: 26rem;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.calvoro-empty-state .calvoro-clear-filters { margin-top: 1.25rem; }
+
+.calvoro-filter-status {
+  margin: 1.5rem 0 0;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--color-outline-variant);
+  font-size: 0.875rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 58%, white);
+}
+
+.calvoro-filter-status strong { color: var(--color-brand-dark); }
+
+/* Loading */
+
+.calvoro-loading {
+  display: grid;
+  place-items: center;
+  min-height: 52vh;
+  padding: 3rem 1.5rem;
+  background: var(--color-brand-light);
+}
+
+.calvoro-loading-box {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--ui-radius-md);
+  background: #fff;
+  box-shadow: var(--ui-elevation-soft);
+}
+
+.calvoro-loading-mark {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.65rem;
+  background: var(--color-brand-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.calvoro-loading-box strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--color-brand-dark);
+}
+
+.calvoro-loading-box span {
+  display: block;
+  font-size: 0.78rem;
+  color: color-mix(in oklab, var(--color-brand-dark) 55%, white);
+}
+
+@media (min-width: 640px) {
+  .calvoro-search-submit { display: inline-flex; }
+}
+
+/* Grids */
+
+.calvoro-card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .calvoro-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .calvoro-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.calvoro-card-grid.is-four {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .calvoro-card-grid.is-four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .calvoro-card-grid.is-four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
