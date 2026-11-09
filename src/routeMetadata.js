@@ -12,9 +12,9 @@ export const DEFAULT_ROUTE_METADATA = Object.freeze({
 
 const coreRouteMetadata = {
   "/": {
-    title: "CALVORO - Free Online Calculators & Smart Tools",
+    title: "CALVORO – Free Online Calculators & Smart Tools",
     description:
-      "CALVORO provides free online calculators for finance, math, business, health, education, time, running, and everyday calculations.",
+      "Free online calculators and smart tools for math, finance, health, education and everyday tasks. Calculate percentages, age, BMI, loans, EMI and GPA with ease.",
     type: "WebSite",
   },
 

@@ -129,8 +129,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="CALVORO - Free Online Calculators"
-        description="Search CALVORO's free online calculators for percentages, loans, BMI, GPA, savings, and other everyday calculations. Filter by category and open a tool in your browser."
+        title="CALVORO – Free Online Calculators & Smart Tools"
+        description="Free online calculators and smart tools for math, finance, health, education and everyday tasks. Calculate percentages, age, BMI, loans, EMI and GPA with ease."
       />
 
       <section className="calvoro-hero-section">
@@ -142,9 +142,7 @@ export default function HomePage() {
             </span>
 
             <h1>
-              Everyday answers,
-              <br />
-              calculated <em>clearly.</em>
+              Free Online Calculators for <em>Everyday Problems</em>
             </h1>
 
             <p className="calvoro-hero-lead">
