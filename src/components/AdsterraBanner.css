@@ -1,0 +1,34 @@
+.calvoro-adsterra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 20px 16px 4px;
+  box-sizing: border-box;
+}
+
+.calvoro-adsterra-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a94a6;
+  line-height: 1;
+}
+
+.calvoro-adsterra-holder {
+  width: 100%;
+  max-width: 728px;
+  height: 90px;
+  overflow: hidden;
+}
+
+.calvoro-adsterra-holder iframe {
+  display: block;
+  width: 728px;
+  height: 90px;
+  border: 0;
+  transform-origin: top left;
+  background: transparent;
+}

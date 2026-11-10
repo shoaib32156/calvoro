@@ -16,6 +16,7 @@ import HomeSearch from "../components/home/HomeSearch.jsx";
 import ToolCard from "../components/tools/ToolCard.jsx";
 import CategoryCard from "../components/tools/CategoryCard.jsx";
 import ArticleCard from "../components/editorial/ArticleCard.jsx";
+import AdsterraBanner from "../components/AdsterraBanner.jsx";
 import HowItWorks from "./HowItWorks.jsx";
 import FAQ from "./FAQ.jsx";
 import HomeSEOContent from "./HomeSEOContent.jsx";
@@ -185,6 +186,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <AdsterraBanner />
 
       <section id="calculators" className="calvoro-home-band is-cream">
         <div className="calvoro-container">
